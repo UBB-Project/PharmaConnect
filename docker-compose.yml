@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=pharmaconnect
+    ports:
+      - "5432:5432"
+    volumes:
+      - mydbdata:/var/lib/postgresql/data
+
+volumes:
+  mydbdata:
