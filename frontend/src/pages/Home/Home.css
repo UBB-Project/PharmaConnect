@@ -1,0 +1,26 @@
+.page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+    color: white;
+}
+
+.hero {
+    margin-top: 120px;
+    text-align: center;
+    padding: 20px;
+}
+.hero h1 { font-size: 2rem; margin-bottom: 8px; }
+.sub { opacity: 0.85; margin-bottom: 20px; }
+.cta { display: flex; gap: 12px; justify-content: center; }
+
+.btn {
+    background: #374151;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: transform .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-1px); background:#3f4857; }
+.btn-primary { background: blueviolet; color: white; }
+.btn-primary:hover { background: blueviolet; color: white; }
