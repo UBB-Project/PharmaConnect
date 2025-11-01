@@ -1,11 +1,37 @@
+/*
+ * MODERN & MINIMALIST GLOBAL STYLESHEET
+ * --------------------------------------
+ * Use this as the foundation for your pharmacy price comparison app.
+ */
+
+/* 1. FONT IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* 2. CSS VARIABLES (LIGHT MODE - DEFAULT) */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* -- Palette -- */
+  --color-primary: #5E50F9;         /* A vibrant, modern indigo */
+  --color-primary-hover: #4a40d1;
+  --color-success: #10B981;        /* A "pharmacy" green */
+
+  --color-text: #22272E;            /* Dark text */
+  --color-text-light: #57606A;     /* For descriptions, labels */
+  --color-bg: #F8F9FA;              /* Very light gray background */
+  --color-surface: #FFFFFF;         /* For cards, inputs, etc. */
+  --color-border: #E0E2E5;          /* Subtle borders */
+
+  /* -- Shadows -- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  /* -- Base Typography & Settings -- */
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +39,108 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* 3. CSS VARIABLES (DARK MODE OVERRIDE) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* -- Dark Palette -- */
+    --color-primary: #7A70FF;
+    --color-primary-hover: #9088FF;
+    --color-success: #10B981; /* Green works on dark too */
+
+    --color-text: #EAEBF0;
+    --color-text-light: #9A9FA8;
+    --color-bg: #1A1B22;        /* Very dark blue/gray */
+    --color-surface: #252630;   /* Slightly lighter dark for cards */
+    --color-border: #3A3C44;
+
+    /* -- Dark Shadows -- */
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
 }
 
+/* 4. BASE ELEMENT STYLES */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* -- Typography -- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-block-start: 1.5em;
+  margin-block-end: 0.5em;
+  color: var(--color-text);
 }
 
+h1 { font-size: 2.5em; }   /* 40px */
+h2 { font-size: 2em; }     /* 32px */
+h3 { font-size: 1.5em; }   /* 24px */
+h4 { font-size: 1.125em; } /* 18px */
+
+p {
+  line-height: 1.6;
+  margin-block-end: 1em;
+}
+
+/* -- Links -- */
+a {
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none; /* Modern: underline on hover only */
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* -- Buttons -- */
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-surface); /* Default is a "secondary" button */
+  color: var(--color-text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.1s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-primary);
+  transform: translateY(-1px); /* Subtle impressive lift */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--color-primary);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* 5. UTILITY CLASSES (FOR YOUR PROJECT) */
+
+/* -- Primary Button (for main actions) -- */
+button.primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+button.primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* -- Card (for holding pharmacy prices) -- */
+.card {
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  padding: 1.5rem; /* 24px */
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.2s, border-color 0.2s;
 }

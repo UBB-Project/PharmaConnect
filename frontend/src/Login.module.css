@@ -1,0 +1,131 @@
+/*
+ * Styles for the Login Component
+ * (Upgraded to a professional, "Apple-like" feel)
+ */
+
+.loginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+   /* * UPGRADE: Added the same subtle radial gradient from the register page
+   * for consistency.
+   */
+  background: radial-gradient(ellipse at 50% -20%, rgba(94, 80, 249, 0.08) 0%, transparent 70%), 
+              var(--color-bg);
+}
+
+.loginCard {
+  /*
+   * UPGRADE: Added the same subtle gradient from the register page.
+   */
+  background: linear-gradient(175deg, 
+    var(--color-surface) 0%, 
+    color-mix(in srgb, var(--color-surface) 95%, var(--color-bg)) 100%
+  );
+  
+  border-radius: 16px; /* Soft, modern radius */
+  border: 1px solid var(--color-border);
+  
+  /* * UPGRADE: Using the same softer, more diffused shadow.
+   */
+  box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.1);
+  
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem; /* More spacing */
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+.title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+  font-size: 2.25em; /* 36px */
+  font-weight: 700;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.875em; /* 14px */
+  margin-bottom: 0.5rem;
+  color: var(--color-text-light);
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1em;
+  font-family: inherit;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border-radius: 10px; /* Rounded inputs */
+  border: 1px solid var(--color-border);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  /* Use the primary blue for focus */
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(94, 80, 249, 0.3); /* Soft focus glow */
+}
+
+.buttonContainer {
+  margin-top: 2rem;
+}
+
+/*
+ * UPGRADE: Chained the class (.loginButton.loginButton) to
+ * increase its CSS specificity. This ensures it overrides
+ * the global `button.primary` style from index.css.
+ */
+.loginButton.loginButton {
+  width: 100%;
+  font-size: 1.05em;
+  font-weight: 600;
+  padding: 1rem 1.2em;
+  border-radius: 10px;
+
+  /* * --- THIS IS THE UPDATE ---
+   * Changed from primary blue to success green to match the register page.
+   */
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: #FFFFFF;
+
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.loginButton.loginButton:hover {
+  /* * --- THIS IS THE UPDATE ---
+   * Added the matching green hover effects from the register page.
+   */
+  background-color: #0d9d71;
+  border-color: #0d9d71;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.extraLink {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9em;
+  color: var(--color-text-light);
+}
+
+.extraLink a {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
