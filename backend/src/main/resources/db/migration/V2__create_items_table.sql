@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS items
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     category VARCHAR(100) NOT NULL,
-    price NUMERIC(10, 2) NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
     brand VARCHAR(100) NOT NULL,
     image_url TEXT,
     manufacturing_date DATE NOT NULL,
