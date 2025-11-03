@@ -43,7 +43,7 @@ public class PharmacyService {
     }
 
     public List<PharmacyDTO> getPharmaciesByName(String name) {
-        return pharmacyRepository.findPharmacyName(name)
+        return pharmacyRepository.findByName(name)
                 .stream()
                 .map(p -> {
                     PharmacyDTO pharmacyDTO = new PharmacyDTO();
