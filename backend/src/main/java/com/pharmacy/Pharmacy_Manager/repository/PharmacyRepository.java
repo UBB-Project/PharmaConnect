@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PharmacyRepository extends JpaRepository<Pharmacy, UUID> {
-    List<PharmacyDTO> findPharmacyName(String name);
+    List<PharmacyDTO> findByName(String name);
 }
