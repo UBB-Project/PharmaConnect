@@ -1,7 +1,7 @@
 ---
 name: Bug Report
 about: Basic Story Template
-title: ''
+title: 'BUG: '
 labels: ''
 assignees: ''
 

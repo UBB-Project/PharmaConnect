@@ -1,7 +1,7 @@
 ---
 name: Hotfix
 about: Create a report to help us improve
-title: ''
+title: 'HOTFIX: '
 labels: ''
 assignees: ''
 
