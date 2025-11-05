@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -41,4 +43,10 @@ public class ItemService {
             itemRepository.save(newItem);
             return newItem.getId();
         }
+    public Optional<Item> getById(UUID id) {
+        return itemRepository.findById(id);
+    }
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
 }

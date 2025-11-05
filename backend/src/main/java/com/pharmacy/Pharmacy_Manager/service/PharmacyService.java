@@ -43,16 +43,13 @@ public class PharmacyService {
     }
 
     public List<PharmacyDTO> getPharmaciesByName(String name) {
-        return pharmacyRepository.findPharmacyName(name)
+        return pharmacyRepository.findByName(name)
                 .stream()
                 .map(p -> {
-                    PharmacyDTO pharmacyDTO = new PharmacyDTO();
-                    pharmacyDTO.setId(p.getId());
-                    pharmacyDTO.setName(p.getName());
-//                    pharmacyDTO.setLocations(p.getLocations().stream()
-//                            .map(Location::getAddress)
-//                            .collect(Collectors.toList()));
-                    return pharmacyDTO;
+                    PharmacyDTO dto = new PharmacyDTO();
+                    dto.setId(p.getId());
+                    dto.setName(p.getName());
+                    return dto;
                 })
                 .collect(Collectors.toList());
     }
