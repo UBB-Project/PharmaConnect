@@ -1,0 +1,56 @@
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.popup-box {
+    background-color: white;
+    padding: 24px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-message {
+    margin-bottom: 16px;
+    font-weight: 500;
+    color: #121212;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.yes-btn,
+.no-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.yes-btn {
+    background-color: #1976d2;
+    color: white;
+}
+
+.yes-btn:hover {
+    background-color: #125ca1;
+}
+
+.no-btn {
+    background-color: #e0e0e0;
+}
+
+.no-btn:hover {
+    background-color: #c9c9c9;
+}
