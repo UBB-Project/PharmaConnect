@@ -1,11 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./HomePage.css";
 
 export default function HomePage() {
-  return (
+    const { t } = useTranslation("home");
+
+    return (
     <div className="home-page">
-      <h2>Welcome to PharmaConnect!</h2>
-      <p>Your trusted partner in digital healthcare.</p>
+      <h2>{t("welcome")}</h2>
+      <p>{t("tagline")}</p>
     </div>
   );
 }

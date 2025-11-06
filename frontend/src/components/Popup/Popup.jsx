@@ -1,7 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./Popup.css";
 
 export default function Popup({ message, onConfirm }) {
+    const { t } = useTranslation(["common", "header"]);
+
     return (
         <div className="popup-overlay">
             <div className="popup-box">
@@ -11,13 +14,13 @@ export default function Popup({ message, onConfirm }) {
                             onClick={() => onConfirm(true)}
                             aria-label="Confirm"
                     >
-                        Yes
+                        {t("common:yes")}
                     </button>
                     <button className="no-btn"
                             onClick={() => onConfirm(false)}
                             aria-label="Cancel"
                     >
-                        No
+                        {t("common:no")}
                     </button>
                 </div>
             </div>

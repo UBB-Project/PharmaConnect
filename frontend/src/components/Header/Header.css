@@ -19,9 +19,45 @@
     margin: 0;
 }
 
-
 .header-left {
 width: 90px;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 6px 28px 6px 10px;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: #104a8a;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    transition: background-color 0.2s ease;
+    line-height: 1.5;
+}
+
+.select-wrapper select:hover {
+    background-color: #e6e6e6;
+}
+
+.select-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-right: 1.8px solid #104a8a;
+    border-bottom: 1.8px solid #104a8a;
+    pointer-events: none;
+    box-sizing: border-box;
 }
 
 .logout-btn {
