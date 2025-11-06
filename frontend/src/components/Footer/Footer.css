@@ -1,0 +1,20 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background-color: #f2f2f2;
+    color: #555;
+    font-size: 0.9rem;
+    padding: 16px 0;
+    border-top: 1px solid #ddd;
+}
+
+.github-link {
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.github-link:hover {
+    color: #1976d2;
+}
