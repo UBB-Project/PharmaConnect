@@ -13,17 +13,14 @@ i18n
         interpolation: { escapeValue: false },
         ns: ["common", "header", "footer", "login", "home"],
         defaultNS: "common",
-        backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
-            detection: {
-                    lookupLocalStorage: "i18nextLng",
-                    order: ["localStorage", "navigator"],
-                    caches: ["localStorage"],
-                    checkWhitelist: true,
-                    lookupFromPathIndex: 0,
-                    lookupFromSubdomainIndex: 0,
-                    languageOnly: true
-            },
-            react: { useSuspense: true }
+        backend: { loadPath: "/locales/{{lng}}.json" },
+        detection: {
+            lookupLocalStorage: "i18nextLng",
+            order: ["localStorage", "navigator"],
+            caches: ["localStorage"],
+            languageOnly: true
+        },
+        react: { useSuspense: true }
     });
 
 export default i18n;

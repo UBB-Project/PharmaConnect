@@ -14,13 +14,13 @@ export default function Popup({ message, onConfirm }) {
                             onClick={() => onConfirm(true)}
                             aria-label="Confirm"
                     >
-                        {t("common:yes")}
+                        {t("common.yes")}
                     </button>
                     <button className="no-btn"
                             onClick={() => onConfirm(false)}
                             aria-label="Cancel"
                     >
-                        {t("common:no")}
+                        {t("common.no")}
                     </button>
                 </div>
             </div>

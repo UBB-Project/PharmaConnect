@@ -7,8 +7,8 @@ export default function HomePage() {
 
     return (
     <div className="home-page">
-      <h2>{t("welcome")}</h2>
-      <p>{t("tagline")}</p>
+      <h2>{t("home.welcome")}</h2>
+      <p>{t("home.tagline")}</p>
     </div>
   );
 }

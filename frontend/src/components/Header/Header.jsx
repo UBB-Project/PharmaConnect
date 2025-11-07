@@ -50,7 +50,7 @@ export default function Header() {
 
             {showPopup && (
                 <Popup
-                    message={t("logoutConfirm")}
+                    message={t("header.logoutConfirm")}
                     onConfirm={confirmLogout}
                 />
             )}

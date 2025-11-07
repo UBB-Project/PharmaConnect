@@ -7,7 +7,7 @@ export default function LoginPage() {
 
     return (
         <div className="login-container">
-            <h2>{t("loginTitle")}</h2>
+            <h2>{t("login.loginTitle")}</h2>
         </div>
     );
 }

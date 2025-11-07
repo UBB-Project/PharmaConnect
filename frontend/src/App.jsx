@@ -17,8 +17,8 @@ function App() {
                         path="/"
                         element={
                             <div className="home-page">
-                                <h1>{t("welcome")}</h1>
-                                <p>{t("tagline")}</p>
+                                <h1>{t("home.welcome")}</h1>
+                                <p>{t("home.tagline")}</p>
                             </div>
                         }
                     />
