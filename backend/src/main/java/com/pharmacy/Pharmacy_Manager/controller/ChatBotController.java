@@ -1,5 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import com.pharmacy.Pharmacy_Manager.service.ChatBotService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/chat")
 public class ChatBotController {

@@ -19,10 +19,6 @@ function App() {
                         element={
                             <div className="home-page">
 
-                                <h1>Welcome to PharmaConnect!</h1>
-                                <p>Your trusted partner in digital healthcare.</p>
-                                
-
                                 <h1>{t("home.welcome")}</h1>
                                 <p>{t("home.tagline")}</p>
 
