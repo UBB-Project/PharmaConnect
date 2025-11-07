@@ -4,8 +4,10 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import "./App.css";
 import ChatBot from "./components/ChatBot.jsx";
+import {useTranslation} from "react-i18next";
 
 function App() {
+    const { t } = useTranslation("home");
     return (
         <div className="app-container">
             <Header />
@@ -16,9 +18,14 @@ function App() {
                         path="/"
                         element={
                             <div className="home-page">
+
                                 <h1>Welcome to PharmaConnect!</h1>
                                 <p>Your trusted partner in digital healthcare.</p>
                                 
+
+                                <h1>{t("home.welcome")}</h1>
+                                <p>{t("home.tagline")}</p>
+
                             </div>
                         }
                     />
