@@ -1,3 +1,16 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'YourOriginalFont', sans-serif;
+  background-color: #121212;
+  color: white;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -9,10 +22,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #121212;
-  color: white;
+  text-align: center;
 }
 
 .home-page {
-  text-align: center;
+  padding: 2rem;
 }
