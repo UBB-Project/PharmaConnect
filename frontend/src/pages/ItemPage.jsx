@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import './itemPage.css'
+import './ItemPage.css'
 
 const API_BASE = 'http://localhost:8080/api'
 
