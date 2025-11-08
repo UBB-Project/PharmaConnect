@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pharmacy.Pharmacy_Manager.dto.PromptRequest;
 import com.pharmacy.Pharmacy_Manager.service.ChatBotService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin("*")
 @RestController

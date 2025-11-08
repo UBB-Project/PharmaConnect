@@ -26,7 +26,8 @@ public class ChatBotService {
   private String model;
 
   public String getChatResponse(PromptRequest promptRequest) {
-
+    System.out.println("PromptRequest received: " + promptRequest);
+    System.out.println("Prompt value: " + promptRequest.prompt());
     ChatGptRequest chatGptRequest = new ChatGptRequest(model,
         List.of(new ChatGptRequest.Message("user", promptRequest.prompt())));
 
@@ -38,6 +39,6 @@ public class ChatBotService {
         .retrieve()
         .body(ChatGptResponse.class);
 
-    return response.choice().get(0).message().content();
+    return response.choices().get(0).message().content();
   }
 }

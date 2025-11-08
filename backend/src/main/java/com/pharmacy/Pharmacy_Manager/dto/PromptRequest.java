@@ -1,4 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
-public record PromptRequest(String prompt) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record PromptRequest(@JsonProperty("prompt") String prompt) {
 }
