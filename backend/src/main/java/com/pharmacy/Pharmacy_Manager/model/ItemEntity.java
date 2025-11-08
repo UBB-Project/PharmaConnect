@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Table(name = "items")
-public class Item {
+public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false, unique = true)

@@ -1,8 +1,10 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
-import com.pharmacy.Pharmacy_Manager.dto.PharmacyDTO;
-import com.pharmacy.Pharmacy_Manager.model.Pharmacy;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyRequestDto;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyResponseDto;
+import com.pharmacy.Pharmacy_Manager.model.PharmacyEntity;
 import com.pharmacy.Pharmacy_Manager.repository.PharmacyRepository;
+import com.pharmacy.Pharmacy_Manager.service.mapper.PharmacyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,53 +19,37 @@ import java.util.stream.Collectors;
 public class PharmacyService {
     private final PharmacyRepository pharmacyRepository;
 
-    public PharmacyDTO createPharmacy(PharmacyDTO pharmacyDTO) {
-        Pharmacy pharmacy = Pharmacy.builder()
-                .name(pharmacyDTO.getName())
+    public PharmacyResponseDto createPharmacy(PharmacyRequestDto pharmacyRequestDto) {
+        PharmacyEntity pharmacyEntity = PharmacyEntity.builder()
+                .name(pharmacyRequestDto.getName())
 //                .locations(pharmacyDTO.getLocations().stream()
 //                        .map(addr -> Location.builder().address(addr).build)))
 //                        .collect(Collectors.toList()))
                 .build();
 //        pharmacy.getLocations().forEach(loc - > loc.setPharmacy(pharmacy));
-        Pharmacy saved = pharmacyRepository.save(pharmacy);
+        PharmacyEntity saved = pharmacyRepository.save(pharmacyEntity);
 
-        pharmacyDTO.setId(saved.getId());
-        return pharmacyDTO;
+        return PharmacyMapper.mapToPharmacyResponse(saved);
     }
 
-    public List<PharmacyDTO> getAllPharmacies() {
-        return pharmacyRepository.findAll().stream().map(p->{
-            PharmacyDTO pharmacyDTO = new PharmacyDTO();
-            pharmacyDTO.setId(p.getId());
-            pharmacyDTO.setName(p.getName());
-//            pharmacyDTO.setLocations(p.getLocations().stream())
-//                    .map(Location::getAddress).collect(Collectors.toList());
-            return pharmacyDTO;
-        }).collect(Collectors.toList());
-    }
-
-    public List<PharmacyDTO> getPharmaciesByName(String name) {
-        return pharmacyRepository.findByName(name)
-                .stream()
-                .map(p -> {
-                    PharmacyDTO pharmacyDTO = new PharmacyDTO();
-                    pharmacyDTO.setId(p.getId());
-                    pharmacyDTO.setName(p.getName());
-//                    pharmacyDTO.setLocations(p.getLocations().stream()
-//                            .map(Location::getAddress)
-//                            .collect(Collectors.toList()));
-                    return pharmacyDTO;
-                })
+    public List<PharmacyResponseDto> getAllPharmacies() {
+        return pharmacyRepository.findAll().stream()
+                .map(PharmacyMapper::mapToPharmacyResponse)
                 .collect(Collectors.toList());
     }
 
-    public PharmacyDTO getPharmacyById(UUID id) {
-        Pharmacy pharmacy = pharmacyRepository.findById(id)
+    public List<PharmacyResponseDto> getPharmaciesByName(String name) {
+        return pharmacyRepository.findByName(name)
+                .stream()
+                .map(PharmacyMapper::mapToPharmacyResponse)
+                .collect(Collectors.toList());
+    }
+
+    public PharmacyResponseDto getPharmacyById(UUID id) {
+        PharmacyEntity pharmacyEntity = pharmacyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pharmacy not found"));
-        PharmacyDTO pharmacyDTO = new PharmacyDTO();
-        pharmacyDTO.setId(pharmacy.getId());
-        pharmacyDTO.setName(pharmacy.getName());
-        return pharmacyDTO;
+
+        return PharmacyMapper.mapToPharmacyResponse(pharmacyEntity);
 
     }
     public void deletePharmacy(UUID id) {
