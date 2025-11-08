@@ -1,9 +1,11 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
 import com.pharmacy.Pharmacy_Manager.model.Order;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class OrderQRCodeDTO {
     String orderId;
     String itemName;
@@ -12,12 +14,13 @@ public class OrderQRCodeDTO {
     int quantity;
 
     public static OrderQRCodeDTO fromOrder(Order order) {
-        var orderQr = new OrderQRCodeDTO();
-        orderQr.setOrderId(order.getId().toString());
-        orderQr.setQuantity(order.getQuantity());
-        orderQr.setUserId(order.getUser().getId().toString());
-        orderQr.setItemName(order.getItem().getName());
-        orderQr.setItemId(order.getItem().getId().toString());
-        return orderQr;
+        return OrderQRCodeDTO
+                .builder()
+                .orderId(order.getId().toString())
+                .quantity(order.getQuantity())
+                .userId(order.getUser().getId().toString())
+                .itemName(order.getItem().getName())
+                .itemId(order.getItem().getId().toString())
+                .build();
     }
 }

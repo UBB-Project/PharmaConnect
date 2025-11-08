@@ -7,6 +7,7 @@ import com.pharmacy.Pharmacy_Manager.model.User;
 import lombok.Data;
 
 import java.util.UUID;
+
 @Data
 public class OrderDTO {
     OrderType type;
@@ -15,11 +16,12 @@ public class OrderDTO {
     UUID userId;
 
     public Order toOrder(User user, Item item) {
-        final var order = new Order();
-        order.setUser(user);
-        order.setItem(item);
-        order.setQuantity(quantity);
-        order.setType(type);
-        return order;
+        return Order.builder()
+                .user(user)
+                .item(item)
+                .quantity(quantity)
+                .type(type)
+                .build();
+
     }
 }

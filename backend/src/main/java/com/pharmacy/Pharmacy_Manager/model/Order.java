@@ -7,11 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.UUID;
+
 @Builder
 @Entity
 @AllArgsConstructor
@@ -29,12 +28,11 @@ public class Order {
     private OrderType type;
 
     @Column
-    @CreatedDate
     @CreationTimestamp(source = SourceType.DB)
-    Instant placedAt;
+    private Instant placedAt;
 
     @Column
-    int quantity;
+    private int quantity;
 
     @ManyToOne()
     @JoinColumn(name= "item_id", referencedColumnName = "id")

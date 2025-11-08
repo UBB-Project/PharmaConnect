@@ -5,7 +5,6 @@ import com.pharmacy.Pharmacy_Manager.dto.OrderDTO;
 import com.pharmacy.Pharmacy_Manager.model.Order;
 import com.pharmacy.Pharmacy_Manager.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +20,15 @@ public class OrderController {
 
     @GetMapping("{id}")
     public ResponseEntity<Order> getOrder(@PathVariable String id){
-        final var order = service.get(UUID.fromString(id));
+        final Order order = service.get(UUID.fromString(id));
         return ResponseEntity.ok(order);
     }
 
     @PostMapping()
-    public ResponseEntity<byte[]> placeOrder(@RequestBody OrderDTO dto) {
+    public ResponseEntity<byte[]> placeOrder(@RequestBody OrderDTO orderDTO) {
         try {
-            var order = service.create(dto);
-            var qrImage = service.getQR(order);
+            Order order = service.create(orderDTO);
+            byte[] qrImage = service.getQR(order);
 
             return ResponseEntity.ok()
                     .header("Content-Type", "image/png")
