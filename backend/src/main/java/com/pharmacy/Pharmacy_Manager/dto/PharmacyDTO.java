@@ -1,11 +1,13 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@Builder
 public class PharmacyDTO {
     private UUID id;
     @NotBlank(message = "Name cannot be empty")

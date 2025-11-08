@@ -63,13 +63,15 @@ public class PharmacyService {
     }
 
     private PharmacyDTO toDTO(Pharmacy pharmacy) {
-        PharmacyDTO pharmacyDTO = new PharmacyDTO();
-        pharmacyDTO.setId(pharmacy.getId());
-        pharmacyDTO.setName(pharmacy.getName());
-        pharmacyDTO.setLocations(pharmacy.getLocations().stream()
-                .map(Location::getAddress)
-                .collect(Collectors.toList()));
-        return pharmacyDTO;
+        return PharmacyDTO.builder()
+                .id(pharmacy.getId())
+                .name(pharmacy.getName())
+                .locations(
+                        pharmacy.getLocations().stream()
+                                .map(Location::getAddress)
+                                .collect(Collectors.toList())
+                )
+                .build();
     }
 
     private Pharmacy fromDTO(PharmacyDTO pharmacyDTO) {
