@@ -13,7 +13,7 @@ import java.util.UUID;
 @Builder
 public class PharmacyMapDTO {
     private UUID id;
-    @NotBlank(message = "Address cannot be empty")
+    @NotBlank(message = "Name cannot be empty")
     private String name;
     @NotBlank(message = "Address cannot be empty")
     private String address;
