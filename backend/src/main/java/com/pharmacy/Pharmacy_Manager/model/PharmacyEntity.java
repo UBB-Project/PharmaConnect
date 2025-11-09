@@ -2,34 +2,30 @@ package com.pharmacy.Pharmacy_Manager.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.UUID;
 
-@Builder
 @Entity
+@Table (name = "pharmacies")
+@Builder
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
-@Table(name = "users")
-public class User{
+@Data
+public class PharmacyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(updatable = false, nullable = false,  unique = true)
     private UUID id;
 
-    @Column(nullable = false)
-    private String firstName;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    private String secondName;
-
-    @Column(nullable = false)
-    private String lastName;
+//    @OneToMany(mappedBy = "pharmacy", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Location> locations;
 }

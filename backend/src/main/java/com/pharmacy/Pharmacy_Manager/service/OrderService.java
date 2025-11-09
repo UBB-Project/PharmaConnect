@@ -9,9 +9,9 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.pharmacy.Pharmacy_Manager.dto.OrderDTO;
 import com.pharmacy.Pharmacy_Manager.dto.OrderQRCodeDTO;
-import com.pharmacy.Pharmacy_Manager.model.Item;
-import com.pharmacy.Pharmacy_Manager.model.Order;
-import com.pharmacy.Pharmacy_Manager.model.User;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.model.OrderEntity;
+import com.pharmacy.Pharmacy_Manager.model.UserEntity;
 import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
 import com.pharmacy.Pharmacy_Manager.repository.OrderRepository;
 import com.pharmacy.Pharmacy_Manager.repository.UserRepository;
@@ -37,28 +37,28 @@ public class OrderService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public Order get(UUID id)  {
-        final Optional<Order> order = orderRepository.findById(id);
+    public OrderEntity get(UUID id)  {
+        final Optional<OrderEntity> order = orderRepository.findById(id);
         if(order.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return order.get();
     }
 
-    public Order create(OrderDTO orderDTO) {
-        final Optional<User> user = userRepository.findById(orderDTO.getUserId());
-        final Optional<Item> item = itemRepository.findById(orderDTO.getItemId());
+    public OrderEntity create(OrderDTO orderDTO) {
+        final Optional<UserEntity> user = userRepository.findById(orderDTO.getUserId());
+        final Optional<ItemEntity> item = itemRepository.findById(orderDTO.getItemId());
 
         if(item.isEmpty() || user.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        Order order = orderDTO.toOrder(user.get(), item.get());
-        return orderRepository.save(order);
+        OrderEntity orderEntity = orderDTO.toOrder(user.get(), item.get());
+        return orderRepository.save(orderEntity);
     }
 
-    public byte[] getQR(Order order) throws IOException, WriterException {
-        OrderQRCodeDTO qrDTO = OrderQRCodeDTO.fromOrder(order);
+    public byte[] getQR(OrderEntity orderEntity) throws IOException, WriterException {
+        OrderQRCodeDTO qrDTO = OrderQRCodeDTO.fromOrder(orderEntity);
         String dtoString = objectMapper.writeValueAsString(qrDTO);
         return generateQRCode(dtoString);
     }

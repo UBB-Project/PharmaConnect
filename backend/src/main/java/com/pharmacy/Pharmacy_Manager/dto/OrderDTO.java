@@ -1,9 +1,9 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
-import com.pharmacy.Pharmacy_Manager.model.Item;
-import com.pharmacy.Pharmacy_Manager.model.Order;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.model.OrderEntity;
 import com.pharmacy.Pharmacy_Manager.model.OrderType;
-import com.pharmacy.Pharmacy_Manager.model.User;
+import com.pharmacy.Pharmacy_Manager.model.UserEntity;
 import lombok.Data;
 
 import java.util.UUID;
@@ -15,8 +15,8 @@ public class OrderDTO {
     int quantity;
     UUID userId;
 
-    public Order toOrder(User user, Item item) {
-        return Order.builder()
+    public OrderEntity toOrder(UserEntity user, ItemEntity item) {
+        return OrderEntity.builder()
                 .user(user)
                 .item(item)
                 .quantity(quantity)
