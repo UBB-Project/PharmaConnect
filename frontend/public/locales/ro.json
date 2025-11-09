@@ -1,0 +1,27 @@
+{
+  "common": {
+    "yes": "Da",
+    "no": "Nu",
+    "cancel": "Anulează",
+    "submit": "Trimite",
+    "loading": "Se încarcă..."
+  },
+  "footer": {
+    "copyright": "© 2025 PharmaConnect. Toate drepturile rezervate.",
+    "github": "Depozitul GitHub PharmaConnect"
+  },
+  "header": {
+    "title": "PharmaConnect",
+    "logout": "Deconectare",
+    "logoutConfirm": "Sigur vrei să te deconectezi?"
+  },
+  "home": {
+    "welcome": "Bine ai venit la PharmaConnect!",
+    "tagline": "Partenerul tău de încredere în sănătatea digitală."
+  },
+  "login": {
+    "loginTitle": "Autentificare",
+    "email": "Email",
+    "password": "Parolă"
+  }
+}

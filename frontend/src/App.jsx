@@ -1,7 +1,36 @@
-export default function App(){
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import "./App.css";
+import {useTranslation} from "react-i18next";
+import ItemPage from "./pages/ItemPage/ItemPage.jsx";
+
+function App() {
+    const { t } = useTranslation("home");
     return (
-        <div style={{padding: 24}}>
-            <h1>Pharmacy Manager</h1>
+        <div className="app-container">
+            <Header />
+
+            <main className="content-wrapper">
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <div className="home-page">
+                                <h1>{t("home.welcome")}</h1>
+                                <p>{t("home.tagline")}</p>
+                            </div>
+                        }
+                    />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/items/:id" element={<ItemPage />} />
+                </Routes>
+            </main>
+
+            <Footer />
         </div>
-    )
+    );
 }
+
+export default App;
