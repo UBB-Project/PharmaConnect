@@ -1,8 +1,9 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
-import com.pharmacy.Pharmacy_Manager.dto.PharmacyDTO;
-import com.pharmacy.Pharmacy_Manager.model.Location;
-import com.pharmacy.Pharmacy_Manager.model.Pharmacy;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyRequestDto;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyResponseDto;
+import com.pharmacy.Pharmacy_Manager.model.LocationEntity;
+import com.pharmacy.Pharmacy_Manager.model.PharmacyEntity;
 import com.pharmacy.Pharmacy_Manager.repository.PharmacyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,29 +21,31 @@ public class PharmacyService {
     private final PharmacyRepository pharmacyRepository;
 
 
-    public PharmacyDTO createPharmacy(PharmacyDTO pharmacyDTO) {
-        Pharmacy pharmacy = fromDTO(pharmacyDTO);
+    public PharmacyResponseDto createPharmacy(PharmacyRequestDto pharmacyDTO) {
+        PharmacyEntity pharmacy = fromDTO(pharmacyDTO);
         pharmacy.getLocations().forEach(loc -> loc.setPharmacy(pharmacy));
-        Pharmacy saved = pharmacyRepository.save(pharmacy);
+        PharmacyEntity saved = pharmacyRepository.save(pharmacy);
         return toDTO(saved);
     }
 
-    public List<PharmacyDTO> getAllPharmacies() {
+    public List<PharmacyResponseDto> getAllPharmacies() {
         return pharmacyRepository.findAll()
-                .stream().map(this::toDTO)
+                .stream()
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<PharmacyDTO> getPharmaciesByName(String name) {
+    public List<PharmacyResponseDto> getPharmaciesByName(String name) {
         return pharmacyRepository.findByName(name)
-                .stream().map(this::toDTO)
+                .stream()
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public PharmacyDTO getPharmacyById(UUID id) {
-        Pharmacy pharmacy = pharmacyRepository.findById(id)
+    public PharmacyResponseDto getPharmacyById(UUID id) {
+        PharmacyEntity pharmacyEntity = pharmacyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pharmacy not found"));
-        return toDTO(pharmacy);
+        return toDTO(pharmacyEntity);
     }
 
     public void deletePharmacy(UUID id) {
@@ -52,33 +55,27 @@ public class PharmacyService {
         pharmacyRepository.deleteById(id);
     }
 
-    public PharmacyDTO updatePharmacy(UUID id, PharmacyDTO pharmacyDTO) {
-        Pharmacy pharmacy = pharmacyRepository.findById(id)
+    public PharmacyResponseDto updatePharmacy(UUID id, PharmacyRequestDto pharmacyDTO) {
+        PharmacyEntity pharmacy = pharmacyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Pharmacy not found"));
 
         pharmacy.setName(pharmacyDTO.getName());
 
-        Pharmacy updated = pharmacyRepository.save(pharmacy);
+        PharmacyEntity updated = pharmacyRepository.save(pharmacy);
         return toDTO(updated);
     }
 
-    private PharmacyDTO toDTO(Pharmacy pharmacy) {
-        return PharmacyDTO.builder()
-                .id(pharmacy.getId())
+    private PharmacyResponseDto toDTO(PharmacyEntity pharmacy) {
+        return PharmacyResponseDto.builder()
                 .name(pharmacy.getName())
-                .locations(
-                        pharmacy.getLocations().stream()
-                                .map(Location::getAddress)
-                                .collect(Collectors.toList())
-                )
                 .build();
     }
 
-    private Pharmacy fromDTO(PharmacyDTO pharmacyDTO) {
-        Pharmacy pharmacy = Pharmacy.builder()
+    private PharmacyEntity fromDTO(PharmacyRequestDto pharmacyDTO) {
+        PharmacyEntity pharmacy = PharmacyEntity.builder()
                 .name(pharmacyDTO.getName())
                 .locations(pharmacyDTO.getLocations().stream()
-                        .map(addr -> Location.builder().address(addr).build())
+                        .map(addr -> LocationEntity.builder().address(addr).build())
                         .collect(Collectors.toList()))
                 .build();
         pharmacy.getLocations().forEach(loc -> loc.setPharmacy(pharmacy));

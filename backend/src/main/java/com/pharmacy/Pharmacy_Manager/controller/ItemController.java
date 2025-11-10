@@ -1,6 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
-import com.pharmacy.Pharmacy_Manager.dto.ItemDTO;
+import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,18 +14,18 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping("/items")
-    public UUID addItem(@RequestBody ItemDTO itemDTO) {
+    public UUID addItem(@RequestBody ItemRequestDto itemRequestDto) {
         return itemService.addItem(
-                itemDTO.name(),
-                itemDTO.description(),
-                itemDTO.category(),
-                itemDTO.price(),
-                itemDTO.brand(),
-                itemDTO.imageUrl(),
-                itemDTO.manufacturingDate(),
-                itemDTO.expirationDate(),
-                itemDTO.prescriptionRequired(),
-                itemDTO.sideEffects()
+                itemRequestDto.name(),
+                itemRequestDto.description(),
+                itemRequestDto.category(),
+                itemRequestDto.price(),
+                itemRequestDto.brand(),
+                itemRequestDto.imageUrl(),
+                itemRequestDto.manufacturingDate(),
+                itemRequestDto.expirationDate(),
+                itemRequestDto.prescriptionRequired(),
+                itemRequestDto.sideEffects()
         );
     }
 }

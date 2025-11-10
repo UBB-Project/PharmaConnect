@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class PharmacyDTO {
+public class PharmacyRequestDto {
     private UUID id;
     @NotBlank(message = "Name cannot be empty")
     private String name;

@@ -1,8 +1,8 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
 import com.pharmacy.Pharmacy_Manager.dto.LocationDTO;
-import com.pharmacy.Pharmacy_Manager.model.Location;
-import com.pharmacy.Pharmacy_Manager.model.Pharmacy;
+import com.pharmacy.Pharmacy_Manager.model.LocationEntity;
+import com.pharmacy.Pharmacy_Manager.model.PharmacyEntity;
 import com.pharmacy.Pharmacy_Manager.repository.LocationRepository;
 import com.pharmacy.Pharmacy_Manager.repository.PharmacyRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,15 +18,15 @@ public class LocationService {
     private final PharmacyRepository pharmacyRepository;
 
     public LocationDTO createLocation(LocationDTO locationDTO) {
-        Pharmacy pharmacy = pharmacyRepository.findById(locationDTO.getPharmacyId())
+        PharmacyEntity pharmacy = pharmacyRepository.findById(locationDTO.getPharmacyId())
                 .orElseThrow(() -> new RuntimeException("Pharmacy not found"));
-        Location location = Location.builder()
+        LocationEntity location = LocationEntity.builder()
                 .address(locationDTO.getAddress())
                 .openHours(locationDTO.getOpenHours())
                 .pharmacy(pharmacy)
                 .build();
 
-    Location saved = locationRepository.save(location);
+    LocationEntity saved = locationRepository.save(location);
     locationDTO.setPharmacyId(saved.getId());
     return locationDTO;
     }

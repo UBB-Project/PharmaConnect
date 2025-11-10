@@ -1,6 +1,7 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
-import com.pharmacy.Pharmacy_Manager.dto.PharmacyDTO;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyRequestDto;
+import com.pharmacy.Pharmacy_Manager.dto.PharmacyResponseDto;
 import com.pharmacy.Pharmacy_Manager.service.PharmacyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,22 +23,22 @@ public class PharmacyController {
     private final PharmacyService pharmacyService;
 
     @GetMapping
-    public List<PharmacyDTO> getAllPharmacies() {
+    public List<PharmacyResponseDto> getAllPharmacies() {
         return pharmacyService.getAllPharmacies();
     }
 
     @PostMapping
-    public PharmacyDTO createPharmacy(@Valid @RequestBody PharmacyDTO pharmacyDTO) {
-        return pharmacyService.createPharmacy(pharmacyDTO);
+    public PharmacyResponseDto createPharmacy(@Valid @RequestBody PharmacyRequestDto pharmacyRequestDto) {
+        return pharmacyService.createPharmacy(pharmacyRequestDto);
     }
 
     @GetMapping("/name/{name}")
-    public List<PharmacyDTO> getPharmaciesByName(@PathVariable String name) {
+    public List<PharmacyResponseDto> getPharmaciesByName(@PathVariable String name) {
         return pharmacyService.getPharmaciesByName(name);
     }
 
     @GetMapping("/{id}")
-    public PharmacyDTO getPharmacyById(@PathVariable UUID id) {
+    public PharmacyResponseDto getPharmacyById(@PathVariable UUID id) {
         return pharmacyService.getPharmacyById(id);
     }
 
@@ -47,7 +48,7 @@ public class PharmacyController {
     }
 
     @PutMapping("/{id}")
-    public PharmacyDTO updatePharmacy(@PathVariable UUID id, @Valid @RequestBody PharmacyDTO pharmacyDTO) {
+    public PharmacyResponseDto updatePharmacy(@PathVariable UUID id, @Valid @RequestBody PharmacyRequestDto pharmacyDTO) {
         return pharmacyService.updatePharmacy(id, pharmacyDTO);
     }
 

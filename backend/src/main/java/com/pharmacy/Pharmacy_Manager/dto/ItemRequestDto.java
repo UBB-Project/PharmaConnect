@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Builder
-public record ItemDTO(
+public record ItemRequestDto(
         UUID id,
         String name,
         String description,
