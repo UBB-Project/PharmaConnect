@@ -77,7 +77,6 @@ export default function ItemPage() {
                     </div>
                 </div>
 
-                {/* right: price card */}
                 <aside className="tei-right">
                     <div className="price-lg">
                         {item.price?.toFixed(2)} <span className="currency">LEI</span>
