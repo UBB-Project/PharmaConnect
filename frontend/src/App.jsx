@@ -1,8 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route, Link} from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import MapPage from "./pages/MapPage/MapPage.jsx";
 import "./App.css";
+import "leaflet/dist/leaflet.css";
 import {useTranslation} from "react-i18next";
 
 function App() {
@@ -19,10 +21,12 @@ function App() {
                             <div className="home-page">
                                 <h1>{t("home.welcome")}</h1>
                                 <p>{t("home.tagline")}</p>
+                                <Link className="main-page__button" to="/map"> Open map</Link>
                             </div>
                         }
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/map" element={<MapPage />} />
                 </Routes>
             </main>
 

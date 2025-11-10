@@ -19,12 +19,37 @@ html, body, #root {
 
 .content-wrapper {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding-top: 64px;
+  background-color: black;
 }
 
 .home-page {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 1rem;
 }
+
+.main-page__button {
+  padding: 1rem 2rem;
+  margin: 2rem;
+  border: none;
+  border-radius: 12px;
+  background: #2b6cb0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.main-page__button:hover {
+  background: #1e4e8c;
+  transform: translateY(-8px);
+}
+
+

@@ -1,0 +1,15 @@
+.map-wrap {
+    width: 90%;                     /* take 90% of screen width */
+    max-width: 1200px;              /* limit width on large screens */
+    height: 70vh;                   /* responsive height */
+    margin: 2rem auto;              /* ✅ centers it horizontally */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    background: #f0f0f0;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+}
