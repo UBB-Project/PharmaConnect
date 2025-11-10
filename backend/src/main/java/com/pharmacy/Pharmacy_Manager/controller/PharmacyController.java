@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,4 +46,10 @@ public class PharmacyController {
     public void deletePharmacy(@PathVariable UUID id) {
         pharmacyService.deletePharmacy(id);
     }
+
+    @PutMapping("/{id}")
+    public PharmacyResponseDto updatePharmacy(@PathVariable UUID id, @Valid @RequestBody PharmacyRequestDto pharmacyDTO) {
+        return pharmacyService.updatePharmacy(id, pharmacyDTO);
+    }
+
 }
