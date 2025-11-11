@@ -1,28 +1,31 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
-import com.pharmacy.Pharmacy_Manager.dto.PharmacyMapDTO;
-import com.pharmacy.Pharmacy_Manager.repository.PharmacyRepository;
-import lombok.RequiredArgsConstructor;
+import com.pharmacy.Pharmacy_Manager.dto.MapLocationDTO;
+import com.pharmacy.Pharmacy_Manager.model.LocationEntity;
+import com.pharmacy.Pharmacy_Manager.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class MapService {
-    private final PharmacyRepository pharmacyRepository;
 
-    public List<PharmacyMapDTO> getAllPharmaciesForMap() {
-        return pharmacyRepository.findAll().stream()
-                .flatMap(pharmacy -> pharmacy.getLocations().stream()
-                        .map(location -> PharmacyMapDTO.builder()
-                                .id(pharmacy.getId())
-                                .name(pharmacy.getName())
-                                .address(location.getAddress())
-                                .latitude(location.getLatitude())
-                                .longitude(location.getLongitude())
-                                .build()))
+    private final LocationRepository locationRepository;
+
+    public MapService(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
+
+    public List<MapLocationDTO> getAllPharmaciesForMap() {
+        return locationRepository.findAll().stream()
+                .map(loc -> new MapLocationDTO(
+                        loc.getPharmacy().getName(),
+                        loc.getAddress(),
+                        loc.getLatitude(),
+                        loc.getLongitude(),
+                        loc.getOpenHours()
+                ))
                 .collect(Collectors.toList());
     }
 }

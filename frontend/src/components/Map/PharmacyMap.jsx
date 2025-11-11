@@ -18,27 +18,21 @@ export default function Map() {
     useEffect(() => {
         fetch("http://localhost:8080/api/map/pharmacies")
             .then((res) => res.json())
-            .then((data) => setPharmacies(data))
+            .then((data) =>
+                setPharmacies(
+                    data.map((p) => ({
+                        ...p,
+                        latitude: parseFloat(p.latitude),
+                        longitude: parseFloat(p.longitude),
+                    }))
+                )
+            )
             .catch((err) => console.error("Failed to load pharmacies:", err));
     }, []);
 
     return (
         <div className="map-wrap">
-            <MapContainer center={CLUJ} zoom={13} scrollWheelZoom>
-                <TileLayer
-                    attribution='&copy; OpenStreetMap contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {pharmacies.map((p) => (
-                    <Marker
-                        key={p.id}
-                        position={[p.latitude, p.longitude]}
-                        icon={pin}
-                    >
-                        <Popup><strong>{p.name}</strong></Popup>
-                    </Marker>
-                ))}
-            </MapContainer>
+            
         </div>
     );
 }
