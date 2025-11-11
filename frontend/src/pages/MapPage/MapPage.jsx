@@ -1,4 +1,4 @@
-import Map from "../../components/Map/Map.jsx";
+import PharmacyMap from "../../components/Map/PharmacyMap.jsx";
 import "./MapPage.css"
 import {Link} from "react-router-dom";
 export default function MapPage() {
@@ -6,7 +6,7 @@ export default function MapPage() {
         <div className="page">
             <div className="page__content">
                 <Link className="main-page__link" to="/">Home</Link>
-                <Map />
+                <PharmacyMap />
             </div>
         </div>
     );
