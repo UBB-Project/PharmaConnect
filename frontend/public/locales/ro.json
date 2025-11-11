@@ -17,11 +17,34 @@
   },
   "home": {
     "welcome": "Bine ai venit la PharmaConnect!",
-    "tagline": "Partenerul tău de încredere în sănătatea digitală."
+    "tagline": "Partenerul tău de încredere în sănătatea digitală.",
+    "heroTitle": "Oferă magazinului tău farmaceutic o prezență online",
+    "heroSubtitle": "Prezintă produse, gestionează stocuri și primește comenzi — totul într-un singur loc.",
+    "ctaPrimary": "Începe să vinzi",
+    "ctaSecondary": "Cumpără produse",
+    "featureListingsTitle": "Listări elegante",
+    "featureListingsDesc": "Prezintă medicamente și produse de wellness cu detalii clare.",
+    "featureInventoryTitle": "Stoc sincronizat",
+    "featureInventoryDesc": "Menține stocul corect cu actualizări în timp real.",
+    "featureOrdersTitle": "Comenzi simplificate",
+    "featureOrdersDesc": "Checkout fluent și urmărirea comenzilor pentru clienți.",
+    "featureTrustedTitle": "Farmacii de încredere",
+    "featureTrustedDesc": "Cumpără în siguranță de la farmacii verificate și vânzători licențiați.",
+    "featureDeliveryTitle": "Livrare rapidă sau ridicare",
+    "featureDeliveryDesc": "Alege livrarea prin curier sau ridicarea din farmacie.",
+    "featureSecureTitle": "Plată securizată",
+    "featureSecureDesc": "Datele tale sunt protejate cu criptare modernă și bune practici."
   },
   "login": {
-    "loginTitle": "Autentificare",
-    "email": "Email",
-    "password": "Parolă"
+  "loginTitle": "Autentificare",
+  "tabLogin": "Autentificare",
+  "tabRegister": "Înregistrare",
+  "email": "Email",
+  "password": "Parolă",
+  "firstName": "Prenume",
+  "secondName": "Al doilea prenume",
+  "lastName": "Nume",
+  "loginButton": "Autentificare",
+  "registerButton": "Înregistrare"
   }
 }

@@ -1,9 +1,274 @@
+:root {
+    --pc-bg-1: #0a355e;
+    --pc-bg-2: #104a8a;
+    --pc-accent: #5be7c4;
+    --pc-white: #ffffff;
+    --pc-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-page {
+    position: relative;
+}
+
+.auth-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.gradient-layer {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(1200px 800px at 20% 10%, rgba(27, 75, 145, 0.35), transparent 60%),
+    radial-gradient(1200px 800px at 80% 90%, rgba(50, 198, 164, 0.35), transparent 60%),
+    linear-gradient(120deg, #0a355e, #104a8a 50%, #0a355e);
+    filter: saturate(120%) brightness(1.05);
+    animation: gradientShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+    from { filter: hue-rotate(0deg) saturate(115%); transform: scale(1); }
+    to   { filter: hue-rotate(20deg) saturate(135%); transform: scale(1.05); }
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    animation: blobFloat 18s ease-in-out infinite alternate;
+}
+
+.blob1 {
+    top: -10%;
+    left: -10%;
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle at 30% 30%, #53e0b7, transparent 55%);
+}
+
+.blob2 {
+    bottom: -15%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at 70% 70%, #59a8ff, transparent 55%);
+    animation-duration: 22s;
+}
+
+.blob3 {
+    top: 20%;
+    right: 30%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle at 50% 50%, #9cd6ff, transparent 55%);
+    animation-duration: 20s;
+}
+
+@keyframes blobFloat {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(0, -20px, 0) scale(1.05); }
+}
+
 .login-container {
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-size: 2rem;
-    color: #1976d2;
+    min-height: calc(100vh - 64px - 64px);
+    padding: 32px 16px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    box-shadow: var(--pc-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+    transform-origin: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.auth-card:focus-within {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.tab {
+    position: relative;
+    padding: 14px 0;
+    text-align: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: #e6f0ff;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.tab:hover { color: #ffffff; }
+.tab.active { color: #ffffff; }
+
+.tab-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #59a8ff, #53e0b7);
+}
+
+.form-viewport {
+    position: relative;
+    min-height: 260px;
+}
+
+.auth-form {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Floating labels */
+.form-group.float {
+    position: relative;
+}
+
+.form-group.float input {
+    width: 100%;
+    padding: 16px 14px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group.float input::placeholder { color: transparent; }
+
+.form-group.float label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 6px;
+    color: #e6f0ff;
+    background: transparent;
+    pointer-events: none;
+    transition: all 0.2s ease;
     font-weight: 600;
+}
+
+.form-group.float input:focus {
+    border-color: #9cd6ff;
+    box-shadow: 0 0 0 4px rgba(156, 214, 255, 0.18);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.form-group.float input:focus + label,
+.form-group.float input:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-50%) scale(0.9);
+    color: #9cd6ff;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+
+.submit-btn {
+    position: relative;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #59a8ff, #53e0b7);
+    color: #0a355e;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 8px 20px rgba(89, 168, 255, 0.35);
+    overflow: hidden;
+}
+
+.submit-btn:hover { box-shadow: 0 12px 26px rgba(83, 224, 183, 0.35); }
+.submit-btn:active { transform: translateY(1px); }
+.submit-btn:disabled { opacity: 0.8; cursor: default; }
+
+/* Ripple effect (centered) */
+.submit-btn::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+    transition: transform 0.45s ease, opacity 0.45s ease;
+    pointer-events: none;
+}
+
+.submit-btn:active::after {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+}
+
+/* Spinner and success states */
+.submit-btn .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(10, 53, 94, 0.25);
+    border-top-color: #0a355e;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.submit-btn .checkmark {
+    display: inline-block;
+    font-weight: 900;
+    color: #0a355e;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    white-space: nowrap;
 }

@@ -17,11 +17,34 @@
   },
   "home": {
     "welcome": "Welcome to PharmaConnect!",
-    "tagline": "Your trusted partner in digital healthcare."
+    "tagline": "Your trusted partner in digital healthcare.",
+    "heroTitle": "Power your pharmacy’s online storefront",
+    "heroSubtitle": "Showcase products, manage inventory, and accept orders — all in one place.",
+    "ctaPrimary": "Start selling",
+    "ctaSecondary": "Shop products",
+    "featureListingsTitle": "Beautiful listings",
+    "featureListingsDesc": "Present medicines and wellness products with rich details and clean design.",
+    "featureInventoryTitle": "Inventory in sync",
+    "featureInventoryDesc": "Keep stock accurate with effortless, real-time updates.",
+    "featureOrdersTitle": "Orders made simple",
+    "featureOrdersDesc": "Streamlined checkout and order tracking for your customers.",
+    "featureTrustedTitle": "Trusted pharmacies",
+    "featureTrustedDesc": "Buy confidently from verified pharmacies and licensed sellers.",
+    "featureDeliveryTitle": "Fast delivery or pickup",
+    "featureDeliveryDesc": "Choose courier delivery or pick up your order in-store.",
+    "featureSecureTitle": "Secure checkout",
+    "featureSecureDesc": "Your data is protected with modern encryption and best practices."
   },
   "login": {
-    "loginTitle": "Login",
-    "email": "Email",
-    "password": "Password"
+  "loginTitle": "Login",
+  "tabLogin": "Login",
+  "tabRegister": "Register",
+  "email": "Email",
+  "password": "Password",
+  "firstName": "First name",
+  "secondName": "Second name",
+  "lastName": "Last name",
+  "loginButton": "Log in",
+  "registerButton": "Register"
   }
 }
