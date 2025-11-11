@@ -1,0 +1,27 @@
+{
+  "common": {
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "loading": "Loading..."
+  },
+  "footer": {
+    "copyright": "© 2025 PharmaConnect. All rights reserved.",
+    "github": "PharmaConnect GitHub Repository"
+  },
+  "header": {
+    "title": "PharmaConnect",
+    "logout": "Log out",
+    "logoutConfirm": "Are you sure you want to logout?"
+  },
+  "home": {
+    "welcome": "Welcome to PharmaConnect!",
+    "tagline": "Your trusted partner in digital healthcare."
+  },
+  "login": {
+    "loginTitle": "Login",
+    "email": "Email",
+    "password": "Password"
+  }
+}

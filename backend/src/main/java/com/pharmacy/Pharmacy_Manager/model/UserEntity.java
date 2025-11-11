@@ -19,7 +19,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Table(name = "users")
-public class User{
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false,  unique = true)
@@ -28,8 +28,8 @@ public class User{
     @Column(nullable = false)
     private String firstName;
 
-    private String lastName;
+    private String secondName;
 
     @Column(nullable = false)
-    private String secondName;
+    private String lastName;
 }
