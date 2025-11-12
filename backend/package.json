@@ -8,10 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/UBB-Project/PharmaConnect.git"
+    "url": "git+https://github.com/UBB-Project/PharmaConnect.git"
   },
   "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/UBB-Project/PharmaConnect/issues"
+  },
+  "homepage": "https://github.com/UBB-Project/PharmaConnect#readme",
   "dependencies": {
-    "react-router-dom": "^7.9.5"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
   }
 }
