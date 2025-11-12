@@ -1,5 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import lombok.Builder;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -17,4 +18,20 @@ public record ItemRequestDto(
         LocalDate expirationDate,
         Boolean prescriptionRequired,
         String sideEffects
-        ) {}
+        ) {
+    public static ItemRequestDto from(ItemEntity i) {
+        return ItemRequestDto.builder()
+                .id(i.getId())
+                .name(i.getName())
+                .description(i.getDescription())
+                .category(i.getCategory())
+                .price(i.getPrice())
+                .brand(i.getBrand())
+                .imageUrl(i.getImageUrl())
+                .manufacturingDate(i.getManufacturingDate())
+                .expirationDate(i.getExpirationDate())
+                .prescriptionRequired(i.getPrescriptionRequired())
+                .sideEffects(i.getSideEffects())
+                .build();
+    }
+}

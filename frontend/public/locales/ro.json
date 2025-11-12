@@ -23,5 +23,45 @@
     "loginTitle": "Autentificare",
     "email": "Email",
     "password": "Parolă"
+  },
+  "item": {
+    "loading": "Se încarcă…",
+    "error": "Produsul nu a fost găsit sau serverul este indisponibil.",
+    "imageNote": "Imagine cu titlu de prezentare. Ambalajul poate varia.",
+    "brand": "Brand",
+    "range": "Gama",
+    "expires": "Expiră",
+    "soldBy": "Vândut de",
+    "soldByName": "PharmaConnect",
+    "rx": "Pe rețetă",
+    "otc": "OTC",
+    "inStock": "ÎN STOC",
+    "updatedToday": "Actualizat azi",
+    "quantity": "Cantitate",
+    "reserve": "Rezervă",
+    "reserved": "Rezervat ✅",
+    "tabs": {
+      "desc": "Descriere",
+      "spec": "Specificații",
+      "info": "Informații utile",
+      "prospect": "Prospect"
+    },
+    "categories": {
+      "Supplement": "Supliment",
+      "Medication": "Medicament"
+    },
+    "adverseReactions": "Reacții adverse",
+    "productData": "Date produs",
+    "manufactured": "Fabricat",
+    "prescriptionRequired": "Necesită rețetă",
+    "noPrescription": "Fără rețetă (OTC)",
+    "category": "Categorie",
+    "productCode": "Cod produs",
+    "generalInfo": "Informații generale: nu depășiți doza recomandată. A nu se lăsa la îndemâna copiilor.",
+    "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul."
+
   }
 }
+
+
+

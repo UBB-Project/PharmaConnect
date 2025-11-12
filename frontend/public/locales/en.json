@@ -23,5 +23,48 @@
     "loginTitle": "Login",
     "email": "Email",
     "password": "Password"
-  }
-}
+  },
+
+    "item": {
+      "loading": "Loading…",
+      "error": "Item not found or server unavailable.",
+      "imageNote": "Illustrative image. Packaging may vary.",
+      "brand": "Brand",
+      "range": "Category",
+      "expires": "Expires",
+      "soldBy": "Sold by",
+      "soldByName": "PharmaConnect",
+      "rx": "Prescription",
+      "otc": "OTC",
+      "inStock": "IN STOCK",
+      "updatedToday": "Updated today",
+      "quantity": "Quantity",
+      "reserve": "Reserve",
+      "reserved": "Reserved ✅",
+      "tabs": {
+        "desc": "Description",
+        "spec": "Specifications",
+        "info": "Useful info",
+        "prospect": "Leaflet"
+      },
+      "categories": {
+        "Supplement": "Supplement",
+        "Medication": "Medication"
+      },
+      "adverseReactions": "Adverse reactions",
+      "productData": "Product data",
+      "manufactured": "Manufactured",
+      "prescriptionRequired": "Requires prescription",
+      "noPrescription": "Without prescription (OTC)",
+      "category": "Category",
+      "productCode": "Product code",
+      "generalInfo": "General information: do not exceed the recommended dose. Keep out of the reach of children.",
+      "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist."
+
+      }
+    }
+
+
+
+
+
