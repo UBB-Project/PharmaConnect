@@ -1,19 +1,26 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
 import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+@CrossOrigin(origins = "http://localhost:5173")
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/items")
+
 public class ItemController {
     private final ItemService itemService;
 
-    @PostMapping("/items")
+    @PostMapping
     public UUID addItem(@RequestBody ItemRequestDto itemRequestDto) {
         return itemService.addItem(
                 itemRequestDto.name(),
@@ -27,5 +34,18 @@ public class ItemController {
                 itemRequestDto.prescriptionRequired(),
                 itemRequestDto.sideEffects()
         );
+    }
+    @GetMapping
+    public List<ItemRequestDto> getAllItems() {
+        return itemService.getAllItems().stream()
+                .map(ItemRequestDto::from)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public ItemRequestDto getItem(@PathVariable UUID id) {
+        ItemEntity item = itemService.getById(id)
+                .orElseThrow();
+        return ItemRequestDto.from(item);
     }
 }

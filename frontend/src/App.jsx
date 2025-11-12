@@ -6,6 +6,7 @@ import MapPage from "./pages/MapPage/MapPage.jsx";
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 import {useTranslation} from "react-i18next";
+import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -26,6 +27,7 @@ function App() {
                         }
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                 </Routes>
             </main>
