@@ -1,7 +1,7 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
 import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
-import com.pharmacy.Pharmacy_Manager.model.Item;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ItemService {
                         String sideEffects
                         )
         {
-            Item newItem = Item.builder()
+            ItemEntity newItemEntity = ItemEntity.builder()
                     .name(name)
                     .description(description)
                     .category(category)
@@ -40,8 +40,8 @@ public class ItemService {
                     .prescriptionRequired(prescriptionRequired)
                     .sideEffects(sideEffects)
                     .build();
-            itemRepository.save(newItem);
-            return newItem.getId();
+            itemRepository.save(newItemEntity);
+            return newItemEntity.getId();
         }
     public Optional<Item> getById(UUID id) {
         return itemRepository.findById(id);

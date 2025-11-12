@@ -2,7 +2,7 @@ package com.pharmacy.Pharmacy_Manager.controller;
 
 import com.google.zxing.WriterException;
 import com.pharmacy.Pharmacy_Manager.dto.OrderDTO;
-import com.pharmacy.Pharmacy_Manager.model.Order;
+import com.pharmacy.Pharmacy_Manager.model.OrderEntity;
 import com.pharmacy.Pharmacy_Manager.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +24,16 @@ public class OrderController {
     private final OrderService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<Order> getOrder(@PathVariable String id){
-        final Order order = service.get(UUID.fromString(id));
-        return ResponseEntity.ok(order);
+    public ResponseEntity<OrderEntity> getOrder(@PathVariable String id){
+        final OrderEntity orderEntity = service.get(UUID.fromString(id));
+        return ResponseEntity.ok(orderEntity);
     }
 
     @PostMapping()
     public ResponseEntity<byte[]> placeOrder(@RequestBody OrderDTO orderDTO) {
         try {
-            Order order = service.create(orderDTO);
-            byte[] qrImage = service.getQR(order);
+            OrderEntity orderEntity = service.create(orderDTO);
+            byte[] qrImage = service.getQR(orderEntity);
 
             return ResponseEntity.ok()
                     .header("Content-Type", "image/png")

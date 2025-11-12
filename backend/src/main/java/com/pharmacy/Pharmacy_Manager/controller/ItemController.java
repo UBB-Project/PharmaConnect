@@ -1,52 +1,31 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
-import com.pharmacy.Pharmacy_Manager.dto.ItemDTO;
-import com.pharmacy.Pharmacy_Manager.model.Item;
+import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
-@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/items")
 public class ItemController {
     private final ItemService itemService;
 
-    @PostMapping
-    public UUID addItem(@RequestBody ItemDTO itemDTO) {
+    @PostMapping("/items")
+    public UUID addItem(@RequestBody ItemRequestDto itemRequestDto) {
         return itemService.addItem(
-                itemDTO.name(),
-                itemDTO.description(),
-                itemDTO.category(),
-                itemDTO.price(),
-                itemDTO.brand(),
-                itemDTO.imageUrl(),
-                itemDTO.manufacturingDate(),
-                itemDTO.expirationDate(),
-                itemDTO.prescriptionRequired(),
-                itemDTO.sideEffects()
+                itemRequestDto.name(),
+                itemRequestDto.description(),
+                itemRequestDto.category(),
+                itemRequestDto.price(),
+                itemRequestDto.brand(),
+                itemRequestDto.imageUrl(),
+                itemRequestDto.manufacturingDate(),
+                itemRequestDto.expirationDate(),
+                itemRequestDto.prescriptionRequired(),
+                itemRequestDto.sideEffects()
         );
-    }
-
-    @GetMapping
-    public List<ItemDTO> getAllItems() {
-        return itemService.getAllItems().stream()
-                .map(ItemDTO::from)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}")
-    public ItemDTO getItem(@PathVariable UUID id) {
-        Item item = itemService.getById(id)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Item not found"));
-        return ItemDTO.from(item);
     }
 }

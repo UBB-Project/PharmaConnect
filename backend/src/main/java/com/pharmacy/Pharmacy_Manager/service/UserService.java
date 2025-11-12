@@ -1,6 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
-import com.pharmacy.Pharmacy_Manager.model.User;
+import com.pharmacy.Pharmacy_Manager.model.UserEntity;
 import com.pharmacy.Pharmacy_Manager.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +16,8 @@ public class UserService {
     @Transactional
     public UUID addUserWithName(String firstName, String secondName, String lastName)
     {
-        User newUser = User.builder().firstName(firstName).secondName(secondName).lastName(lastName).build();
-        userRepository.save(newUser);
-        return newUser.getId();
+        UserEntity newUserEntity = UserEntity.builder().firstName(firstName).secondName(secondName).lastName(lastName).build();
+        userRepository.save(newUserEntity);
+        return newUserEntity.getId();
     }
 }
