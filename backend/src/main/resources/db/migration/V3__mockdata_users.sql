@@ -15,7 +15,7 @@ INSERT INTO users (id, first_name, second_name, last_name) VALUES
 (gen_random_uuid(), 'Hannah', 'I.', 'Thomas'),
 (gen_random_uuid(), 'Ryan', NULL, 'Moore'),
 (gen_random_uuid(), 'Isabella', 'J.', 'Martin'),
-(gen_random_uuid(), 'Ethan', NULL, 'Jackson'),
+(gen_random_uuid(), 'Ethan', '', 'Jackson'),
 (gen_random_uuid(), 'Mia', 'K.', 'White'),
 (gen_random_uuid(), 'Alexander', NULL, 'Harris'),
 (gen_random_uuid(), 'Charlotte', 'L.', 'Clark');

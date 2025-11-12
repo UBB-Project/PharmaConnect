@@ -11,7 +11,7 @@ i18n
         fallbackLng: "en",
         debug: import.meta.env.MODE === "development",
         interpolation: { escapeValue: false },
-        ns: ["common", "header", "footer", "login", "home"],
+        ns: ["common", "header", "footer", "login", "home","item"],
         defaultNS: "common",
         backend: { loadPath: "/locales/{{lng}}.json" },
         detection: {
