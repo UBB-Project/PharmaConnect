@@ -7,7 +7,7 @@ import "./PharmacyMap.css";
 const CLUJ = [46.7712, 23.6236];
 
 const pin = new Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/3448/3448599.png",
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/4287/4287703.png",
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -26],
