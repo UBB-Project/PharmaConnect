@@ -23,4 +23,6 @@ public class ItemResponseDto {
     private LocalDate expirationDate;
     private Boolean prescriptionRequired;
     private String sideEffects;
+    private Integer soldCount;
+    private Integer stockQuantity;
 }

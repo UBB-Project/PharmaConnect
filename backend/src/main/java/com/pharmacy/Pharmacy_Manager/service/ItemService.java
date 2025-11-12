@@ -27,7 +27,9 @@ public class ItemService {
                         LocalDate manufacturingDate,
                         LocalDate expirationDate,
                         Boolean prescriptionRequired,
-                        String sideEffects
+                        String sideEffects,
+                        Integer soldCount,
+                        Integer stockQuantity
                         )
         {
             ItemEntity newItemEntity = ItemEntity.builder()
@@ -41,6 +43,8 @@ public class ItemService {
                     .expirationDate(expirationDate)
                     .prescriptionRequired(prescriptionRequired)
                     .sideEffects(sideEffects)
+                    .soldCount(soldCount)
+                    .stockQuantity(stockQuantity)
                     .build();
             itemRepository.save(newItemEntity);
             return newItemEntity.getId();
