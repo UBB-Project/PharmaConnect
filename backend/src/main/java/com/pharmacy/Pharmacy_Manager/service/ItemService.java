@@ -43,10 +43,10 @@ public class ItemService {
             itemRepository.save(newItemEntity);
             return newItemEntity.getId();
         }
-    public Optional<Item> getById(UUID id) {
+    public Optional<ItemEntity> getById(UUID id) {
         return itemRepository.findById(id);
     }
-    public List<Item> getAllItems() {
+    public List<ItemEntity> getAllItems() {
         return itemRepository.findAll();
     }
 }

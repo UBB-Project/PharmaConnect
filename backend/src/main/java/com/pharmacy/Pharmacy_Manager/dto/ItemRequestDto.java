@@ -1,6 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
-import com.pharmacy.Pharmacy_Manager.model.Item;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import lombok.Builder;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -19,8 +19,8 @@ public record ItemRequestDto(
         Boolean prescriptionRequired,
         String sideEffects
         ) {
-    public static ItemDTO from(Item i) {
-        return ItemDTO.builder()
+    public static ItemRequestDto from(ItemEntity i) {
+        return ItemRequestDto.builder()
                 .id(i.getId())
                 .name(i.getName())
                 .description(i.getDescription())
