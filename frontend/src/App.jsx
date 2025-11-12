@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import "./App.css";
 import {useTranslation} from "react-i18next";
+import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -23,6 +24,7 @@ function App() {
                         }
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/items/:id" element={<ItemPage />} />
                 </Routes>
             </main>
 
