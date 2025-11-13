@@ -60,6 +60,29 @@
     "generalInfo": "Informații generale: nu depășiți doza recomandată. A nu se lăsa la îndemâna copiilor.",
     "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul."
 
+  },
+  "itemsList": {
+    "title": "Produse Disponibile",
+    "searchPlaceholder": "Caută produse...",
+    "allCategories": "Toate categoriile",
+    "allBrands": "Toate brandurile",
+    "allProducts": "Toate produsele",
+    "prescriptionRequired": "Necesită rețetă",
+    "overTheCounter": "Fără rețetă (OTC)",
+    "sortBy": "Sortează după...",
+    "priceLowHigh": "Preț: Mic → Mare",
+    "priceHighLow": "Preț: Mare → Mic",
+    "nameAZ": "Nume A → Z",
+    "nameZA": "Nume Z → A",
+    "brandAZ": "Brand A → Z",
+    "brandZA": "Brand Z → A",
+    "clearAll": "Resetează filtrele",
+    "noResults": "Nici un produs găsit."
+  },
+  "nav": {
+    "home": "Acasă",
+    "map": "Hartă",
+    "items": "Produse"
   }
 }
 

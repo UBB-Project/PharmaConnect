@@ -61,8 +61,32 @@
       "generalInfo": "General information: do not exceed the recommended dose. Keep out of the reach of children.",
       "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist."
 
-      }
-    }
+      },
+  "itemsList": {
+    "title": "Available Products",
+    "searchPlaceholder": "Search products...",
+    "allCategories": "All Categories",
+    "allBrands": "All Brands",
+    "allProducts": "All Products",
+    "prescriptionRequired": "Prescription Required",
+    "overTheCounter": "Over-the-counter",
+    "sortBy": "Sort By...",
+    "priceLowHigh": "Price: Low → High",
+    "priceHighLow": "Price: High → Low",
+    "nameAZ": "Name A → Z",
+    "nameZA": "Name Z → A",
+    "brandAZ": "Brand A → Z",
+    "brandZA": "Brand Z → A",
+    "clearAll": "Clear all selections",
+    "noResults": "No products found."
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Map",
+    "items": "Items"
+  }
+
+}
 
 
 

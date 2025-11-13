@@ -4,9 +4,7 @@ import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,11 +34,19 @@ public class ItemController {
         );
     }
     @GetMapping
-    public List<ItemRequestDto> getAllItems() {
-        return itemService.getAllItems().stream()
+    public List<ItemRequestDto> getAllItems(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String brand,
+            @RequestParam(required = false) Boolean prescription,
+            @RequestParam(required = false) String sort
+    ) {
+        return itemService.searchFilterSort(search, category, brand, prescription, sort)
+                .stream()
                 .map(ItemRequestDto::from)
                 .collect(Collectors.toList());
     }
+
 
     @GetMapping("/{id}")
     public ItemRequestDto getItem(@PathVariable UUID id) {
