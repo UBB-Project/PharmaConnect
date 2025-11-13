@@ -25,7 +25,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Table(name = "orders")
-public class Order {
+public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, nullable = false, unique = true)
@@ -44,9 +44,9 @@ public class Order {
 
     @ManyToOne()
     @JoinColumn(name= "item_id", referencedColumnName = "id")
-    private Item item;
+    private ItemEntity item;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private UserEntity user;
 }
