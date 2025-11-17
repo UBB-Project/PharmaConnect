@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./ItemPage.css";
 
@@ -8,7 +8,7 @@ const API_BASE = "http://localhost:8080/api";
 export default function ItemPage() {
     const { id } = useParams();
     const { t, i18n } = useTranslation();
-
+    const navigate = useNavigate();
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -39,9 +39,32 @@ export default function ItemPage() {
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
 
+    // const reserve = () => {
+    //     setReserved(true);
+    //     setTimeout(() => setReserved(false), 2000);
+    // };
+
     const reserve = () => {
         setReserved(true);
-        setTimeout(() => setReserved(false), 2000);
+
+        // 1. Define the hardcoded reservation details
+        const reservationDetails = {
+            "type": "reservation",
+            "quantity": 1, // Hardcoded quantity
+            "itemId": "e3182925-cac0-40f5-994a-0b8505adede9", // Hardcoded item ID
+            "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"  // Hardcoded user ID
+        };
+
+        // 2. Navigate to the /orders page and pass the details in the state
+        // This state can be accessed on the /orders page using the useLocation hook
+        navigate(`/orders`, {
+            state: {
+                reservation: reservationDetails
+            }
+        });
+
+        // Since we are navigating away, the setTimeout is no longer needed.
+        // setTimeout(() => setReserved(false), 2000);
     };
 
     const priceFormatted =
