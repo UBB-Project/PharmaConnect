@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
+import OrderPage from "./pages/OrderPage/OrderPage.jsx";
 import "./App.css";
 import ChatBot from "./components/ChatBot.jsx";
 import "leaflet/dist/leaflet.css";
@@ -28,6 +29,7 @@ function App() {
                                 <h1>{t("home.welcome")}</h1>
                                 <p>{t("home.tagline")}</p>
                                 <Link className="main-page__button" to="/map"> Open map</Link>
+                                <Link className={"main-page__button"} to={"/chatbot"}>Open ChatBot</Link>
                                 <SimpleSlider />
                             </div>
                         }
@@ -36,6 +38,7 @@ function App() {
                     <Route path="/chatbot" element={<ChatBot />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
+                    <Route path="/orders" element={<OrderPage />}/>
                 </Routes>
             </main>
 

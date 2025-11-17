@@ -1,16 +1,19 @@
 import React from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 import "./SimpleSlider.css";
 
 function SimpleSlider() {
     const slidesData = [
         // Updated data to include image URLs and titles
-        { title: "PainRelief 500", imgUrl: "https://m.media-amazon.com/images/I/61grcfYAnAL._AC_SL1000_.jpg" },
+        { id: "e3182925-cac0-40f5-994a-0b8505adede9", title: "PainRelief 500", imgUrl: "https://m.media-amazon.com/images/I/61grcfYAnAL._AC_SL1000_.jpg" },
         { title: "Vitamin C 1000", imgUrl: "https://gymbeam.ro/media/catalog/product/cache/70f742f66feec18cb83790f14444a3d1/v/i/vitamic_c_1000_mg_30_tabs_gymbeam.png" },
         { title: "AllergyStop", imgUrl: "https://aronia-charlottenburg.ro/wp-content/uploads/2025/08/1080x1080_allergy_28.07.2025.jpg" },
         { title: "Omega 3 Fish Oil", imgUrl: "https://gymbeam.ro/media/catalog/product/cache/70f742f66feec18cb83790f14444a3d1/u/n/untitled_design_2__5.png" },
         { title: "Cough Relief Syrup", imgUrl: "https://www.medisei.gr/801-thickbox_default/cough-relief-syrup.jpg" },
     ];
+
+    const navigate = useNavigate();
 
     const settings = {
         dots: true,
@@ -22,11 +25,16 @@ function SimpleSlider() {
         slidesToScroll: 2,
     };
 
+    const handleItemClick = (itemId) => {
+        // Navigates to the route '/items/:itemId'
+        navigate(`/items/${itemId}`);
+    };
+
     return (
         <div className="slider-container">
             <Slider {...settings}>
                 {slidesData.map((slide, index) => (
-                    <div key={index}>
+                    <div key={index} onClick={() => handleItemClick(slide.id)} className="cursor-pointer-wrapper">
                         <div className="slide-item">
                             {/* Image element added */}
                             <img
