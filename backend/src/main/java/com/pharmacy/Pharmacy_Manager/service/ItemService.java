@@ -63,8 +63,7 @@ public class ItemService {
             items = items.stream()
                     .filter(i ->
                             i.getName().toLowerCase().contains(s) ||
-                                    i.getBrand().toLowerCase().contains(s) ||
-                                    i.getDescription().toLowerCase().contains(s)
+                                    i.getBrand().toLowerCase().contains(s)
                     )
                     .collect(Collectors.toList());
         }
@@ -87,7 +86,6 @@ public class ItemService {
                     .collect(Collectors.toList());
         }
 
-        // ↕ SORTING
         if (sort != null) {
             switch (sort) {
                 case "priceLowHigh":
