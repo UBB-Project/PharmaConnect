@@ -1,10 +1,11 @@
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
 import "./App.css";
+import ChatBot from "./components/ChatBot.jsx";
 import "leaflet/dist/leaflet.css";
 import {useTranslation} from "react-i18next";
 import "slick-carousel/slick/slick.css";
@@ -33,6 +34,7 @@ function App() {
                         }
                     />
                     <Route path="/login" element={<LoginPage />} />
+                    <Route path="/chatbot" element={<ChatBot />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={
                             <>

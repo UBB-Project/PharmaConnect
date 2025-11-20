@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import "leaflet/dist/leaflet.css";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import i18n from "./i18n.js";
 import "./index.css"
 
