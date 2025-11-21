@@ -7,6 +7,10 @@ import "leaflet/dist/leaflet.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import i18n from "./i18n.js";
 import "./index.css"
+import 'primereact/resources/themes/lara-light-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

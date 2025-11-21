@@ -130,6 +130,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    margin-bottom: 14px;
 }
 .qty-row label { font-size: 12px; color: #6b7280; }
 
@@ -180,47 +181,113 @@
 .btn-green:hover { filter: brightness(1.05); }
 .btn-green:disabled { opacity: .85; cursor: default; }
 
-
-
 .tei-tabs {
     margin-top: 40px;
 }
-.tab-bar { display: flex; gap: 8px; }
 
-.tab {
-    padding: 10px 14px;
+.tei-tabs .p-tabview {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.tei-tabs .p-tabview-nav {
+    background: #ffffff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.tei-tabs .p-tabview-nav-link {
     font-weight: 600;
-    border: 1px solid transparent;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background: #f8fafc;
-    cursor: pointer;
-    overflow: hidden;
+    padding: 1rem 1.25rem;
+    color: #000;
+    border: 0;
+    background: transparent;
 }
-.tab.active { background: #4EA2FF; color: #fff; }
-.tab:not(.active):hover { background: #e0f2fe; color: #000; }
 
-.tab-panel {
-    padding: 16px;
-    background: #fff;
-    border-radius: 0 8px 8px 8px;
-    text-align: left;
-    color: #111;
-    overflow: hidden;
-    border-right: solid 1px #e5e7eb;
-    transition: opacity .2s ease-in-out;
-    min-height: 150px;
-    justify-content: space-between;
+.tei-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: #3B82F6;
+    border-bottom: 3px solid #3B82F6;
 }
+
+.tei-tabs .p-tabview-panels {
+    background: #ffffff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 1.5rem;
+    margin: 0;
+}
+
+.tei-tabs .p-tabview-panels h3 {
+    font-size: 16px !important;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.tei-tabs .p-tabview-panels h4 {
+    font-size: 16px !important;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.tei-tabs .p-tabview-panels p,
+.tei-tabs .p-tabview-panels li {
+    font-size: 14px !important;
+    line-height: 1.4;
+}
+
 
 .lead { margin-top: 6px; color: #374151; line-height: 1.6; }
 
-.bullets { padding-left: 18px; }
-.bullets li { margin: 6px 0; }
+
 .tei-tabs .tab-panel ul.bullets li b {
-    font-weight: 700;
-    color: #000; /* optional */
+    font-weight: 200;
+    color: #000;
 }
+
+.rx-tag.p-tag {
+    font-size: 14px;
+    padding: 6px 14px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+}
+
+.rx-tag .p-tag-icon {
+    font-size: 16px !important;
+
+}
+.rx-tag{
+    background:#0754CD
+}
+
+.reserve-btn {
+    width: 100%;
+    padding: 9px 16px;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+
+    background-color: #0754CD !important;
+    border: none !important;
+    border-radius: 10px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+
+}
+
+.reserve-btn.p-button:disabled {
+    opacity: 0.8;
+}
+
 
 .benefits { margin: 12px 0 0; padding-left: 18px; color: #6b7280; font-size: 13px; }
 .benefits li { margin: 4px 0; }
