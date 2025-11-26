@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Tag } from "primereact/tag";
 
 export default function ProductCard({ product }) {
     const navigate = useNavigate();
@@ -20,14 +21,15 @@ export default function ProductCard({ product }) {
 
             <div className="product-brand">{product.brand}</div>
 
-            <p
-                className={`product-prescription ${
-                    product.prescriptionRequired ? "required" : "not-required"
-                }`}
-            >
-                {product.prescriptionRequired ?
-                    t("item.rx") : t("item.otc")}
-            </p>
+            <div className="product-prescription">
+                <Tag
+                    className="rx-tag"
+                    value={product.prescriptionRequired ? t("item.rx") : t("item.otc")}
+                    icon={product.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
+                    severity={product.prescriptionRequired ? "info" : "success"}
+                    rounded
+                />
+            </div>
         </div>
     );
 }

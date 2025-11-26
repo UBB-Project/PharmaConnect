@@ -1,5 +1,6 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
+import com.pharmacy.Pharmacy_Manager.dto.ItemQueryDto;
 import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
@@ -33,18 +34,19 @@ public class ItemController {
                 itemRequestDto.sideEffects()
         );
     }
+
     @GetMapping
-    public List<ItemRequestDto> getAllItems(
-            @RequestParam(required = false) String search,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String brand,
-            @RequestParam(required = false) Boolean prescription,
-            @RequestParam(required = false) String sort
-    ) {
-        return itemService.searchFilterSort(search, category, brand, prescription, sort)
+    public List<ItemRequestDto> getAllItems(@ModelAttribute ItemQueryDto query) {
+        return itemService.searchFilterSort(
+                        query.getSearch(),
+                        query.getCategory(),
+                        query.getBrand(),
+                        query.getPrescription(),
+                        query.getSort()
+                )
                 .stream()
                 .map(ItemRequestDto::from)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 

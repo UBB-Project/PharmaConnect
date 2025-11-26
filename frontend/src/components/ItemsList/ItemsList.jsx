@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import "./ItemsList.css";
 import { useTranslation } from "react-i18next";
+import { Dropdown } from "primereact/dropdown";
 
 export default function ItemsList() {
     const [products, setProducts] = useState([]);

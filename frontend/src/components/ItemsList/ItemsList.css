@@ -144,16 +144,3 @@
     font-size: 16px;
     margin-bottom: 8px;
 }
-
-.product-prescription {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.product-prescription.required {
-    color: #1e90ff;
-}
-
-.product-prescription.not-required {
-    color: white;
-}
