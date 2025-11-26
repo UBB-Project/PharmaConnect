@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { TabView, TabPanel } from 'primereact/tabview';
+import { Tag } from 'primereact/tag';
+import { Button } from 'primereact/button';
+
+
 import "./ItemPage.css";
 
 const API_BASE = "http://localhost:8080/api";
@@ -12,7 +17,6 @@ export default function ItemPage() {
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [tab, setTab] = useState("desc");
     const [reserved, setReserved] = useState(false);
     const [qty, setQty] = useState(1);
 
@@ -39,10 +43,7 @@ export default function ItemPage() {
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
 
-    // const reserve = () => {
-    //     setReserved(true);
-    //     setTimeout(() => setReserved(false), 2000);
-    // };
+
 
     const reserve = () => {
         setReserved(true);
@@ -55,16 +56,13 @@ export default function ItemPage() {
             "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"  // Hardcoded user ID
         };
 
-        // 2. Navigate to the /orders page and pass the details in the state
-        // This state can be accessed on the /orders page using the useLocation hook
+
         navigate(`/orders`, {
             state: {
                 reservation: reservationDetails
             }
         });
 
-        // Since we are navigating away, the setTimeout is no longer needed.
-        // setTimeout(() => setReserved(false), 2000);
     };
 
     const priceFormatted =
@@ -112,10 +110,14 @@ export default function ItemPage() {
                     </div>
 
                     <div className="tei-badges">
-            <span className="badge badge-green">
-              {item.prescriptionRequired ? t("item.rx") : t("item.otc")}
-            </span>
+                        <Tag className="rx-tag"
+                            value={item.prescriptionRequired ? t("item.rx") : t("item.otc")}
+                            icon={item.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
+                            severity={item.prescriptionRequired ? "info" : "success"}
+                            rounded
+                        />
                     </div>
+
                 </div>
 
                 <aside className="tei-right">
@@ -145,92 +147,72 @@ export default function ItemPage() {
                         </div>
                     </div>
 
-                    <button className="btn-green" onClick={reserve} disabled={reserved}>
-                        {reserved ? t("item.reserved") : t("item.reserve")}
-                    </button>
+                    <Button
+                        label={reserved ? t("item.reserved") : t("item.reserve")}
+                        icon={reserved ? "pi pi-check" : ""}
+                        iconPos="left"
+                        className="reserve-btn"
+                        onClick={reserve}
+                        disabled={reserved}
+                    />
                 </aside>
             </div>
 
+
+
             <div className="tei-tabs">
-                <div className="tab-bar" role="tablist" aria-label="Product details">
-                    <button
-                        className={`tab ${tab === "desc" ? "active" : ""}`}
-                        onClick={() => setTab("desc")}
-                        role="tab"
-                    >
-                        {t("item.tabs.desc")}
-                    </button>
-                    <button
-                        className={`tab ${tab === "spec" ? "active" : ""}`}
-                        onClick={() => setTab("spec")}
-                        role="tab"
-                    >
-                        {t("item.tabs.spec")}
-                    </button>
-                    <button
-                        className={`tab ${tab === "info" ? "active" : ""}`}
-                        onClick={() => setTab("info")}
-                        role="tab"
-                    >
-                        {t("item.tabs.info")}
-                    </button>
-                    <button
-                        className={`tab ${tab === "prospect" ? "active" : ""}`}
-                        onClick={() => setTab("prospect")}
-                        role="tab"
-                    >
-                        {t("item.tabs.prospect")}
-                    </button>
-                </div>
+                <TabView>
+                    <TabPanel header={t("item.tabs.desc")}>
+                        <h3>{tt("name", item.name)}</h3>
+                        <p className="lead">{tt("description", item.description)}</p>
 
-                <div className="tab-panel">
-                    {tab === "desc" && (
-                        <>
-                            <h3>{tt("name", item.name)}</h3>
-                            <p className="lead">{tt("description", item.description)}</p>
+                        <h4>{t("item.adverseReactions")}</h4>
+                        <p>{tt("sideEffects", item.sideEffects)}</p>
 
-                            <h4>{t("item.adverseReactions")}</h4>
-                            <p>{tt("sideEffects", item.sideEffects)}</p>
+                        <h4>{t("item.productData")}</h4>
+                        <ul className="bullets">
+                            <li>
+                                <b>{t("item.manufactured")}:</b> {item.manufacturingDate}
+                            </li>
+                            <li>
+                                <b>{t("item.expires")}:</b> {item.expirationDate}
+                            </li>
+                            <li>
+                                <b>{t("item.prescriptionRequired")}:</b>{" "}
+                                {item.prescriptionRequired
+                                    ? t("item.prescriptionRequired")
+                                    : t("item.noPrescription")}
+                            </li>
+                        </ul>
+                    </TabPanel>
 
-                            <h4>{t("item.productData")}</h4>
-                            <ul className="bullets">
-                                <li>
-                                    <b>{t("item.manufactured")}:</b> {item.manufacturingDate}
-                                </li>
-                                <li>
-                                    <b>{t("item.expires")}:</b> {item.expirationDate}
-                                </li>
-                                <li>
-                                    <b>{t("item.prescriptionRequired")}:</b>{" "}
-                                    {item.prescriptionRequired
-                                        ? t("item.prescriptionRequired")
-                                        : t("item.noPrescription")}
-                                </li>
-                            </ul>
-                        </>
-                    )}
-
-                    {tab === "spec" && (
+                    <TabPanel header={t("item.tabs.spec")}>
                         <ul className="bullets">
                             <li>
                                 <b>{t("item.brand")}:</b> {item.brand}
                             </li>
                             <li>
-                                <b>{t("item.category")}:</b> {t(`item.categories.${item.category}`, { defaultValue: item.category })}
+                                <b>{t("item.category")}:</b>{" "}
+                                {t(`item.categories.${item.category}`, { defaultValue: item.category })}
                             </li>
                             <li>
                                 <b>{t("item.productCode")}:</b> {item.id}
                             </li>
                         </ul>
-                    )}
+                    </TabPanel>
 
-                    {tab === "info" && <p>{t("item.generalInfo")}</p>}
+                    <TabPanel header={t("item.tabs.info")}>
+                        <p>{t("item.generalInfo")}</p>
+                    </TabPanel>
 
-                    {tab === "prospect" && (
+                    <TabPanel header={t("item.tabs.prospect")}>
                         <p>{tt("prospectInfo", t("item.prospectInfo"))}</p>
-                    )}
-                </div>
+                    </TabPanel>
+                </TabView>
             </div>
+
+
         </div>
+
     );
 }
