@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import "./ItemsList.css";
 import { useTranslation } from "react-i18next";
-import { Dropdown } from "primereact/dropdown";
+import { Dropdown } from 'primereact/dropdown';
 
 export default function ItemsList() {
     const [products, setProducts] = useState([]);
@@ -69,6 +69,49 @@ export default function ItemsList() {
         fetchData();
     }, [searchTerm, categoryFilter, brandFilter, prescriptionFilter, sortBy]);
 
+    const sortOptions = [
+        {
+            label: t("itemsList.priceLow"),
+            value: "priceLowHigh",
+            icon: "pi pi-sort-amount-up-alt"
+        },
+        {
+            label: t("itemsList.priceHigh"),
+            value: "priceHighLow",
+            icon: "pi pi-sort-amount-down"
+        },
+        {
+            label: t("itemsList.nameAsc"),
+            value: "nameAZ",
+            icon: "pi pi-sort-alpha-down"
+        },
+        {
+            label: t("itemsList.nameDesc"),
+            value: "nameZA",
+            icon: "pi pi-sort-alpha-up-alt"
+        },
+        {
+            label: t("itemsList.brandAsc"),
+            value: "brandAZ",
+            icon: "pi pi-sort-alpha-down"
+        },
+        {
+            label: t("itemsList.brandDesc"),
+            value: "brandZA",
+            icon: "pi pi-sort-alpha-up-alt"
+        }
+    ];
+
+// Custom option template to show icons
+    const optionTemplate = (option) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <i className={option.icon}></i>
+                <span>{option.label}</span>
+            </div>
+        );
+    };
+
     const clearAllFilters = () => {
         setSearchTerm("");
         setCategoryFilter("");
@@ -125,19 +168,16 @@ export default function ItemsList() {
                     <option value="not-required">{t("itemsList.overTheCounter")}</option>
                 </select>
 
-                <select
+                <Dropdown
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                    onChange={(e) => setSortBy(e.value)}
+                    options={sortOptions}
+                    optionLabel="label"
+                    placeholder={t("itemsList.sortBy")}
+                    itemTemplate={optionTemplate}
                     className="filter-select"
-                >
-                    <option value="">{t("itemsList.sortBy")}</option>
-                    <option value="priceLowHigh">{t("itemsList.priceLowHigh")}</option>
-                    <option value="priceHighLow">{t("itemsList.priceHighLow")}</option>
-                    <option value="nameAZ">{t("itemsList.nameAZ")}</option>
-                    <option value="nameZA">{t("itemsList.nameZA")}</option>
-                    <option value="brandAZ">{t("itemsList.brandAZ")}</option>
-                    <option value="brandZA">{t("itemsList.brandZA")}</option>
-                </select>
+                    panelClassName="filter-select-panel"
+                />
                 <button className="clear-btn" onClick={clearAllFilters}>
                     {t("itemsList.clearAll")}
                 </button>
@@ -148,7 +188,8 @@ export default function ItemsList() {
 
             <div className="product-grid">
                 {products.length === 0 && !loading ? (
-                    <p className="no-results">{t("itemsList.noResults")}</p>                ) : (
+                    <p className="no-results">{t("itemsList.noResults")}</p>
+                ) : (
                     products.map((product) => (
                         <Link
                             key={product.id}
