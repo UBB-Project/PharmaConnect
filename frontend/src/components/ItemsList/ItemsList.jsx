@@ -5,6 +5,10 @@ import "./ItemsList.css";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from 'primereact/dropdown';
 
+/**
+ * @typedef {import('react-i18next').TFunction} TFunction
+ */
+
 export default function ItemsList() {
     const [products, setProducts] = useState([]);
 
@@ -49,18 +53,19 @@ export default function ItemsList() {
                 const res = await fetch(url);
 
                 if (!res.ok) {
-                    throw new Error("Failed to fetch items");
+                    setError("Could not load items.");
+                    return;
                 }
 
                 const data = await res.json();
                 setProducts(data);
-
                 setAvailableCategories([...new Set(data.map((p) => p.category))]);
                 setAvailableBrands([...new Set(data.map((p) => p.brand))]);
 
             } catch (err) {
-                setError("Could not load items.");
                 console.error(err);
+                setError("Could not load items.");
+                setProducts([]);
             } finally {
                 setLoading(false);
             }
@@ -68,6 +73,7 @@ export default function ItemsList() {
 
         fetchData();
     }, [searchTerm, categoryFilter, brandFilter, prescriptionFilter, sortBy]);
+
 
     const sortOptions = [
         {
@@ -102,7 +108,6 @@ export default function ItemsList() {
         }
     ];
 
-// Custom option template to show icons
     const optionTemplate = (option) => {
         return (
             <div className="flex align-items-center gap-2">
@@ -183,8 +188,17 @@ export default function ItemsList() {
                 </button>
             </div>
 
-            {loading && <p style={{ color: "white" }}>Loading...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {loading && (
+                <div className="status-message loading">
+                    {t("itemsList.loading") || "Loading..."}
+                </div>
+            )}
+
+            {error && (
+                <div className="status-message error">
+                    {error}
+                </div>
+            )}
 
             <div className="product-grid">
                 {products.length === 0 && !loading ? (

@@ -25,8 +25,9 @@
     font-size: 14px;
     outline: none;
     transition: border-color 0.2s ease;
-    height: 38px; /* Add explicit height */
-    box-sizing: border-box; /* Ensure padding is included in height */
+    height: 38px;
+    box-sizing: border-box;
+    width:12%;
 }
 
 .search-input {
@@ -224,3 +225,24 @@
     font-size: 16px;
     margin-bottom: 8px;
 }
+
+.status-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-message.error {
+    background: #ffdddd;
+    color: #a60000;
+    border: 1px solid #ffaaaa;
+}
+
+.status-message.loading {
+    background: #eaf4ff;
+    color: #004a99;
+    border: 1px solid #bcdcff;
+}
+

@@ -64,7 +64,7 @@
       },
   "itemsList": {
     "title": "Available Products",
-    "searchPlaceholder": "Search products...",
+    "searchPlaceholder": "Search Products...",
     "allCategories": "All Categories",
     "allBrands": "All Brands",
     "allProducts": "All Products",
@@ -73,11 +73,11 @@
     "sortBy": "Sort By...",
     "priceLow": "Price: Low to High",
     "priceHigh": "Price: High to Low",
-    "nameAsc": "Name A to Z",
-    "nameDesc": "Name Z to A",
-    "brandAsc": "Brand A to Z",
-    "brandDesc": "Brand Z to A",
-    "clearAll": "Clear all selections",
+    "nameAsc": "Name: A to Z",
+    "nameDesc": "Name: Z to A",
+    "brandAsc": "Brand: A to Z",
+    "brandDesc": "Brand: Z to A",
+    "clearAll": "Clear all Filters",
     "noResults": "No products found."
   },
   "nav": {
