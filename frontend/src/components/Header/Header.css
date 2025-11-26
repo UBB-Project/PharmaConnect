@@ -20,57 +20,95 @@
 }
 
 .header-left {
-width: 90px;
+    width: 140px;
 }
 
-.select-wrapper {
-    position: relative;
+.language-dropdown {
     width: 100%;
-}
-
-.select-wrapper select {
-    width: 100%;
-    padding: 6px 28px 6px 10px;
-    border-radius: 6px;
-    border: none;
     background-color: white;
-    color: #104a8a;
-    font-weight: 500;
-    cursor: pointer;
-    appearance: none;
-    transition: background-color 0.2s ease;
-    line-height: 1.5;
+    border: none;
+    border-radius: 6px;
+    height: 36px;
+    align-items: center;
+    box-shadow: none;
+    display: flex;
 }
 
-.select-wrapper select:hover {
-    background-color: #e6e6e6;
+.language-dropdown:hover {
+    background-color: #f0fdfa;
 }
 
-.select-wrapper::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%) rotate(45deg);
-    width: 6px;
-    height: 6px;
-    border-right: 1.8px solid #104a8a;
-    border-bottom: 1.8px solid #104a8a;
-    pointer-events: none;
-    box-sizing: border-box;
+.language-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.language-item .fi {
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+.language-dropdown .p-dropdown-label {
+    padding: 0 10px;
+    color: #0f766e;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.language-dropdown .p-dropdown-trigger {
+    width: 2.5rem;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.language-dropdown-panel .p-dropdown-items {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.language-dropdown-panel .p-dropdown-item {
+    color: #0f766e;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+}
+
+.language-dropdown-panel .p-dropdown-item .language-item {
+    width: 85px;
+    justify-content: flex-start;
+}
+
+.language-dropdown-panel .p-dropdown-item.p-highlight {
+    background-color: #ccfbf1;
+    color: #0f766e;
 }
 
 .logout-btn {
     background-color: white;
-    color: #104a8a;
+    color: #0f766e;
     border: none;
     border-radius: 6px;
     padding: 8px 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .logout-btn:hover {
-    background-color: #e6e6e6;
+    background-color: #f0fdfa;
 }
