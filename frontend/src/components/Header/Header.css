@@ -2,12 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0a355e;
-    color: white;
-    height: 64px;
-    position: relative;
-    padding: 12px 24px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0 32px;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.header-left {
+    width: 170px;
 }
 
 .header-title {
@@ -16,26 +23,42 @@
     transform: translateX(-50%);
     font-size: 1.5rem;
     font-weight: 600;
+    letter-spacing: -0.5px;
     margin: 0;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+    background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: opacity 0.2s ease;
 }
 
-.header-left {
-    width: 140px;
+.header-title:hover {
+    opacity: 0.8;
 }
 
 .language-dropdown {
     width: 100%;
-    background-color: white;
-    border: none;
-    border-radius: 6px;
-    height: 36px;
+    background-color: #f8fafc;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    height: 42px;
     align-items: center;
-    box-shadow: none;
     display: flex;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
 .language-dropdown:hover {
-    background-color: #f0fdfa;
+    background-color: white;
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.language-dropdown.p-focus {
+    border-color: #0f766e;
+    box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.1);
 }
 
 .language-item {
@@ -49,18 +72,16 @@
     display: inline-block;
     width: 20px;
     height: 15px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     flex-shrink: 0;
 }
 
 .language-dropdown .p-dropdown-label {
-    padding: 0 10px;
-    color: #0f766e;
+    padding: 0 16px;
+    color: #334155;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     height: 100%;
@@ -68,24 +89,32 @@
 
 .language-dropdown .p-dropdown-trigger {
     width: 2.5rem;
-    color: #0f766e;
+    color: #64748b;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.language-dropdown-panel {
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #e2e8f0;
+    margin-top: 4px;
+}
+
 .language-dropdown-panel .p-dropdown-items {
-    padding: 0 !important;
+    padding: 4px !important;
     margin: 0 !important;
 }
 
 .language-dropdown-panel .p-dropdown-item {
-    color: #0f766e;
+    color: #334155;
     display: flex;
     justify-content: center !important;
     align-items: center !important;
     padding: 10px 0 !important;
-    margin: 0 !important;
+    margin: 2px 0 !important;
+    border-radius: 6px;
 }
 
 .language-dropdown-panel .p-dropdown-item .language-item {
@@ -94,21 +123,40 @@
 }
 
 .language-dropdown-panel .p-dropdown-item.p-highlight {
-    background-color: #ccfbf1;
-    color: #0f766e;
-}
-
-.logout-btn {
-    background-color: white;
-    color: #0f766e;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.logout-btn:hover {
     background-color: #f0fdfa;
+    color: #0f766e;
+    font-weight: 600;
+}
+
+.language-dropdown-panel .p-dropdown-item:not(.p-highlight):hover {
+    background-color: #f1f5f9;
+    color: #0f766e;
+}
+
+.logout-btn.p-button {
+    background: linear-gradient(180deg, #0f766e 0%, #0d9488 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0 24px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    height: 42px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    background-size: 200% auto;
+}
+
+.logout-btn.p-button:hover {
+    background-position: right center;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.logout-btn.p-button:active {
+    transform: translateY(0);
+}
+
+.logout-btn.p-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #99f6e4;
 }

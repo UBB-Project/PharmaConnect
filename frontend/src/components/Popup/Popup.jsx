@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { createPortal } from "react-dom";
 import "./Popup.css";
 
 export default function Popup({ message, onConfirm }) {
     const { t } = useTranslation(["common", "header"]);
 
-    return (
+    const popupContent = (
         <div className="popup-overlay">
             <div className="popup-box">
                 <p id="popup-message" className="popup-message">{message}</p>
@@ -26,4 +27,5 @@ export default function Popup({ message, onConfirm }) {
             </div>
         </div>
     );
+    return createPortal(popupContent, document.body);
 }

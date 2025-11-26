@@ -4,6 +4,7 @@ import Popup from "../Popup/Popup.jsx";
 import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
 
 export default function Header() {
     const [showPopup, setShowPopup] = useState(false);
@@ -48,30 +49,28 @@ export default function Header() {
     return (
         <header className="header">
             <div className="header-left">
-                <div className="select-wrapper">
-                    <Dropdown
-                        value={currentVal}
-                        onChange={changeLanguage}
-                        options={languages}
-                        optionLabel="label"
-                        valueTemplate={countryOptionTemplate}
-                        itemTemplate={countryOptionTemplate}
-                        className="language-dropdown"
-                        panelClassName="language-dropdown-panel"
-                        aria-label="Select Language"
-                    />
-                </div>
+                <Dropdown
+                    value={currentVal}
+                    onChange={changeLanguage}
+                    options={languages}
+                    optionLabel="label"
+                    valueTemplate={countryOptionTemplate}
+                    itemTemplate={countryOptionTemplate}
+                    className="language-dropdown"
+                    panelClassName="language-dropdown-panel"
+                    aria-label="Select Language"
+                />
             </div>
 
-            <h1 className="header-title">PharmaConnect</h1>
+            <h1 className="header-title" onClick={() => navigate("/")} >PharmaConnect</h1>
 
             {!hideLogoutButton && (
-                <button className="logout-btn"
-                        onClick={handleLogoutClick}
-                        aria-label="Log out of PharmaConnect"
-                >
-                    Log out
-                </button>
+                <Button
+                    label="Log out"
+                    className="logout-btn"
+                    onClick={handleLogoutClick}
+                    aria-label="Log out of PharmaConnect"
+                />
             )}
 
             {showPopup && (
