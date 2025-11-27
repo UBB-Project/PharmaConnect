@@ -13,12 +13,12 @@
     flex-direction: column;
     justify-content: space-between; /* Pushes image up, title down */
     align-items: center;
-
     padding: 20px 10px; /* Slightly more internal padding */
     margin: 0 10px; /* Space between slides when slidesToShow > 1 */
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    color: var(--text-color);
     text-align: center;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow for bigger card */
     transition: transform 0.3s ease-in-out;
@@ -37,7 +37,7 @@
 /* Custom styling for the title */
 .slide-item h3.slide-title {
     font-size: 1.5rem;
-    color: #334155; /* Slate-700 */
+    color: var(--text-color); /* Slate-700 */
     margin-top: 0;
     margin-bottom: 5px;
 }
@@ -50,7 +50,7 @@
 .slick-prev:before,
 .slick-next:before {
     font-size: 40px;
-    color: #3b82f6 !important; /* Blue-500 (Primary color) */
+    color: var(--primary-color);/* Blue-500 (Primary color) */
     opacity: 0.8;
 }
 
@@ -67,7 +67,7 @@
 /* Customizing Dots (Indicators) */
 .slick-dots li button:before {
     font-size: 12px;
-    color: #94a3b8 !important; /* Gray color for inactive dots */
+    color: var(--text-color-secondary) !important;
     opacity: 0.75;
 }
 

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Popup from "../Popup/Popup.jsx";
 import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import ThemeSwitcher from "../Theme/ThemeSwitcher.jsx";
 
 export default function Header() {
     const [showPopup, setShowPopup] = useState(false);
@@ -39,15 +40,18 @@ export default function Header() {
 
             <h1 className="header-title">PharmaConnect</h1>
 
-            {!hideLogoutButton && (
-                <button className="logout-btn"
-                        onClick={handleLogoutClick}
-                        aria-label="Log out of PharmaConnect"
-                >
-                    Log out
-                </button>
-            )}
 
+            <div className="header-right">
+                <ThemeSwitcher />
+                {!hideLogoutButton && (
+                    <button className="logout-btn"
+                            onClick={handleLogoutClick}
+                            aria-label="Log out of PharmaConnect"
+                        >
+                        Log out
+                    </button>
+                )}
+            </div>
             {showPopup && (
                 <Popup
                     message={t("header.logoutConfirm")}

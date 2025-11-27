@@ -7,8 +7,8 @@
 html, body, #root {
   height: 100%;
   font-family: 'YourOriginalFont', sans-serif;
-  background-color: #121212;
-  color: white;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
 }
 
 .app-container {
@@ -20,7 +20,7 @@ html, body, #root {
 .content-wrapper {
   flex: 1;
   padding-top: 64px;
-  background-color: black;
+  background-color: var(--surface-ground);
 }
 
 .home-page {
@@ -48,7 +48,7 @@ html, body, #root {
 }
 
 .main-page__button:hover {
-  background: #1e4e8c;
+  background: var(--surface-ground);
   transform: translateY(-8px);
 }
 

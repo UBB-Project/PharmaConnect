@@ -20,7 +20,15 @@
 }
 
 .header-left {
-width: 90px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .select-wrapper {
