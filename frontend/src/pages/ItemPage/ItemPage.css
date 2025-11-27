@@ -328,7 +328,7 @@
 
 }
 .rx-tag{
-    background:#0754CD;
+    background-color: #115e59  !important;
     color: #ffffff;
 }
 
@@ -337,7 +337,7 @@
     padding: 9px 16px;
     font-size: 15px !important;
     font-weight: 700 !important;
-    background-color: #0754CD !important;
+    background-color: #115e59  !important;
     color: #ffffff;
     border: none !important;
     border-radius: 10px !important;

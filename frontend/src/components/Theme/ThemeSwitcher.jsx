@@ -11,21 +11,24 @@ const ThemeSwitcher = () => {
     };
 
     useEffect(() => {
-        const theme = isDarkMode ? "lara-dark-blue" : "lara-light-blue";
+        const theme = isDarkMode ? "lara-dark-teal" : "lara-light-teal";
 
         const existingLink = document.getElementById("app-theme");
         if (existingLink) {
             existingLink.remove();
         }
 
-        // Creează link-ul nou
         const link = document.createElement("link");
         link.id = "app-theme";
         link.rel = "stylesheet";
         link.href = `/themes/${theme}/theme.css`;
         document.head.appendChild(link);
 
-
+        if (isDarkMode) {
+            document.body.classList.add('app-dark');
+        } else {
+            document.body.classList.remove('app-dark');
+        }
         localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     }, [isDarkMode]);
 

@@ -2,12 +2,19 @@
 /* Container styling to set maximum width and centering */
 .slider-container {
     max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 10px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 /* Base style for individual slides (the content inside the carousel) */
 .slide-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 24px !important;
+    position: relative;
+    overflow: hidden;
     min-height: 400px;
     display: flex;
     flex-direction: column;
@@ -15,11 +22,7 @@
     align-items: center;
     padding: 20px 10px; /* Slightly more internal padding */
     margin: 0 10px; /* Space between slides when slidesToShow > 1 */
-    background: var(--surface-card);
-    border: 1px solid var(--surface-border);
-    color: var(--text-color);
     text-align: center;
-    border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow for bigger card */
     transition: transform 0.3s ease-in-out;
 }

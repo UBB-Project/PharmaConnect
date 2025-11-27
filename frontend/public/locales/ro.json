@@ -17,7 +17,9 @@
   },
   "home": {
     "welcome": "Bine ai venit la PharmaConnect!",
-    "tagline": "Partenerul tău de încredere în sănătatea digitală."
+    "tagline": "Partenerul tău de încredere în sănătatea digitală.",
+    "openMap": "Deschide Harta",
+    "openChatBot": "Deschide ChatBot"
   },
   "login": {
     "loginTitle": "Autentificare",
