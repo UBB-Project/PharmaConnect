@@ -5,10 +5,6 @@ import "./ItemsList.css";
 import { useTranslation } from "react-i18next";
 import { Dropdown } from 'primereact/dropdown';
 
-/**
- * @typedef {import('react-i18next').TFunction} TFunction
- */
-
 export default function ItemsList() {
     const [products, setProducts] = useState([]);
 
