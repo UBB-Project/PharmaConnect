@@ -8,7 +8,7 @@ const API_BASE = "http://localhost:8080/api";
 function SimpleSlider() {
     const [slidesData, setSlidesData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {

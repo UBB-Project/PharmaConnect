@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Popup from "../Popup/Popup.jsx";
 import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Dropdown } from 'primereact/dropdown';
+import ThemeSwitcher from "../Theme/ThemeSwitcher.jsx";
 import { Button } from 'primereact/button';
 
 export default function Header() {
@@ -64,15 +64,19 @@ export default function Header() {
 
             <h1 className="header-title" onClick={() => navigate("/")} >PharmaConnect</h1>
 
-            {!hideLogoutButton && (
-                <Button
-                    label="Log out"
-                    className="logout-btn"
-                    onClick={handleLogoutClick}
-                    aria-label="Log out of PharmaConnect"
-                />
-            )}
 
+            <div className="header-right">
+                <ThemeSwitcher />
+                {!hideLogoutButton && (
+                    <Button
+                        label="Log out"
+                        icon="pi pi-sign-out"
+                        className="p-button-outlined"
+                        onClick={handleLogoutClick}
+                        aria-label="Log out"
+                    />
+                )}
+            </div>
             {showPopup && (
                 <Popup
                     message={t("header.logoutConfirm")}

@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #ffffff;
+    background: var(--surface-ground);
     border-radius: 12px;
     padding: 30px 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
 
 .qr-code-wrapper p {
     font-size: 1rem;
-    color: #555;
+    color: var(--text-color);
     margin-bottom: 20px;
     max-width: 300px;
 }
@@ -44,17 +44,17 @@
 
 .qr-note {
     font-size: 0.9rem;
-    color: #777;
+    color: var(--text-color);
     margin-top: 20px;
 }
 
 .loading-text,
 .error-text {
     font-size: 1.2rem;
-    color: #555;
+    color: var(--text-color);
 }
 
 .error-text {
-    color: #d9534f;
+    color: var(--text-color);
     font-weight: bold;
 }

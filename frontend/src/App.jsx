@@ -12,9 +12,11 @@ import {useTranslation} from "react-i18next";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
+import { Button } from 'primereact/button';
 
 function App() {
     const { t } = useTranslation("home");
+
     return (
         <div className="app-container">
             <Header />
@@ -27,9 +29,33 @@ function App() {
                             <div className="home-page">
 
                                 <h1>{t("home.welcome")}</h1>
-                                <p>{t("home.tagline")}</p>
-                                <Link className="main-page__button" to="/map"> Open map</Link>
-                                <Link className={"main-page__button"} to={"/chatbot"}>Open ChatBot</Link>
+                                <p className="mb-4">{t("home.tagline")}</p>
+
+                                <div className="flex gap-3 mt-3 mb-5 justify-content-center">
+
+                                    <Link to="/map" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openMap")}
+                                            icon="pi pi-map"
+                                            className="super-btn-primary"
+                                            size="large"
+                                            rounded
+                                        />
+                                    </Link>
+
+                                    <Link to="/chatbot" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openChatBot")}
+                                            icon="pi pi-comments"
+                                            size="large"
+                                            className="super-btn-primary"
+                                            rounded
+                                            outlined
+
+                                        />
+                                    </Link>
+                                </div>
+
                                 <SimpleSlider />
                             </div>
                         }
@@ -44,7 +70,6 @@ function App() {
 
             <Footer />
         </div>
-
     );
 }
 
