@@ -8,7 +8,7 @@ export default function Footer() {
 
     return (
         <footer className="footer">
-            <p>{t("footer.copyright")}</p>
+            <p className="footer-text">{t("footer.copyright")}</p>
             <a
                 href="https://github.com/UBB-Project/PharmaConnect"
                 target="_blank"
@@ -16,7 +16,7 @@ export default function Footer() {
                 className="github-link"
                 aria-label={t("footer.github")}
             >
-                <FaGithub size={18} />
+                <FaGithub size={16} />
             </a>
         </footer>
     );

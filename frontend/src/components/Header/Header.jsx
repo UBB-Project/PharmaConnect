@@ -13,6 +13,11 @@ export default function Header() {
     const location = useLocation();
     const hideLogoutButton = location.pathname === "/login";
 
+    const languages = [
+        { label: 'English', value: 'en', code: 'gb' },
+        { label: 'Română', value: 'ro', code: 'ro' }
+    ];
+
     const handleLogoutClick = () => setShowPopup(true);
 
     const confirmLogout = (confirm) => {
@@ -22,24 +27,42 @@ export default function Header() {
         }
     };
 
-    const changeLanguage = (lng) => i18n.changeLanguage(lng);
+    const changeLanguage = (e) => {
+        i18n.changeLanguage(e.value);
+    };
+
+    const countryOptionTemplate = (option) => {
+        if (!option) {
+            return <span>Select</span>;
+        }
+
+        return (
+            <div className="language-item">
+                <span className={`fi fi-${option.code}`}></span>
+                <span>{option.label}</span>
+            </div>
+        );
+    };
+
+    const currentVal = languages.find(l => l.value === i18n.language) ? i18n.language : languages[0].value;
 
     return (
         <header className="header">
             <div className="header-left">
-                <div className="select-wrapper">
-                    <select
-                        value={i18n.language}
-                        onChange={(e) => changeLanguage(e.target.value)}
-                        aria-label="Select Language"
-                    >
-                        <option value="en">English</option>
-                        <option value="ro">Română</option>
-                    </select>
-                </div>
+                <Dropdown
+                    value={currentVal}
+                    onChange={changeLanguage}
+                    options={languages}
+                    optionLabel="label"
+                    valueTemplate={countryOptionTemplate}
+                    itemTemplate={countryOptionTemplate}
+                    className="language-dropdown"
+                    panelClassName="language-dropdown-panel"
+                    aria-label="Select Language"
+                />
             </div>
 
-            <h1 className="header-title">PharmaConnect</h1>
+            <h1 className="header-title" onClick={() => navigate("/")} >PharmaConnect</h1>
 
 
             <div className="header-right">
