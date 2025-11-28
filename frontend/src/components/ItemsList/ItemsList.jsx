@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import "./ItemsList.css";
 import { useTranslation } from "react-i18next";
-import { Dropdown } from 'primereact/dropdown';
 
 export default function ItemsList() {
     const [products, setProducts] = useState([]);
@@ -70,49 +69,6 @@ export default function ItemsList() {
         fetchData();
     }, [searchTerm, categoryFilter, brandFilter, prescriptionFilter, sortBy]);
 
-
-    const sortOptions = [
-        {
-            label: t("itemsList.priceLow"),
-            value: "priceLowHigh",
-            icon: "pi pi-sort-amount-up-alt"
-        },
-        {
-            label: t("itemsList.priceHigh"),
-            value: "priceHighLow",
-            icon: "pi pi-sort-amount-down"
-        },
-        {
-            label: t("itemsList.nameAsc"),
-            value: "nameAZ",
-            icon: "pi pi-sort-alpha-down"
-        },
-        {
-            label: t("itemsList.nameDesc"),
-            value: "nameZA",
-            icon: "pi pi-sort-alpha-up-alt"
-        },
-        {
-            label: t("itemsList.brandAsc"),
-            value: "brandAZ",
-            icon: "pi pi-sort-alpha-down"
-        },
-        {
-            label: t("itemsList.brandDesc"),
-            value: "brandZA",
-            icon: "pi pi-sort-alpha-up-alt"
-        }
-    ];
-
-    const optionTemplate = (option) => {
-        return (
-            <div className="flex align-items-center gap-2">
-                <i className={option.icon}></i>
-                <span>{option.label}</span>
-            </div>
-        );
-    };
-
     const clearAllFilters = () => {
         setSearchTerm("");
         setCategoryFilter("");
@@ -169,16 +125,20 @@ export default function ItemsList() {
                     <option value="not-required">{t("itemsList.overTheCounter")}</option>
                 </select>
 
-                <Dropdown
+                <select
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.value)}
-                    options={sortOptions}
-                    optionLabel="label"
-                    placeholder={t("itemsList.sortBy")}
-                    itemTemplate={optionTemplate}
+                    onChange={(e) => setSortBy(e.target.value)}
                     className="filter-select"
-                    panelClassName="filter-select-panel"
-                />
+                >
+                    <option value="">{t("itemsList.sortBy")}</option>
+                    <option value="priceLowHigh">{t("itemsList.priceLow")}</option>
+                    <option value="priceHighLow">{t("itemsList.priceHigh")}</option>
+                    <option value="nameAZ">{t("itemsList.nameAsc")}</option>
+                    <option value="nameZA">{t("itemsList.nameDesc")}</option>
+                    <option value="brandAZ">{t("itemsList.brandAsc")}</option>
+                    <option value="brandZA">{t("itemsList.brandDesc")}</option>
+                </select>
+
                 <button className="clear-btn" onClick={clearAllFilters}>
                     {t("itemsList.clearAll")}
                 </button>

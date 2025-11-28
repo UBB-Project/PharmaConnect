@@ -1,9 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
+import OrderPage from "./pages/OrderPage/OrderPage.jsx";
 import "./App.css";
 import ChatBot from "./components/ChatBot.jsx";
 import "leaflet/dist/leaflet.css";
@@ -11,9 +12,8 @@ import {useTranslation} from "react-i18next";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
-import ItemsList from "./components/ItemsList/ItemsList.jsx";
-import NavBar from "./NavBar/NavBar.jsx";
 import { Button } from 'primereact/button';
+import ItemsList from "./components/ItemsList/ItemsList.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -28,9 +28,8 @@ function App() {
                         path="/"
                         element={
                             <div className="home-page">
-                                <NavBar />
+
                                 <h1>{t("home.welcome")}</h1>
-                                <p>{t("home.tagline")}</p>
                                 <p className="mb-4">{t("home.tagline")}</p>
 
                                 <div className="flex gap-3 mt-3 mb-5 justify-content-center">
@@ -41,6 +40,16 @@ function App() {
                                             icon="pi pi-map"
                                             className="super-btn-primary"
                                             size="large"
+                                            rounded
+                                        />
+                                    </Link>
+
+                                    <Link to="/items" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openItemsList")}
+                                            icon="pi pi-shopping-cart"
+                                            size="large"
+                                            className="super-btn-primary"
                                             rounded
                                         />
                                     </Link>
@@ -64,21 +73,10 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/chatbot" element={<ChatBot />} />
+                    <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
-                    <Route path="/map" element={
-                            <>
-                                <NavBar />
-                                <MapPage />
-                            </>
-                        }
-                    />
-                    <Route path="/items" element={
-                            <>
-                                <NavBar />
-                                <ItemsList />
-                            </>
-                        }
-                    />
+                    <Route path="/map" element={<MapPage />} />
+                    <Route path="/orders" element={<OrderPage />}/>
                 </Routes>
             </main>
 

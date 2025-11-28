@@ -18,18 +18,15 @@ export default function ProductCard({ product }) {
             />
 
             <div className="product-name">{product.name}</div>
-
             <div className="product-brand">{product.brand}</div>
 
-            <div className="product-prescription">
-                <Tag
-                    className="rx-tag"
-                    value={product.prescriptionRequired ? t("item.rx") : t("item.otc")}
-                    icon={product.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
-                    severity={product.prescriptionRequired ? "info" : "success"}
-                    rounded
-                />
-            </div>
+            <Tag
+                value={product.prescriptionRequired ? t("item.rx") : t("item.otc")}
+                icon={product.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
+                severity={product.prescriptionRequired ? "info" : "success"}
+                className="product-tag"
+                rounded
+            />
         </div>
     );
 }

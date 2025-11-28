@@ -1,8 +1,26 @@
+.items-list-container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: var(--surface-ground);
+    min-height: 100vh;
+    border-radius: 16px;
+    color: var(--text-color);
+}
+
+.list-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
 .sticky-bar {
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: #222;
+    background-color: var(--surface-card);
     padding: 12px 16px;
     margin-bottom: 20px;
     display: flex;
@@ -10,24 +28,22 @@
     gap: 12px;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 4px var(--surface-border);
     backdrop-filter: blur(5px);
 }
 
 .search-input,
-.filter-select,
-.filter-select.p-dropdown {
-    background-color: #333;
-    color: white ;
-    border: 1px solid #444;
+.filter-select {
+    background-color: var(--surface-b);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
     border-radius: 8px;
     padding: 8px 12px;
     font-size: 14px;
-    outline: none;
     transition: border-color 0.2s ease;
     height: 38px;
     box-sizing: border-box;
-    width:12%;
+    width: 12%;
 }
 
 .search-input {
@@ -35,137 +51,30 @@
 }
 
 .search-input:hover,
-.filter-select:hover,
-.filter-select.p-dropdown:not(.p-disabled):hover {
-    border-color: #007bff;
+.filter-select:hover {
+    border-color: var(--primary-color);
 }
 
 .search-input:focus,
-.filter-select:focus,
-.filter-select.p-dropdown.p-focus {
-    border-color: #007bff;
-    box-shadow: none;
+.filter-select:focus {
+    border-color: var(--primary-color);
     outline: none;
-}
-
-.filter-select.p-dropdown {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    height: auto;
-}
-
-.filter-select.p-dropdown .p-dropdown-label {
-    color: white;
-    padding: 8px 12px;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.filter-select.p-dropdown .p-dropdown-label.p-placeholder {
-    color: white;
-}
-
-.filter-select.p-dropdown .p-dropdown-trigger {
-    color: white;
-    width: 2.5rem;
-}
-
-.filter-select.p-dropdown .p-dropdown-trigger:hover {
-    background-color: transparent;
-}
-
-.filter-select-panel.p-dropdown-panel {
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    margin-top: 4px;
-}
-
-.filter-select-panel .p-dropdown-items-wrapper {
-    max-height: 300px;
-}
-
-.filter-select-panel .p-dropdown-items {
-    padding: 4px;
-}
-
-.filter-select-panel .p-dropdown-item {
-    color: white;
-    background-color: transparent;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin: 2px 0;
-    transition: background-color 0.2s ease;
-    font-size: 14px;
-}
-
-.filter-select-panel .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-    background-color: #444;
-    color: white;
-}
-
-.filter-select-panel .p-dropdown-item.p-highlight {
-    background-color: #007bff;
-    color: white;
-}
-
-.filter-select-panel .p-dropdown-item:focus {
-    box-shadow: none;
-    outline: none;
-}
-
-/* Icon styling inside dropdown options */
-.filter-select-panel .p-dropdown-item i {
-    margin-right: 8px;
-    font-size: 14px;
-}
-
-.no-results {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #aaa;
-    margin-top: 20px;
-}
-
-.items-list-container {
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 20px 30px;
-    background-color: rgb(18, 18, 18);
-    min-height: 100vh;
-    border-radius: 16px;
-}
-
-.list-title {
-    text-align:center;
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 20px;
 }
 
 .clear-btn {
-    background: #444;
-    color: #fff;
-    border: 1px solid #555;
+    background: var(--surface-c);
+    color: var(--text-color);
+    border: 1px solid var(--surface-border);
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
+    white-space: nowrap;
     font-size: 0.85rem;
     transition: background 0.2s ease, border-color 0.2s ease;
-    white-space: nowrap;
 }
 
 .clear-btn:hover {
-    background: #555;
-    border-color: #777;
-}
-
-.clear-btn:active {
-    background: #666;
+    background: var(--surface-hover);
 }
 
 .product-grid {
@@ -194,7 +103,7 @@
 }
 
 .product-card {
-    background-color: #2b2b2b;
+    background-color: var(--surface-card);
     border-radius: 16px;
     padding: 16px;
     cursor: pointer;
@@ -203,7 +112,7 @@
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .product-image {
@@ -214,16 +123,22 @@
 }
 
 .product-name {
-    color: white;
+    color: var(--text-color);
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 4px;
 }
 
 .product-brand {
-    color: #b0b0b0;
+    color: var(--text-color-secondary);
     font-size: 16px;
     margin-bottom: 8px;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-color-secondary);
+    margin-top: 20px;
 }
 
 .status-message {
@@ -235,14 +150,37 @@
 }
 
 .status-message.error {
-    background: #ffdddd;
-    color: #a60000;
-    border: 1px solid #ffaaaa;
+    background: var(--red-100);
+    color: var(--red-700);
+    border: 1px solid var(--red-300);
 }
 
 .status-message.loading {
-    background: #eaf4ff;
-    color: #004a99;
-    border: 1px solid #bcdcff;
+    background: var(--blue-50);
+    color: var(--blue-700);
+    border: 1px solid var(--blue-200);
+}
+
+.app-dark .status-message.error {
+    background: #3a0000;
+    border-color: #660000;
+    color: #ffbbbb;
+}
+
+.app-dark .status-message.loading {
+    background: #001f33;
+    border-color: #003d66;
+    color: #aad7ff;
+}
+
+.product-tag{
+    font-size: 14px;
+    padding: 6px 14px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #115e59  !important;
+    color: #ffffff;
 }
 
