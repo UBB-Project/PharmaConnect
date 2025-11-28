@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 import { Button } from 'primereact/button';
+import ItemsList from "./components/ItemsList/ItemsList.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -43,6 +44,16 @@ function App() {
                                         />
                                     </Link>
 
+                                    <Link to="/items" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openItemsList")}
+                                            icon="pi pi-shopping-cart"
+                                            size="large"
+                                            className="super-btn-primary"
+                                            rounded
+                                        />
+                                    </Link>
+
                                     <Link to="/chatbot" style={{ textDecoration: 'none' }}>
                                         <Button
                                             label={t("home.openChatBot")}
@@ -62,6 +73,7 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/chatbot" element={<ChatBot />} />
+                    <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/orders" element={<OrderPage />}/>

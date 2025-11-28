@@ -1,16 +1,14 @@
 package com.pharmacy.Pharmacy_Manager.controller;
 
+import com.pharmacy.Pharmacy_Manager.dto.ItemQueryDto;
 import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:5173")
 
 @RestController
@@ -35,12 +33,21 @@ public class ItemController {
                 itemRequestDto.sideEffects()
         );
     }
+
     @GetMapping
-    public List<ItemRequestDto> getAllItems() {
-        return itemService.getAllItems().stream()
+    public List<ItemRequestDto> getAllItems(@ModelAttribute ItemQueryDto query) {
+        return itemService.searchFilterSort(
+                        query.getSearch(),
+                        query.getCategory(),
+                        query.getBrand(),
+                        query.getPrescription(),
+                        query.getSort()
+                )
+                .stream()
                 .map(ItemRequestDto::from)
-                .collect(Collectors.toList());
+                .toList();
     }
+
 
     @GetMapping("/{id}")
     public ItemRequestDto getItem(@PathVariable UUID id) {
