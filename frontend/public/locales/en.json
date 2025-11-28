@@ -17,7 +17,9 @@
   },
   "home": {
     "welcome": "Welcome to PharmaConnect!",
-    "tagline": "Your trusted partner in digital healthcare."
+    "tagline": "Your trusted partner in digital healthcare.",
+    "openMap": "Open Map",
+    "openChatBot": "Open ChatBot"
   },
   "login": {
     "loginTitle": "Login",
