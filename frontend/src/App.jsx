@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 import { Button } from 'primereact/button';
 import ItemsList from "./components/ItemsList/ItemsList.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -77,6 +78,8 @@ function App() {
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/orders" element={<OrderPage />}/>
+
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
 

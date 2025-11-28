@@ -83,10 +83,9 @@
     "clearAll": "Clear all Filters",
     "noResults": "No products found."
   },
-  "nav": {
-    "home": "Home",
-    "map": "Map",
-    "items": "Items"
+  "notFound": {
+    "message": "Page not found",
+    "goHome": "Go back home"
   }
 
 }
