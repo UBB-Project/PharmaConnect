@@ -82,10 +82,9 @@
     "clearAll": "Resetează Filtrele",
     "noResults": "Nici un produs găsit."
   },
-  "nav": {
-    "home": "Acasă",
-    "map": "Hartă",
-    "items": "Produse"
+  "notFound": {
+    "message": "Pagina nu a fost găsită",
+    "goHome": "Înapoi la pagina principală"
   }
 }
 
