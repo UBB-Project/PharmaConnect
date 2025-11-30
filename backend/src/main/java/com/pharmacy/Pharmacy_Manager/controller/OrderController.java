@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -30,9 +31,16 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<byte[]> placeOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderEntity> placeOrder(@RequestBody OrderDTO orderDTO) {
+        OrderEntity orderEntity = service.create(orderDTO);
+
+        return ResponseEntity.ok().body(orderEntity);
+    }
+
+    @GetMapping("qr/{id}")
+    public ResponseEntity<byte[]> getQRForOrder(@PathVariable String id) {
         try {
-            OrderEntity orderEntity = service.create(orderDTO);
+            final OrderEntity orderEntity = service.get(UUID.fromString(id));
             byte[] qrImage = service.getQR(orderEntity);
 
             return ResponseEntity.ok()

@@ -77,7 +77,11 @@ function App() {
                     <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
-                    <Route path="/orders" element={<OrderPage />}/>
+                    <Route path="/orders" element={
+                        <dialog open>
+                            <OrderPage />
+                        </dialog>
+                    }/>
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>

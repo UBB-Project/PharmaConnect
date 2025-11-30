@@ -8,17 +8,16 @@ import { InputText } from 'primereact/inputtext';
 
 
 import "./ItemPage.css";
+import ReserveButton from "./ReserveButton";
 
 const API_BASE = "http://localhost:8080/api";
 
 export default function ItemPage() {
     const { id } = useParams();
     const { t, i18n } = useTranslation();
-    const navigate = useNavigate();
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [reserved, setReserved] = useState(false);
     const [qty, setQty] = useState(1);
     const [notifyEmail, setNotifyEmail] = useState("");
     const [notifyError, setNotifyError] = useState("");
@@ -58,27 +57,6 @@ export default function ItemPage() {
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
 
-
-
-    const reserve = () => {
-        setReserved(true);
-
-        // 1. Define the hardcoded reservation details
-        const reservationDetails = {
-            "type": "reservation",
-            "quantity": 1, // Hardcoded quantity
-            "itemId": "e3182925-cac0-40f5-994a-0b8505adede9", // Hardcoded item ID
-            "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"  // Hardcoded user ID
-        };
-
-
-        navigate(`/orders`, {
-            state: {
-                reservation: reservationDetails
-            }
-        });
-
-    };
 
     const priceFormatted =
         typeof item.price === "number"
@@ -224,6 +202,7 @@ export default function ItemPage() {
                             )}
                         </div>
                     )}
+                    <ReserveButton quantity={qty}/>
                 </aside>
             </div>
 

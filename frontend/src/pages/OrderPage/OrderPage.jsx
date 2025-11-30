@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 // 💡 Removed useLocation and Navigate
 import { useTranslation } from 'react-i18next';
 import './OrderPage.css'; // We will create this CSS file for styling
@@ -19,6 +20,7 @@ export default function OrdersPage() {
     const [qrCodeUrl, setQrCodeUrl] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const state = useLocation().state;
 
     // 💡 Removed: const reservationData = location.state?.reservation;
 
@@ -28,14 +30,7 @@ export default function OrdersPage() {
             // 💡 Removed check for reservationData, as we now use the hardcoded one
             try {
                 // Make the POST request to your backend controller
-                const response = await fetch(`${API_BASE}/orders`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    // 💡 Send the hardcoded data
-                    body: JSON.stringify(hardcodedReservationData),
-                });
+                const response = await fetch(`${API_BASE}/orders/qr/${state.reservation.id}`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status} - ${response.statusText}`);

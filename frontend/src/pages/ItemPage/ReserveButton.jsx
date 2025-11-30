@@ -1,0 +1,75 @@
+import { useState } from "react";
+import { Button } from "primereact/button";
+import { Dialog } from 'primereact/dialog';
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+
+const API_BASE = "http://localhost:8080/api";
+
+export default function ReserveButton(props) {
+    const quantity = props.quantity;
+      
+    const [isLoading, setIsLoading] = useState(false);
+    const [reserved, setReserved] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    const { id } = useParams();
+    
+
+    const reservationData = {
+        "quantity" : quantity,
+        "itemId" : id,
+        "type" : "reservation",
+        // Hardcoded userId. We don't have login :(
+        "userId" : "e49aae7f-1959-4c14-910a-4bdf4c188088"
+    }
+    
+
+    const reserve = async () => {
+        setIsLoading(true);
+        setIsError(false);
+
+        const response = await fetch(`${API_BASE}/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reservationData),
+        });
+
+        if(!response.ok){
+            setIsError(true);
+            setIsLoading(false);
+            return;
+        }
+        const data = await response.json();
+
+        setIsLoading(false);
+        setReserved(true);
+
+        navigate(`/orders`, {
+            state: {
+                reservation: data
+            }
+        });
+    }
+
+
+    return (
+        <div>
+            <Button
+                label={reserved ? t("item.reserved") : t("item.reserve")}
+                icon={reserved ? "pi pi-check" : ""}
+                iconPos="left"
+                className="reserve-btn"
+                onClick={reserve}
+                disabled={reserved}
+                loading={isLoading}
+            />
+            {isError && <p class="error">{t("item.reserveError")}</p>}
+        </div>
+    )
+}
