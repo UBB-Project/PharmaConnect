@@ -1,11 +1,11 @@
 .map-wrap {
-    width: 90%;
-    max-width: 1216px;
-    height: 60vh;
-    margin: 40px auto;
-    border-radius: 8px;
+    width: 100%;
+    max-width: none;
+    height: 85vh;
+    margin: 0;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
     background: #f0f0f0;
 }
 
@@ -21,6 +21,8 @@
 .popup-title {
     color: #1a237e;
     font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 .popup-address {
@@ -31,4 +33,5 @@
 .popup-hours {
     font-size: 0.85rem;
     color: #444;
+    margin-top: 5px;
 }

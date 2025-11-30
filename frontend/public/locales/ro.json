@@ -18,8 +18,14 @@
   "home": {
     "welcome": "Bine ai venit la PharmaConnect!",
     "tagline": "Partenerul tău de încredere în sănătatea digitală.",
+    "miniMapTitle": "Explorează Farmaciile din Apropiere",
     "openMap": "Deschide Harta",
-    "openChatBot": "Deschide ChatBot"
+    "openChatBot": "Deschide ChatBot",
+    "clickToExplore": "Click pentru a explora",
+    "back": "Înapoi la Acasă",
+    "login": "Autentificare",
+    "orders": "Comenzile Mele",
+    "copyright": "© 2024 PharmaConnect. Toate drepturile rezervate."
   },
   "login": {
     "loginTitle": "Autentificare",

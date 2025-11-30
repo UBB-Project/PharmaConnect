@@ -5,57 +5,59 @@ import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
 import OrderPage from "./pages/OrderPage/OrderPage.jsx";
-import "./App.css";
 import ChatBot from "./components/ChatBot.jsx";
+import ItemPage from "./pages/ItemPage/ItemPage.jsx";
+import MiniMapWidget from "./components/Map/MiniMapWidget.jsx";
+import { Button } from 'primereact/button';
+import { useTranslation } from "react-i18next";
+
+import "./App.css";
 import "leaflet/dist/leaflet.css";
-import {useTranslation} from "react-i18next";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ItemPage from "./pages/ItemPage/ItemPage.jsx";
-import { Button } from 'primereact/button';
 
 function App() {
     const { t } = useTranslation("home");
-
     return (
         <div className="app-container">
             <Header />
-
             <main className="content-wrapper">
                 <Routes>
                     <Route
                         path="/"
                         element={
-                            <div className="home-page">
+                            <div className="home-container">
+                                <h1 className="home-title">{t("home.welcome")}</h1>
+                                <p className="home-tagline">{t("home.tagline")}</p>
 
-                                <h1>{t("home.welcome")}</h1>
-                                <p className="mb-4">{t("home.tagline")}</p>
+                                {/* Horizontal Container for Map and ChatBot */}
+                                <div className="home-actions-container">
 
-                                <div className="flex gap-3 mt-3 mb-5 justify-content-center">
+                                    {/* Left: Mini Map */}
+                                    <div className="mini-map-section">
+                                        <h3 className="mini-map-title">
+                                            <i className="pi pi-map"></i>
+                                            {t("home.miniMapTitle") || "Find Pharmacies Near You"}
+                                        </h3>
+                                        <Link to="/map" className="no-underline">
+                                            <MiniMapWidget />
+                                        </Link>
+                                    </div>
 
-                                    <Link to="/map" style={{ textDecoration: 'none' }}>
-                                        <Button
-                                            label={t("home.openMap")}
-                                            icon="pi pi-map"
-                                            className="super-btn-primary"
-                                            size="large"
-                                            rounded
-                                        />
-                                    </Link>
-
-                                    <Link to="/chatbot" style={{ textDecoration: 'none' }}>
-                                        <Button
-                                            label={t("home.openChatBot")}
-                                            icon="pi pi-comments"
-                                            size="large"
-                                            className="super-btn-primary"
-                                            rounded
-                                            outlined
-
-                                        />
-                                    </Link>
+                                    {/* Right: ChatBot Button */}
+                                    <div className="chatbot-section">
+                                        <Link to="/chatbot" className="no-underline">
+                                            <Button
+                                                label={t("home.openChatBot")}
+                                                icon="pi pi-comments"
+                                                size="large"
+                                                className="super-btn-primary"
+                                                rounded
+                                                outlined
+                                            />
+                                        </Link>
+                                    </div>
                                 </div>
-
                                 <SimpleSlider />
                             </div>
                         }
