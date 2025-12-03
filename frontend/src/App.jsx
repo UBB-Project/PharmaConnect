@@ -67,18 +67,6 @@ function App() {
                                             rounded
                                         />
                                     </Link>
-
-                                    <Link to="/chatbot" style={{ textDecoration: 'none' }}>
-                                        <Button
-                                            label={t("home.openChatBot")}
-                                            icon="pi pi-comments"
-                                            size="large"
-                                            className="super-btn-primary"
-                                            rounded
-                                            outlined
-
-                                        />
-                                    </Link>
                                 </div>
                                 <SimpleSlider />
                             </div>
