@@ -10,11 +10,12 @@ import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 import MiniMapWidget from "./components/Map/MiniMapWidget.jsx";
 import { Button } from 'primereact/button';
 import { useTranslation } from "react-i18next";
-
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ItemsList from "./components/ItemsList/ItemsList.jsx";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -57,6 +58,27 @@ function App() {
                                             />
                                         </Link>
                                     </div>
+                                    <Link to="/items" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openItemsList")}
+                                            icon="pi pi-shopping-cart"
+                                            size="large"
+                                            className="super-btn-primary"
+                                            rounded
+                                        />
+                                    </Link>
+
+                                    <Link to="/chatbot" style={{ textDecoration: 'none' }}>
+                                        <Button
+                                            label={t("home.openChatBot")}
+                                            icon="pi pi-comments"
+                                            size="large"
+                                            className="super-btn-primary"
+                                            rounded
+                                            outlined
+
+                                        />
+                                    </Link>
                                 </div>
                                 <SimpleSlider />
                             </div>
@@ -64,9 +86,12 @@ function App() {
                     />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/chatbot" element={<ChatBot />} />
+                    <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/orders" element={<OrderPage />}/>
+
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
 

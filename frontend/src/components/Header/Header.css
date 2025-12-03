@@ -7,6 +7,9 @@
     padding: 0 24px;
     position: relative;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .header-title {
@@ -23,8 +26,11 @@
     user-select: none;
     background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     transition: opacity 0.2s ease;
+}
+
+.header-title:hover {
+    opacity: 0.8;
 }
 
 .header-left {

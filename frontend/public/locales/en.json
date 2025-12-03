@@ -25,7 +25,8 @@
     "back": "Back to Home",
     "login": "Login",
     "orders": "My Orders",
-    "copyright": "© 2024 PharmaConnect. All rights reserved."
+    "copyright": "© 2024 PharmaConnect. All rights reserved.",
+    "openItemsList": "Open Items List"
   },
   "login": {
     "loginTitle": "Login",
@@ -69,8 +70,31 @@
       "generalInfo": "General information: do not exceed the recommended dose. Keep out of the reach of children.",
       "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist."
 
-      }
-    }
+      },
+  "itemsList": {
+    "title": "Available Products",
+    "searchPlaceholder": "Search Products...",
+    "allCategories": "All Categories",
+    "allBrands": "All Brands",
+    "allProducts": "All Products",
+    "prescriptionRequired": "Prescription Required",
+    "overTheCounter": "Over-the-counter",
+    "sortBy": "Sort By...",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "nameAsc": "Name: A to Z",
+    "nameDesc": "Name: Z to A",
+    "brandAsc": "Brand: A to Z",
+    "brandDesc": "Brand: Z to A",
+    "clearAll": "Clear all Filters",
+    "noResults": "No products found."
+  },
+  "notFound": {
+    "message": "Page not found",
+    "goHome": "Go back home"
+  }
+
+}
 
 
 

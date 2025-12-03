@@ -20,12 +20,13 @@
     "tagline": "Partenerul tău de încredere în sănătatea digitală.",
     "miniMapTitle": "Explorează Farmaciile din Apropiere",
     "openMap": "Deschide Harta",
-    "openChatBot": "Deschide ChatBot",
     "clickToExplore": "Click pentru a explora",
     "back": "Înapoi la Acasă",
     "login": "Autentificare",
     "orders": "Comenzile Mele",
-    "copyright": "© 2024 PharmaConnect. Toate drepturile rezervate."
+    "copyright": "© 2024 PharmaConnect. Toate drepturile rezervate.",
+    "openChatBot": "Deschide ChatBot",
+    "openItemsList": "Deschide Lista Produselor"
   },
   "login": {
     "loginTitle": "Autentificare",
@@ -68,6 +69,28 @@
     "generalInfo": "Informații generale: nu depășiți doza recomandată. A nu se lăsa la îndemâna copiilor.",
     "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul."
 
+  },
+  "itemsList": {
+    "title": "Produse Disponibile",
+    "searchPlaceholder": "Caută Produse...",
+    "allCategories": "Toate Categoriile",
+    "allBrands": "Toate Brandurile",
+    "allProducts": "Toate Produsele",
+    "prescriptionRequired": "Necesită Rețetă",
+    "overTheCounter": "Fără Rețetă (OTC)",
+    "sortBy": "Sortează După...",
+    "priceLow": "Preț: Mic spre Mare",
+    "priceHigh": "Preț: Mare spre Mic",
+    "nameAsc": "Nume: A spre Z",
+    "nameDesc": "Nume: Z spre A",
+    "brandAsc": "Brand: A spre Z",
+    "brandDesc": "Brand: Z spre A",
+    "clearAll": "Resetează Filtrele",
+    "noResults": "Nici un produs găsit."
+  },
+  "notFound": {
+    "message": "Pagina nu a fost găsită",
+    "goHome": "Înapoi la pagina principală"
   }
 }
 
