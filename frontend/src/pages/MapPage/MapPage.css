@@ -6,15 +6,6 @@
     flex-direction: column;
 }
 
-.map-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem 0;
-    width: 100%;
-    z-index: 100;
-}
-
 .map-content {
     flex: 1;
     width: 100%;
@@ -30,8 +21,4 @@
     margin: 0;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.nav-link {
-    text-decoration: none;
 }
