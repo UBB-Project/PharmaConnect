@@ -19,9 +19,23 @@ export default function ItemPage() {
     const [error, setError] = useState(null);
     const [reserved, setReserved] = useState(false);
     const [qty, setQty] = useState(1);
+    const [notifyEmail, setNotifyEmail] = useState("");
+    const [notifyError, setNotifyError] = useState("");
+    const [subscribed, setSubscribed] = useState(false);
 
     const inc = () => setQty((q) => q + 1);
     const dec = () => setQty((q) => (q > 1 ? q - 1 : 1));
+
+    const handleNotifySubscribe = () => {
+        if (!notifyEmail.includes("@")) {
+            setNotifyError("Please enter a valid email.");
+            return;
+        }
+
+        setSubscribed(true);
+        setNotifyError("");
+
+    };
 
     useEffect(() => {
         const load = async () => {
@@ -29,7 +43,7 @@ export default function ItemPage() {
                 const r = await fetch(`${API_BASE}/items/${id}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
-                setItem(data);
+                setItem({ ...data, stock: 0 });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
             } catch {
                 setError(t("item.error"));
             } finally {
@@ -75,6 +89,9 @@ export default function ItemPage() {
 
     const tt = (field, fallback) =>
         t(`item.products.${id}.${field}`, { defaultValue: fallback });
+
+    const outOfStock = item.stock === 0;
+
 
     return (
         <div className="container">
@@ -125,7 +142,9 @@ export default function ItemPage() {
                         {priceFormatted} <span className="currency">LEI</span>
                     </div>
                     <div className="stock-row">
-                        <span className="in-stock">{t("item.inStock")}</span>
+                        <span className={outOfStock ? "out-of-stock" : "in-stock"}>
+                                {outOfStock ? t("item.outOfStock") : t("item.inStock")}
+                        </span>
                         <span className="updated">{t("item.updatedToday")}</span>
                     </div>
 
@@ -155,6 +174,47 @@ export default function ItemPage() {
                         onClick={reserve}
                         disabled={reserved}
                     />
+                    {outOfStock && (
+                        <div className="notify-box">
+                            <h3 className="notify-title">
+                                {t("item.notifyWhenInStock")}
+                            </h3>
+
+                            {!subscribed ? (
+                                <>
+                                    <div className="notify-form">
+                                        <input
+                                            type="email"
+                                            className="notify-input"
+                                            placeholder={t("item.notifyEmailPlaceholder")}
+                                            value={notifyEmail}
+                                            onChange={(e) =>
+                                                setNotifyEmail(e.target.value)
+                                            }
+                                        />
+
+                                        <button
+                                            className="notify-btn"
+                                            type="button"
+                                            onClick={handleNotifySubscribe}
+                                        >
+                                            {t("item.notifySubscribe")}
+                                        </button>
+                                    </div>
+                                    {notifyError && (
+                                        <p className="notify-error">
+                                            {notifyError}
+                                        </p>
+                                    )}
+                                </>
+                            ) : (
+                                <button className="notify-btn subscribed" type="button" disabled>
+                                    <i className="pi pi-check" style={{ marginRight: "6px" }}></i>
+                                    {t("item.subscribed")}
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </aside>
             </div>
 

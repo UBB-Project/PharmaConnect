@@ -160,6 +160,10 @@
     font-weight: 500;
     margin-left: 5px;
 }
+.out-of-stock {
+    color: #dc2626; /* roșu elegant */
+    font-weight: 600;
+}
 
 .updated {
     opacity: .8;
@@ -226,7 +230,7 @@
     border-radius: 10px;
     font-weight: 700;
     color: #fff;
-    background: #0754CD;
+    background: #29C0AE ;
     cursor: pointer;
     white-space: nowrap;
 }
@@ -270,8 +274,8 @@
 }
 
 .tei-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    color: #3B82F6;
-    border-bottom: 3px solid #3B82F6;
+    color: #29C0AE;
+    border-bottom: 3px solid #29C0AE;
 }
 
 .tei-tabs .p-tabview-panels {
@@ -360,6 +364,63 @@
 .benefits li {
     margin: 4px 0;
 }
+/* Notify Me When in Stock */
+
+.notify-box {
+    margin-top: 20px;
+}
+
+.notify-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.notify-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notify-input {
+    padding: 8px;
+    width: 260px;
+    border-radius: 6px;
+    border: 1px solid var(--surface-border);
+    background: var(--surface-ground);
+    color: var(--text-color);
+}
+
+.notify-btn {
+    padding: 8px 14px;
+    background: #115e59;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.notify-btn .pi {
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+.notify-btn:hover {
+    filter: brightness(1.08);
+}
+
+.notify-btn.subscribed {
+    background: gray;
+    cursor: default;
+}
+
+.notify-error {
+    margin-top: 6px;
+    color: #b00020;
+    font-size: 14px;
+}
+
 
 @media (max-width: 1000px) {
     .tei-top {
