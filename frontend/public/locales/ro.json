@@ -39,6 +39,7 @@
     "rx": "Pe rețetă",
     "otc": "OTC",
     "subscribed": "Abonat",
+    "setNotifyError": "Te rog introdu o adresă validă.",
     "inStock": "ÎN STOC",
     "outOfStock": "STOC EPUIZAT",
     "notifyWhenInStock": "Anunță-mă când revine în stoc",

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 
 
 import "./ItemPage.css";
@@ -28,7 +29,7 @@ export default function ItemPage() {
 
     const handleNotifySubscribe = () => {
         if (!notifyEmail.includes("@")) {
-            setNotifyError("Please enter a valid email.");
+            setNotifyError(t("item.setNotifyError"));
             return;
         }
 
@@ -151,18 +152,24 @@ export default function ItemPage() {
                     <div className="qty-row">
                         <label htmlFor="qty">{t("item.quantity")}</label>
                         <div className="qty-box">
-                            <button type="button" onClick={dec}>
-                                −
-                            </button>
-                            <input
-                                id="qty"
+                            <Button
+                                icon="pi pi-minus"
+                                className="qty-btn"
+                                onClick={dec}
+                                text
+                                />
+                            <InputText
                                 value={qty}
                                 readOnly
-                                aria-label={t("item.quantity")}
-                            />
-                            <button type="button" onClick={inc}>
-                                +
-                            </button>
+                                className="qty-input"
+                                />
+                            <Button
+                                icon="pi pi-plus"
+                                className="qty-btn"
+                                onClick={inc}
+                                text
+                                />
+
                         </div>
                     </div>
 
@@ -183,7 +190,7 @@ export default function ItemPage() {
                             {!subscribed ? (
                                 <>
                                     <div className="notify-form">
-                                        <input
+                                        <InputText
                                             type="email"
                                             className="notify-input"
                                             placeholder={t("item.notifyEmailPlaceholder")}
@@ -193,13 +200,12 @@ export default function ItemPage() {
                                             }
                                         />
 
-                                        <button
+                                        <Button
                                             className="notify-btn"
                                             type="button"
                                             onClick={handleNotifySubscribe}
-                                        >
-                                            {t("item.notifySubscribe")}
-                                        </button>
+                                            label={t("item.notifySubscribe")}
+                                        />
                                     </div>
                                     {notifyError && (
                                         <p className="notify-error">
@@ -208,10 +214,13 @@ export default function ItemPage() {
                                     )}
                                 </>
                             ) : (
-                                <button className="notify-btn subscribed" type="button" disabled>
-                                    <i className="pi pi-check" style={{ marginRight: "6px" }}></i>
-                                    {t("item.subscribed")}
-                                </button>
+                                <Button className="notify-btn subscribed"
+                                        type="button"
+                                        disabled
+                                        icon="pi pi-check"
+                                        label={t("item.subscribed")}
+
+                                />
                             )}
                         </div>
                     )}

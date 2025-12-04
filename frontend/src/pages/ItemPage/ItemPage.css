@@ -191,12 +191,12 @@
 }
 
 .qty-box button {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     border: 1px solid var(--surface-border);
     background: var(--surface-ground);
     color: var(--text-color);
-    border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     font-size: 18px;
@@ -204,23 +204,56 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background .15s, color .15s;
+    transition: border-color .15s ease, background-color .15s ease, color .15s ease;
 }
+
 .qty-box button:hover {
-    background: var(--surface-ground);
+    border-color: #0F5E59;
+    color: #0F5E59;
+}
+
+.qty-box button:active {
+    background-color: #0F5E59;
+    border-color: #0F5E59;
+    color: #ffffff;
+}
+
+.qty-box button:focus,
+.qty-box button:focus-visible {
+    outline: none;
+    box-shadow: none;
 }
 
 .qty-box input {
     width: 48px;
     height: 28px;
-    border: 1px solid var(--surface-border);
-    border-radius: 6px;
-    text-align: center;
     background: var(--surface-ground);
     color: var(--text-color);
     font-size: 16px;
     font-weight: 500;
+    text-align: center;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 6px;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: none !important;
 }
+
+.qty-box input:hover {
+    border: 1px solid var(--surface-border) !important;
+    background: var(--surface-ground) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.qty-box input:focus,
+.qty-box input:active {
+    border: 1px solid var(--surface-border) !important;
+    background: var(--surface-ground) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
 
 .btn-green {
     width: 100%;
@@ -350,7 +383,25 @@
     gap: 8px !important;
 
 }
+.reserve-btn,
+.notify-btn {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 
+.reserve-btn:focus,
+.reserve-btn:active,
+.notify-btn:focus,
+.notify-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.reserve-btn:hover {
+    filter: brightness(1.08);
+}
 .reserve-btn.p-button:disabled {
     opacity: 0.8;
 }
@@ -364,7 +415,6 @@
 .benefits li {
     margin: 4px 0;
 }
-/* Notify Me When in Stock */
 
 .notify-box {
     margin-top: 20px;
@@ -391,6 +441,17 @@
     background: var(--surface-ground);
     color: var(--text-color);
 }
+.notify-input:focus {
+    outline: none;
+
+    box-shadow: 0 0 0 1.5px #0F5E59 !important
+}
+
+.notify-btn:hover {
+    filter: brightness(1.08);
+}
+
+
 
 .notify-btn {
     padding: 8px 14px;
@@ -400,14 +461,12 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
+    width: 140px !important;
 }
 .notify-btn .pi {
     margin-right: 6px;
     font-size: 14px;
-}
 
-.notify-btn:hover {
-    filter: brightness(1.08);
 }
 
 .notify-btn.subscribed {
