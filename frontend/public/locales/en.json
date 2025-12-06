@@ -18,8 +18,14 @@
   "home": {
     "welcome": "Welcome to PharmaConnect!",
     "tagline": "Your trusted partner in digital healthcare.",
+    "miniMapTitle": "Explore Pharmacies Nearby",
     "openMap": "Open Map",
     "openChatBot": "Open ChatBot",
+    "clickToExplore": "Click map to explore",
+    "back": "Back to Home",
+    "login": "Login",
+    "orders": "My Orders",
+    "copyright": "© 2026 PharmaConnect. All rights reserved.",
     "openItemsList": "Open Items List"
   },
   "login": {

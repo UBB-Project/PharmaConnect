@@ -1,85 +1,81 @@
-
-/* Container styling to set maximum width and centering */
+/* CRITICAL FIX: width 100% forces it to expand inside the centered flex parent */
 .slider-container {
+    width: 100%;
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
+    display: block;
 }
 
-/* Base style for individual slides (the content inside the carousel) */
+/* Base style for individual slides */
 .slide-item {
-    background: rgba(255, 255, 255, 0.03) !important;
+    background: rgba(255, 255, 255, 0.95) !important; /* Increased opacity for readability */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
     border-radius: 24px !important;
     position: relative;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 380px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Pushes image up, title down */
+    justify-content: space-between;
     align-items: center;
-    padding: 20px 10px; /* Slightly more internal padding */
-    margin: 0 10px; /* Space between slides when slidesToShow > 1 */
+    padding: 20px;
+    margin: 15px; /* Adds gap between slides */
     text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow for bigger card */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-/* Styling for the image */
+.slide-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
 .slide-image {
-    width: 90%;
-    height: auto;
-    max-height: 280px;
-    object-fit: cover;
-    border-radius: 8px;
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* Ensures medication box isn't cropped */
     margin-bottom: 20px;
+    border-radius: 12px;
 }
 
-/* Custom styling for the title */
-.slide-item h3.slide-title {
-    font-size: 1.5rem;
-    color: var(--text-color); /* Slate-700 */
-    margin-top: 0;
-    margin-bottom: 5px;
+.slide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #334155;
+    margin: 0;
 }
 
-/* -------------------------------------------
- * slick-carousel Overrides (Customizing Arrows and Dots)
- * ------------------------------------------- */
-
-/* Ensure the arrows are positioned correctly and visible */
+/* Slick Carousel Overrides */
 .slick-prev:before,
 .slick-next:before {
-    font-size: 40px;
-    color: var(--primary-color);/* Blue-500 (Primary color) */
-    opacity: 0.8;
-}
-
-.slick-prev {
-    left: -25px;
-    z-index: 10;
-}
-
-.slick-next {
-    right: -25px;
-    z-index: 10;
-}
-
-/* Customizing Dots (Indicators) */
-.slick-dots li button:before {
-    font-size: 12px;
-    color: var(--text-color-secondary) !important;
-    opacity: 0.75;
-}
-
-.slick-dots li.slick-active button:before {
-    color: #3b82f6 !important; /* Blue color for active dot */
+    font-size: 30px;
+    color: var(--primary-color, #2dd4bf);
     opacity: 1;
 }
 
-/* Ensure the dot container is centered and has proper margin */
-.slick-dots {
-    bottom: -45px;
+.slick-prev {
+    left: -35px; /* Pull arrows out of the content */
+}
+
+.slick-next {
+    right: -35px;
+}
+
+.slick-dots li button:before {
+    font-size: 10px;
+    color: #cbd5e1;
+}
+
+.slick-dots li.slick-active button:before {
+    color: var(--primary-color, #2dd4bf);
+}
+
+/* Wrapper to fix click events on slides */
+.cursor-pointer-wrapper {
+    outline: none;
+    padding: 10px 0; /* Vertical breathing room */
 }
