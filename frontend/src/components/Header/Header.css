@@ -9,7 +9,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--surface-border);
 }
 
 .header-title {
@@ -55,6 +55,8 @@
     display: flex;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
 }
 
 .language-dropdown:hover {
@@ -73,6 +75,7 @@
     align-items: center;
     gap: 10px;
     width: 100%;
+
 }
 
 .language-item .fi {
@@ -82,16 +85,17 @@
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     flex-shrink: 0;
+
 }
 
 .language-dropdown .p-dropdown-label {
     padding: 0 16px;
-    color: #334155;
     font-weight: 600;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
     height: 100%;
+    color: var(--dropdown-text) !important;
 }
 
 .language-dropdown .p-dropdown-trigger {
@@ -105,8 +109,10 @@
 .language-dropdown-panel {
     border-radius: 10px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-    border: 1px solid #e2e8f0;
     margin-top: 4px;
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--surface-border) !important;
 }
 
 .language-dropdown-panel .p-dropdown-items {
@@ -115,13 +121,14 @@
 }
 
 .language-dropdown-panel .p-dropdown-item {
-    color: #334155;
     display: flex;
     justify-content: center !important;
     align-items: center !important;
     padding: 10px 0 !important;
     margin: 2px 0 !important;
-    border-radius: 6px;
+    background: transparent !important;
+    color: var(--text-color) !important;
+    border-radius: 6px !important;
 }
 
 .language-dropdown-panel .p-dropdown-item .language-item {
