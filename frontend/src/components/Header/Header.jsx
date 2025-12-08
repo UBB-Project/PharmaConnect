@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ThemeSwitcher from "../Theme/ThemeSwitcher.jsx";
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
+import BulkOrderButton from './BulkOrderButton';
 
 export default function Header() {
     const [showPopup, setShowPopup] = useState(false);
@@ -60,6 +61,12 @@ export default function Header() {
                     panelClassName="language-dropdown-panel"
                     aria-label="Select Language"
                 />
+
+                {!hideLogoutButton && (
+                    <div style={{ marginRight: '1rem' }}>
+                        <BulkOrderButton />
+                    </div>
+                )}
             </div>
 
             <h1 className="header-title" onClick={() => navigate("/")} >PharmaConnect</h1>
