@@ -60,6 +60,10 @@ public class ItemService {
 
     public Optional<ItemEntityTranslation> getByIdAndLanguage(UUID id, Language language){return translationRepository.findByItemIdAndLanguage(id, language);}
 
+    public List<ItemEntity> getAll(){return itemRepository.findAll();}
+
+    public List<ItemEntityTranslation> getAllLanguage(Language language){return translationRepository.findAllByLanguage(language);}
+
     public List<ItemEntity> searchFilterSort(
             String search,
             String category,

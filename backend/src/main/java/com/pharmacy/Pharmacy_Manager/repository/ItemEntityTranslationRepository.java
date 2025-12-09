@@ -14,4 +14,6 @@ public interface ItemEntityTranslationRepository extends JpaRepository<ItemEntit
 
     // Optionally, find one translation by item id and language
     Optional<ItemEntityTranslation> findByItemIdAndLanguage(UUID itemId, Language language);
+
+    List<ItemEntityTranslation> findAllByLanguage(Language language);
 }
