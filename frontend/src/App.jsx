@@ -4,7 +4,6 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
-import OrderPage from "./pages/OrderPage/OrderPage.jsx";
 import ChatBot from "./components/ChatBot.jsx";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 import MiniMapWidget from "./components/Map/MiniMapWidget.jsx";
@@ -77,11 +76,6 @@ function App() {
                     <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
-                    <Route path="/orders" element={
-                        <dialog open>
-                            <OrderPage />
-                        </dialog>
-                    }/>
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
