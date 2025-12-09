@@ -9,15 +9,14 @@ import org.springframework.web.client.RestClient;
 import com.pharmacy.Pharmacy_Manager.dto.ChatGptRequest;
 import com.pharmacy.Pharmacy_Manager.dto.ChatGptResponse;
 import com.pharmacy.Pharmacy_Manager.dto.PromptRequest;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
 
 @Service
 public class ChatBotService {
 
   private final RestClient restClient;
-
-  public ChatBotService(RestClient restClient) {
-    this.restClient = restClient;
-  }
+  private final ItemRepository itemRepository;
 
   @Value("${openapi.api.key}")
   private String apiKey;
@@ -25,11 +24,40 @@ public class ChatBotService {
   @Value("${openapi.api.model}")
   private String model;
 
+  public ChatBotService(RestClient restClient, ItemRepository itemRepository) {
+    this.restClient = restClient;
+    this.itemRepository = itemRepository;
+  }
+
   public String getChatResponse(PromptRequest promptRequest) {
-    System.out.println("PromptRequest received: " + promptRequest);
-    System.out.println("Prompt value: " + promptRequest.prompt());
-    ChatGptRequest chatGptRequest = new ChatGptRequest(model,
-        List.of(new ChatGptRequest.Message("user", promptRequest.prompt())));
+    String userMessage = promptRequest.prompt();
+
+    List<ItemEntity> allItems = itemRepository.findAll();
+
+    StringBuilder dbContext = new StringBuilder();
+    for (ItemEntity item : allItems) {
+      dbContext.append(item.getName())
+          .append(" - ")
+          .append(item.getDescription())
+          .append("\n");
+    }
+
+    String systemPrompt = "You are a pharmacy assistant. Your job is to recommend medications or supplements to the user.\n"
+        + "- The user may describe symptoms (like \"headache\" or \"nausea\"), or write in any language.\n"
+        + "- The user may also describe general health concerns or body areas (like \"heart,\" \"joints,\" \"skin\"), in any language.\n"
+        + "- Match their input to the most relevant item in the database, even if it is not strictly a symptom.\n"
+        + "- Always use the database to provide your recommendation.\n"
+        + "- Respond in the same language the user writes in.\n"
+        + "- If nothing matches, respond: \"Sorry, I couldn't find any medications or supplements for that concern.\"\n"
+        + "- If the user asks something unrelated to medications or supplements, respond: \"I can only help with medication or supplement recommendations.\"\n\n"
+        + "Here are the items in your database:\n" +
+        dbContext.toString();
+
+    ChatGptRequest chatGptRequest = new ChatGptRequest(
+        model,
+        List.of(
+            new ChatGptRequest.Message("system", systemPrompt),
+            new ChatGptRequest.Message("user", userMessage)));
 
     ChatGptResponse response = restClient
         .post()
