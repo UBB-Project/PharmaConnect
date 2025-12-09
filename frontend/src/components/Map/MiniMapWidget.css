@@ -1,0 +1,53 @@
+.mini-map-wrapper {
+    height: 180px;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid var(--primary-color, #2dd4bf);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f0fdfa;
+}
+
+.mini-map-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+.mini-map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 400;
+    background-color: rgba(45, 212, 191, 0.05);
+}
+
+.mini-map-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    z-index: 401;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color, #0f766e);
+    pointer-events: none;
+}
+
+.mini-map-badge i {
+    font-size: 1rem;
+}
+
+.mini-map-wrapper .leaflet-container {
+    height: 100%;
+    width: 100%;
+}

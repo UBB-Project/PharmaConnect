@@ -4,7 +4,7 @@ import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./PharmacyMap.css";
 
-const CLUJ = [46.7712, 23.6236];
+const CLUJ = [46.772229, 23.596226];
 
 const pin = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/4287/4287703.png",
@@ -12,7 +12,6 @@ const pin = new Icon({
     iconAnchor: [15, 30],
     popupAnchor: [0, -26],
 });
-
 export default function PharmacyMap() {
     const [pharmacies, setPharmacies] = useState([]);
 

@@ -30,7 +30,9 @@ public class ItemController {
                 itemRequestDto.manufacturingDate(),
                 itemRequestDto.expirationDate(),
                 itemRequestDto.prescriptionRequired(),
-                itemRequestDto.sideEffects()
+                itemRequestDto.sideEffects(),
+                itemRequestDto.soldCount(),
+                itemRequestDto.stockQuantity()
         );
     }
 

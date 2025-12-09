@@ -36,8 +36,14 @@
   "home": {
     "welcome": "Welcome to PharmaConnect!",
     "tagline": "Your trusted partner in digital healthcare.",
+    "miniMapTitle": "Explore Pharmacies Nearby",
     "openMap": "Open Map",
     "openChatBot": "Open ChatBot",
+    "clickToExplore": "Click map to explore",
+    "back": "Back to Home",
+    "login": "Login",
+    "orders": "My Orders",
+    "copyright": "© 2026 PharmaConnect. All rights reserved.",
     "openItemsList": "Open Items List"
   },
   "login": {
@@ -58,10 +64,16 @@
       "rx": "Prescription",
       "otc": "OTC",
       "inStock": "IN STOCK",
+      "outOfStock": "OUT OF STOCK",
+      "notifyWhenInStock": "Notify me when in stock",
+      "notifyEmailPlaceholder": "your@email.com",
+      "notifySubscribe": "Subscribe",
+      "setNotifyError": "Please enter a valid email.",
+      "subscribed": "Subscribed",
       "updatedToday": "Updated today",
       "quantity": "Quantity",
       "reserve": "Reserve",
-      "reserved": "Reserved ✅",
+      "reserved": "Reserved ",
       "tabs": {
         "desc": "Description",
         "spec": "Specifications",

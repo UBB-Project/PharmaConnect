@@ -17,7 +17,9 @@ public record ItemRequestDto(
         LocalDate manufacturingDate,
         LocalDate expirationDate,
         Boolean prescriptionRequired,
-        String sideEffects
+        String sideEffects,
+        Integer soldCount,
+        Integer stockQuantity
         ) {
     public static ItemRequestDto from(ItemEntity i) {
         return ItemRequestDto.builder()
@@ -32,6 +34,8 @@ public record ItemRequestDto(
                 .expirationDate(i.getExpirationDate())
                 .prescriptionRequired(i.getPrescriptionRequired())
                 .sideEffects(i.getSideEffects())
+                .soldCount(i.getSoldCount())
+                .stockQuantity(i.getStockQuantity())
                 .build();
     }
 }
