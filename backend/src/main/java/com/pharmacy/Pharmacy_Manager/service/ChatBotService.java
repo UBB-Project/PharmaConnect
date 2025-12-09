@@ -48,8 +48,8 @@ public class ChatBotService {
         + "- Match their input to the most relevant item in the database, even if it is not strictly a symptom.\n"
         + "- Always use the database to provide your recommendation.\n"
         + "- Respond in the same language the user writes in.\n"
-        + "- If nothing matches, respond: \"Sorry, I couldn't find any medications or supplements for that concern.\"\n"
-        + "- If the user asks something unrelated to medications or supplements, respond: \"I can only help with medication or supplement recommendations.\"\n\n"
+        + "- If nothing matches, respond: \"Sorry, I couldn't find any medications or supplements for that concern.\" Translate it in the language the user wrote in.\n"
+        + "- If the user asks something unrelated to medications or supplements, respond: \"I can only help with medication or supplement recommendations.\"Translate it in the language the user wrote in.\\n\n"
         + "Here are the items in your database:\n" +
         dbContext.toString();
 
