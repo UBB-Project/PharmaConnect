@@ -10,6 +10,7 @@ const API_BASE = "http://localhost:8080/api";
 
 export default function ReserveButton(props) {
     const quantity = props.quantity;
+    const outOfStock = props.outOfStock;
       
     const [isLoading, setIsLoading] = useState(false);
     const [reserved, setReserved] = useState(false);
@@ -62,7 +63,7 @@ export default function ReserveButton(props) {
                 iconPos="left"
                 className="reserve-btn"
                 onClick={reserve}
-                disabled={reserved}
+                disabled={reserved || outOfStock}
                 loading={isLoading}
             />
             {isError && <p class="error">{t("item.reserveError")}</p>}

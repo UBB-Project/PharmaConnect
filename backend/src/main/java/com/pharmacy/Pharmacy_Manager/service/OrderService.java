@@ -54,6 +54,9 @@ public class OrderService {
         }
 
         OrderEntity orderEntity = orderDTO.toOrder(user.get(), item.get());
+        final ItemEntity newItem = item.get();
+        newItem.setStockQuantity(newItem.getStockQuantity() - orderDTO.getQuantity());
+        itemRepository.save(newItem);
         return orderRepository.save(orderEntity);
     }
 

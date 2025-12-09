@@ -9,7 +9,6 @@ import { InputText } from 'primereact/inputtext';
 
 import "./ItemPage.css";
 import ReserveButton from "./ReserveButton";
-import ReservationConfirmationDialog from "./ReservationConfirmationDialog";
 
 const API_BASE = "http://localhost:8080/api";
 
@@ -44,7 +43,7 @@ export default function ItemPage() {
                 const r = await fetch(`${API_BASE}/items/${id}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
-                setItem({ ...data, stock: 0 });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
+                setItem({ ...data, stock: data.stock_quantity });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
             } catch {
                 setError(t("item.error"));
             } finally {
@@ -152,14 +151,7 @@ export default function ItemPage() {
                         </div>
                     </div>
 
-                    <Button
-                        label={reserved ? t("item.reserved") : t("item.reserve")}
-                        icon={reserved ? "pi pi-check" : ""}
-                        iconPos="left"
-                        className="reserve-btn"
-                        onClick={reserve}
-                        disabled={reserved}
-                    />
+                    {!outOfStock && <ReserveButton quantity={qty}/>}
                     {outOfStock && (
                         <div className="notify-box">
                             <h3 className="notify-title">
@@ -203,7 +195,6 @@ export default function ItemPage() {
                             )}
                         </div>
                     )}
-                    <ReserveButton quantity={qty}/>
                 </aside>
             </div>
 
