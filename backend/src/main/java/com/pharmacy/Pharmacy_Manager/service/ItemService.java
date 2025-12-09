@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import com.pharmacy.Pharmacy_Manager.dto.ItemResponseDto; // From previous turn
-import com.pharmacy.Pharmacy_Manager.dto.StockCheckResponseDto; // From previous turn
+import com.pharmacy.Pharmacy_Manager.dto.ItemResponseDto;
+import com.pharmacy.Pharmacy_Manager.dto.StockCheckResponseDto;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedReader;
@@ -123,13 +123,10 @@ public class ItemService {
     public StockCheckResponseDto processBulkOrder(MultipartFile file) throws IOException {
         StockCheckResponseDto response = new StockCheckResponseDto();
 
-        // 1. Fetch all items (For a large real app, we would cache this)
         List<ItemEntity> allItems = itemRepository.findAll();
 
-        // 2. Setup Fuzzy Search
         LevenshteinDistance levenshtein = new LevenshteinDistance();
 
-        // 3. Read file
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -139,9 +136,7 @@ public class ItemService {
                 ItemEntity bestMatch = null;
                 int bestDistance = Integer.MAX_VALUE;
 
-                // Find the closest match in DB
                 for (ItemEntity item : allItems) {
-                    // Safety check if name is null
                     if (item.getName() == null) continue;
 
                     int distance = levenshtein.apply(searchName.toLowerCase(), item.getName().toLowerCase());
@@ -152,21 +147,16 @@ public class ItemService {
                     }
                 }
 
-                // Threshold: If distance > 3, we assume we don't carry this item.
                 if (bestMatch != null && bestDistance <= 3) {
 
-                    // --- MOCK STOCK LOGIC (Since you don't have the field yet) ---
                     // TODO: Later replace with: int stock = bestMatch.getStock();
-                    int stock = 50; // Default: we have it
+                    int stock = 50;
 
-                    // SIMULATION: If item name has "X" or "Z", pretend it's out of stock for testing
                     if (bestMatch.getName().toUpperCase().contains("X")) {
                         stock = 0;
                     }
-                    // -------------------------------------------------------------
 
                     if (stock > 0) {
-                        // Convert Entity to ItemResponseDto
                         ItemResponseDto dto = mapToResponseDto(bestMatch);
                         response.addAvailable(dto);
                     } else {
@@ -180,7 +170,6 @@ public class ItemService {
         return response;
     }
 
-    // Helper to map Entity -> Response DTO
     private ItemResponseDto mapToResponseDto(ItemEntity entity) {
         return ItemResponseDto.builder()
                 .name(entity.getName())
