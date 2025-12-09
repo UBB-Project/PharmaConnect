@@ -1,9 +1,171 @@
-.login-container {
+/* --- Layout & Container --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh; 
+  background-color: var(--surface-ground);
+  padding: 1rem;
+  transition: background-color 0.2s;
+}
+
+/* --- Card Styling --- */
+.auth-card {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); 
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* --- TabView & Alignment Fixes --- */
+
+.auth-tabs .p-tabview-nav {
+    display: flex !important;
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    border-bottom: 1px solid var(--surface-border); 
+}
+
+
+.auth-tabs .p-tabview-nav li {
+    width: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 2rem;
-    color: #1976d2;
-    font-weight: 600;
 }
+
+/* Style the clickable link inside the tab */
+.auth-tabs .p-tabview-nav-link {
+    width: 100%;
+    justify-content: center;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    font-weight: 600;
+    color: var(--text-color-secondary) !important;
+    padding: 1rem !important;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+/* Active Tab Style */
+.auth-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: var(--primary-color, #0ea5e9) !important; 
+    border-bottom-color: var(--primary-color, #0ea5e9) !important;
+}
+
+.auth-form {
+    margin-top: 1rem;
+}
+
+/* --- Inputs & Groups --- */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.flex-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+
+.p-password {
+    display: block;
+    position: relative !important;
+    width: 100% !important;
+}
+
+.p-password .p-inputtext {
+    width: 100% !important;
+    padding-right: 2.5rem !important; 
+}
+
+.p-password .p-icon, 
+.p-password .p-password-show-icon,
+.p-password .p-password-hide-icon {
+    position: absolute !important;
+    top: 50% !important;
+    right: 0.75rem !important;
+    transform: translateY(-50%) !important;
+    cursor: pointer;
+    z-index: 10;
+    color: var(--text-color-secondary);
+}
+
+/* --- Buttons --- */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem !important;
+  font-weight: bold;
+  border-radius: 8px !important;
+  border: none !important;
+  background-color: #0ea5e9 !important; 
+  color: #ffffff !important;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.auth-btn:hover {
+    background-color: #0284c7 !important; 
+    transform: translateY(-1px);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+
+.register-link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    gap: 8px;              
+    margin-top: 1.5rem;
+}
+
+.p-button.p-button-link.custom-link-btn {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #0ea5e9 !important;
+    padding: 0 !important;    
+    width: auto !important;   
+    margin: 0 !important;
+    font-weight: 700 !important;
+}
+
+.p-button.p-button-link.custom-link-btn:hover {
+    text-decoration: underline !important;
+    background: transparent !important;
+}
+
+/* Utilities */
+.secondary-text { color: var(--text-color-secondary); }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.ml-2 { margin-left: 0.5rem; }
+.w-full { width: 100%; }
