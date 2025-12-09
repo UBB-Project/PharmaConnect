@@ -16,6 +16,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemsList from "./components/ItemsList/ItemsList.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import CartPage from "./pages/CartPage/CartPage.jsx";
 
 function App() {
     const { t } = useTranslation("home");
@@ -78,6 +79,7 @@ function App() {
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/orders" element={<OrderPage />}/>
+                    <Route path="/cart" element={<CartPage />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>

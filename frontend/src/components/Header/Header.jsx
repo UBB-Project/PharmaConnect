@@ -63,9 +63,7 @@ export default function Header() {
                 />
 
                 {!hideLogoutButton && (
-                    <div style={{ marginRight: '1rem' }}>
-                        <BulkOrderButton />
-                    </div>
+                    <BulkOrderButton />
                 )}
             </div>
 

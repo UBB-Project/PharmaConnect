@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+import { useNavigate } from 'react-router-dom';
+import './BulkOrderButton.css';
 
 const BulkOrderButton = () => {
     const fileInputRef = useRef(null);
     const toast = useRef(null);
+    const navigate = useNavigate();
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
@@ -14,10 +17,21 @@ const BulkOrderButton = () => {
         const file = event.target.files[0];
         if (!file) return;
 
+        if (file.type !== 'text/plain' && !file.name.toLowerCase().endsWith('.txt')) {
+            toast.current.show({
+                severity: 'error',
+                summary: 'Invalid File',
+                detail: 'Please upload a .txt file only.',
+                life: 3000
+            });
+            event.target.value = null;
+            return;
+        }
+
         toast.current.show({
             severity: 'info',
             summary: 'Processing',
-            detail: 'Reading file and checking stock...',
+            detail: 'Reading file...',
             life: 2000
         });
 
@@ -37,31 +51,19 @@ const BulkOrderButton = () => {
             if (data.availableItems.length > 0) {
                 const existing = JSON.parse(localStorage.getItem('temp_cart_import') || '[]');
                 localStorage.setItem('temp_cart_import', JSON.stringify([...existing, ...data.availableItems]));
-
-                toast.current.show({
-                    severity: 'success',
-                    summary: 'Import Successful',
-                    detail: `Found ${data.availableItems.length} items. Added to temporary storage.`,
-                    life: 3000
-                });
             }
 
-            if (data.outOfStockNames.length > 0 || data.notFoundNames.length > 0) {
-                let errorDetails = [];
-
-                if (data.outOfStockNames.length > 0) {
-                    errorDetails.push(`Out of Stock: ${data.outOfStockNames.length} items`);
-                }
-                if (data.notFoundNames.length > 0) {
-                    errorDetails.push(`Unknown items: ${data.notFoundNames.length} items`);
-                }
-
-                toast.current.show({
-                    severity: 'warn',
-                    summary: 'Partial Import Issues',
-                    detail: errorDetails.join(', '),
-                    sticky: true
+            if (data.availableItems.length > 0 || data.outOfStockNames.length > 0 || data.notFoundNames.length > 0) {
+                navigate('/cart', {
+                    state: {
+                        importSuccess: true,
+                        addedCount: data.availableItems.length,
+                        outOfStock: data.outOfStockNames,
+                        notFound: data.notFoundNames
+                    }
                 });
+            } else {
+                toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found in file.', life: 3000 });
             }
 
         } catch (error) {
@@ -80,17 +82,18 @@ const BulkOrderButton = () => {
     return (
         <>
             <Toast ref={toast} />
+
             <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
                 accept=".txt"
-                style={{ display: 'none' }}
+                className="hidden-file-input"
             />
+
             <Button
                 icon="pi pi-upload"
-                className="p-button-rounded p-button-text"
-                style={{ color: '#0f766e', width: '2.5rem', height: '2.5rem' }}
+                className="p-button-outlined bulk-order-btn"
                 onClick={handleButtonClick}
                 tooltip="Upload Order List (.txt)"
                 tooltipOptions={{ position: 'bottom' }}
