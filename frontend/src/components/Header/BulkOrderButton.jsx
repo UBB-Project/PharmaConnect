@@ -17,6 +17,7 @@ const BulkOrderButton = () => {
         const file = event.target.files[0];
         if (!file) return;
 
+        // Security Check
         if (file.type !== 'text/plain' && !file.name.toLowerCase().endsWith('.txt')) {
             toast.current.show({
                 severity: 'error',
@@ -28,6 +29,7 @@ const BulkOrderButton = () => {
             return;
         }
 
+        // Processing Toast (Will now be Teal!)
         toast.current.show({
             severity: 'info',
             summary: 'Processing',
@@ -81,8 +83,7 @@ const BulkOrderButton = () => {
 
     return (
         <>
-            <Toast ref={toast} />
-
+            <Toast ref={toast}/>
             <input
                 type="file"
                 ref={fileInputRef}
