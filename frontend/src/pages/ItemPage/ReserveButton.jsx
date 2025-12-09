@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Button } from "primereact/button";
-import { Dialog } from 'primereact/dialog';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import  ReservationConfirmationDialog  from "./ReservationConfirmationDialog";
 
 
 const API_BASE = "http://localhost:8080/api";
@@ -13,6 +13,7 @@ export default function ReserveButton(props) {
       
     const [isLoading, setIsLoading] = useState(false);
     const [reserved, setReserved] = useState(false);
+    const [reservation, setReservation] = useState(null);
     const [isError, setIsError] = useState(false);
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -49,12 +50,7 @@ export default function ReserveButton(props) {
 
         setIsLoading(false);
         setReserved(true);
-
-        navigate(`/orders`, {
-            state: {
-                reservation: data
-            }
-        });
+        setReservation(data);
     }
 
 
@@ -70,6 +66,7 @@ export default function ReserveButton(props) {
                 loading={isLoading}
             />
             {isError && <p class="error">{t("item.reserveError")}</p>}
+            <ReservationConfirmationDialog visible={reserved} setVisible = {setReserved} reservation = {reservation}/>
         </div>
     )
 }

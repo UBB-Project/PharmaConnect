@@ -9,6 +9,7 @@ import { InputText } from 'primereact/inputtext';
 
 import "./ItemPage.css";
 import ReserveButton from "./ReserveButton";
+import ReservationConfirmationDialog from "./ReservationConfirmationDialog";
 
 const API_BASE = "http://localhost:8080/api";
 

@@ -4,15 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './OrderPage.css'; // We will create this CSS file for styling
 
-const API_BASE = "http://localhost:8080/api";
 
-// 💡 This is the hardcoded data you want to send every time
-const hardcodedReservationData = {
-    "type": "reservation",
-    "quantity": 1,
-    "itemId": "e3182925-cac0-40f5-994a-0b8505adede9",
-    "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"
-};
+
 
 export default function OrdersPage() {
     // 💡 Removed location hook
@@ -22,7 +15,6 @@ export default function OrdersPage() {
     const [error, setError] = useState(null);
     const state = useLocation().state;
 
-    // 💡 Removed: const reservationData = location.state?.reservation;
 
     useEffect(() => {
         // This function will be called once when the component mounts
