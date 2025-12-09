@@ -58,27 +58,27 @@ export default function ItemPage() {
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
 
+    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+    const reserve = async () => {
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: item.id, quantity: qty })
+            });
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            setReserved(true);
 
 
-    const reserve = () => {
-        setReserved(true);
+            navigate("/cart");
 
-        // 1. Define the hardcoded reservation details
-        const reservationDetails = {
-            "type": "reservation",
-            "quantity": 1, // Hardcoded quantity
-            "itemId": "e3182925-cac0-40f5-994a-0b8505adede9", // Hardcoded item ID
-            "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"  // Hardcoded user ID
-        };
-
-
-        navigate(`/orders`, {
-            state: {
-                reservation: reservationDetails
-            }
-        });
-
+        } catch (err) {
+            console.error("Failed to reserve item:", err);
+        }
     };
+
 
     const priceFormatted =
         typeof item.price === "number"
