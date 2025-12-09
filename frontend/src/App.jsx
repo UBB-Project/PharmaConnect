@@ -16,34 +16,56 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ItemsList from "./components/ItemsList/ItemsList.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import CartPage from "./pages/CartPage/CartPage.jsx";
+import React, { useState, useEffect } from "react";
 
 function App() {
     const { t } = useTranslation("home");
+    const [setCartItems] = useState([]);
+    const USER_ID = "ba204b4e-fa60-4a55-9b96-9911900e385c";
+    const API_BASE = "http://localhost:8080/api";
+
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const r = await fetch(`${API_BASE}/cart/${USER_ID}`);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                const data = await r.json();
+                setCartItems(data);
+            } catch (err) {
+                console.error("Failed to fetch cart:", err);
+            }
+        };
+        fetchCart();
+    }, []);
+
+
+
     return (
-        <div className="app-container">
-            <Header />
-            <main className="content-wrapper">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <div className="home-container">
-                                <h1 className="home-title">{t("home.welcome")}</h1>
-                                <p className="home-tagline">{t("home.tagline")}</p>
+            <div className="app-container">
+                <Header />
+                <main className="content-wrapper">
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <div className="home-container">
+                                    <h1 className="home-title">{t("home.welcome")}</h1>
+                                    <p className="home-tagline">{t("home.tagline")}</p>
 
-                                {/* Horizontal Container for Map and ChatBot */}
-                                <div className="home-actions-container">
+                                    {/* Horizontal Container for Map and ChatBot */}
+                                    <div className="home-actions-container">
 
-                                    {/* Left: Mini Map */}
-                                    <div className="mini-map-section">
-                                        <h3 className="mini-map-title">
-                                            <i className="pi pi-map"></i>
-                                            {t("home.miniMapTitle") || "Find Pharmacies Near You"}
-                                        </h3>
-                                        <Link to="/map" className="no-underline">
-                                            <MiniMapWidget />
-                                        </Link>
-                                    </div>
+                                     {/* Left: Mini Map */}
+                                     <div className="mini-map-section">
+                                            <h3 className="mini-map-title">
+                                                <i className="pi pi-map"></i>
+                                                {t("home.miniMapTitle") || "Find Pharmacies Near You"}
+                                            </h3>
+                                            <Link to="/map" className="no-underline">
+                                                <MiniMapWidget />
+                                            </Link>
+                                     </div>
 
                                     {/* Right: ChatBot Button */}
                                     <div className="chatbot-section">
@@ -78,9 +100,11 @@ function App() {
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/orders" element={<OrderPage />}/>
+                    <Route path="/cart" element={<CartPage />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+
             </main>
 
             <Footer />
