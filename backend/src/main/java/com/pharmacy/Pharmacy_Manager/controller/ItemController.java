@@ -2,7 +2,10 @@ package com.pharmacy.Pharmacy_Manager.controller;
 
 import com.pharmacy.Pharmacy_Manager.dto.ItemQueryDto;
 import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
+import com.pharmacy.Pharmacy_Manager.dto.ItemTranslationRequestDto;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntityTranslation;
+import com.pharmacy.Pharmacy_Manager.model.Language;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -50,11 +53,16 @@ public class ItemController {
                 .toList();
     }
 
-
-    @GetMapping("/{id}")
-    public ItemRequestDto getItem(@PathVariable UUID id) {
+    @GetMapping("/{id}/{language}")
+    public Object getItem(@PathVariable UUID id, @PathVariable Language language) {
         ItemEntity item = itemService.getById(id)
-                .orElseThrow();
-        return ItemRequestDto.from(item);
+                .orElseThrow(() -> new RuntimeException("Item not found with id " + id));
+        if(language==Language.en){
+            return ItemRequestDto.from(item);
+        }
+        else{
+            ItemEntityTranslation item_trans = itemService.getByIdAndLanguage(id, language).orElseThrow(() -> new RuntimeException("Item not found with id " + id));
+            return ItemTranslationRequestDto.from(item, item_trans);
+        }
     }
 }

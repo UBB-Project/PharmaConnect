@@ -1,5 +1,8 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
+import com.pharmacy.Pharmacy_Manager.model.ItemEntityTranslation;
+import com.pharmacy.Pharmacy_Manager.model.Language;
+import com.pharmacy.Pharmacy_Manager.repository.ItemEntityTranslationRepository;
 import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import jakarta.transaction.Transactional;
@@ -16,6 +19,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final ItemEntityTranslationRepository translationRepository;
+
     @Transactional
     public UUID addItem(
                         String name,
@@ -52,6 +57,8 @@ public class ItemService {
     public Optional<ItemEntity> getById(UUID id) {
         return itemRepository.findById(id);
     }
+
+    public Optional<ItemEntityTranslation> getByIdAndLanguage(UUID id, Language language){return translationRepository.findByItemIdAndLanguage(id, language);}
 
     public List<ItemEntity> searchFilterSort(
             String search,
