@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ThemeSwitcher from "../Theme/ThemeSwitcher.jsx";
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import BulkOrderButton from './BulkOrderButton';
+import BulkOrderButton from '../BulkOrderButton/BulkOrderButton.jsx';
 
 export default function Header() {
     const [showPopup, setShowPopup] = useState(false);
