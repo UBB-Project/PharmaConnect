@@ -55,7 +55,7 @@
       "updatedToday": "Updated today",
       "quantity": "Quantity",
       "reserve": "Reserve",
-      "reserved": "Reserved ✅",
+      "reserved": "Reserved",
       "reserveError": "Error reserving the item. Try again",
       "tabs": {
         "desc": "Description",

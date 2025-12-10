@@ -54,8 +54,8 @@
     "updatedToday": "Actualizat azi",
     "quantity": "Cantitate",
     "reserve": "Rezervă",
-    "reserved": "Rezervat ✅",
-    "reserveError": "Error reserving the item. Try again",
+    "reserved": "Rezervat",
+    "reserveError": "Eroare la rezervare. Incercati din nou",
     "tabs": {
       "desc": "Descriere",
       "spec": "Specificații",

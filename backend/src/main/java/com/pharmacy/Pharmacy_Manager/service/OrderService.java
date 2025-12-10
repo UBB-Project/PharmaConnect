@@ -37,7 +37,7 @@ public class OrderService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public OrderEntity get(UUID id)  {
+    public OrderEntity getOrder(UUID id)  {
         final Optional<OrderEntity> order = orderRepository.findById(id);
         if(order.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
