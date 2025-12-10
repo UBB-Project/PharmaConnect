@@ -41,7 +41,7 @@ export default function ItemPage() {
     useEffect(() => {
         const load = async () => {
             try {
-                const r = await fetch(`${API_BASE}/items/${id}`);
+                const r = await fetch(`${API_BASE}/items/${id}/${i18n.language}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
                 setItem({ ...data, stock: 0 });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
