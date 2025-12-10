@@ -19,7 +19,7 @@ public class ChatBotService {
     this.restClient = restClient;
   }
 
-//  @Value("${openapi.api.key}")
+  @Value("${openapi.api.key}")
   private String apiKey = "";
 
   @Value("${openapi.api.model}")
