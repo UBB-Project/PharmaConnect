@@ -93,8 +93,8 @@
       "category": "Category",
       "productCode": "Product code",
       "generalInfo": "General information: do not exceed the recommended dose. Keep out of the reach of children.",
-      "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist."
-
+      "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist.",
+      "addToCart": "Add to Cart"
       },
   "itemsList": {
     "title": "Available Products",

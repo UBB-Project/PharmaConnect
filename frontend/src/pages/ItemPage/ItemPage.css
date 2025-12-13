@@ -406,6 +406,42 @@
     opacity: 0.8;
 }
 
+/* --- Add to Cart Button (Same style as Reserve) --- */
+.add-to-cart-btn {
+    width: 100%;
+    /* Add spacing between this and the Reserve button */
+    margin-top: 12px;
+
+    /* Exact copy of .reserve-btn styles */
+    padding: 9px 16px;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    background-color: #115e59 !important;
+    color: #ffffff;
+    border: none !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.add-to-cart-btn:hover {
+    filter: brightness(1.08);
+}
+
+.add-to-cart-btn:disabled {
+    opacity: 0.8;
+}
+
+.add-to-cart-btn:focus,
+.add-to-cart-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 .benefits {
     margin: 12px 0 0;
     padding-left: 18px;

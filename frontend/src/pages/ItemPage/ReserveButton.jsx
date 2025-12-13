@@ -26,7 +26,7 @@ export default function ReserveButton(props) {
         "itemId" : id,
         "type" : "reservation",
         // Hardcoded userId. We don't have login :(
-        "userId" : "e49aae7f-1959-4c14-910a-4bdf4c188088"
+        "userId" : "00000000-0000-0000-0000-000000000001"
     }
     
 

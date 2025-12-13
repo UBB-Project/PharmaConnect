@@ -21,7 +21,7 @@ import React, { useState, useEffect } from "react";
 function App() {
     const { t } = useTranslation("home");
     const [setCartItems] = useState([]);
-    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
     const API_BASE = "http://localhost:8080/api";
 
     useEffect(() => {
@@ -98,7 +98,6 @@ function App() {
                     <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
-                    <Route path="/orders" element={<OrderPage />}/>
                     <Route path="/cart" element={<CartPage />} />
 
                     <Route path="*" element={<NotFound />} />

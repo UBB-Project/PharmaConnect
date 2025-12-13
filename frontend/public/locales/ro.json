@@ -92,8 +92,8 @@
     "category": "Categorie",
     "productCode": "Cod produs",
     "generalInfo": "Informații generale: nu depășiți doza recomandată. A nu se lăsa la îndemâna copiilor.",
-    "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul."
-
+    "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul.",
+    "addToCart": "Adauga in Cos"
   },
   "itemsList": {
     "title": "Produse Disponibile",
