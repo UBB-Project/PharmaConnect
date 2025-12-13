@@ -25,14 +25,21 @@ public class OrderController {
 
     @GetMapping("{id}")
     public ResponseEntity<OrderEntity> getOrder(@PathVariable String id){
-        final OrderEntity orderEntity = service.get(UUID.fromString(id));
+        final OrderEntity orderEntity = service.getOrder(UUID.fromString(id));
         return ResponseEntity.ok(orderEntity);
     }
 
     @PostMapping()
-    public ResponseEntity<byte[]> placeOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderEntity> placeOrder(@RequestBody OrderDTO orderDTO) {
+        OrderEntity orderEntity = service.create(orderDTO);
+
+        return ResponseEntity.ok().body(orderEntity);
+    }
+
+    @GetMapping("qr/{id}")
+    public ResponseEntity<byte[]> getQRForOrder(@PathVariable String id) {
         try {
-            OrderEntity orderEntity = service.create(orderDTO);
+            final OrderEntity orderEntity = service.getOrder(UUID.fromString(id));
             byte[] qrImage = service.getQR(orderEntity);
 
             return ResponseEntity.ok()
