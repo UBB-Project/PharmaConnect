@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
@@ -8,6 +9,7 @@ const API_BASE = "http://localhost:8080/api";
 const USER_ID = "00000000-0000-0000-0000-000000000001";
 
 export default function CartPage() {
+    const navigate = useNavigate();
     const { t, i18n } = useTranslation("cart");
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -50,7 +52,12 @@ export default function CartPage() {
             );
         } catch (err) {
             console.error(err);
-            setError(t("cart.updateError") || "Failed to update quantity.");
+            // Use toast instead of wiping the screen
+            toast.current.show({
+                severity: 'error',
+                summary: t("cart.updateError") || "Failed to update quantity",
+                life: 3000
+            });
         }
     };
 
@@ -62,9 +69,21 @@ export default function CartPage() {
             if (!response.ok) throw new Error("Failed to remove item");
 
             setCartItems(prev => prev.filter(item => item.id !== id));
+
+            toast.current.show({
+                severity: 'success',
+                summary: t("cart.removed") || "Item removed",
+                life: 3000
+            });
+
         } catch (err) {
             console.error(err);
-            setError(t("cart.removeError") || "Failed to remove item.");
+            // FIX: Don't use setError here, or the whole page disappears. Use Toast.
+            toast.current.show({
+                severity: 'error',
+                summary: t("cart.removeError") || "Failed to remove item.",
+                life: 3000
+            });
         }
     };
 
@@ -85,21 +104,30 @@ export default function CartPage() {
                 severity: 'success',
                 summary: t("cart.orderSuccess"),
                 detail: "",
-                life: 3000,
+                life: 2000,
                 className: 'center-toast'
             });
 
             setCartItems([]);
+
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
         } catch (err) {
             console.error(err);
-            setError(t("cart.checkoutError") || "Checkout failed.");
+            toast.current.show({
+                severity: 'error',
+                summary: t("cart.checkoutError") || "Checkout failed.",
+                life: 1000
+            });
         } finally {
             setCheckoutLoading(false);
         }
     };
 
     if (loading) return <p>{t("common.loading")}</p>;
-    if (error) return <p className="error">{error}</p>;
+
+    if (error && cartItems.length === 0) return <p className="error">{error}</p>;
 
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -112,8 +140,9 @@ export default function CartPage() {
                 <p>{t("cart.empty")}</p>
             ) : (
                 <div className="cart-items">
-                    {cartItems.map(item => (
-                        <div className="cart-item" key={item.id}>
+                    {/* FIX: Added index and composite key to prevent duplicate key errors */}
+                    {cartItems.map((item, index) => (
+                        <div className="cart-item" key={`${item.id}-${index}`}>
                             <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
                             <div className="cart-item-info">
                                 <h3>{item.name}</h3>

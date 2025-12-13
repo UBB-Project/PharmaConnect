@@ -4,7 +4,6 @@ import Footer from "./components/Footer/Footer.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import SimpleSlider from "./components/Carousel/SimpleSlider.jsx";
 import MapPage from "./pages/MapPage/MapPage.jsx";
-import OrderPage from "./pages/OrderPage/OrderPage.jsx";
 import ChatBot from "./components/ChatBot.jsx";
 import ItemPage from "./pages/ItemPage/ItemPage.jsx";
 import MiniMapWidget from "./components/Map/MiniMapWidget.jsx";
@@ -22,7 +21,7 @@ import React, { useState, useEffect } from "react";
 function App() {
     const { t } = useTranslation("home");
     const [setCartItems] = useState([]);
-    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
     const API_BASE = "http://localhost:8080/api";
 
     useEffect(() => {
@@ -99,7 +98,6 @@ function App() {
                     <Route path="/items" element={<ItemsList />} />
                     <Route path="/items/:id" element={<ItemPage />} />
                     <Route path="/map" element={<MapPage />} />
-                    <Route path="/orders" element={<OrderPage />}/>
                     <Route path="/cart" element={<CartPage />} />
 
                     <Route path="*" element={<NotFound />} />
