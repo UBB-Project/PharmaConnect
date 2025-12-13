@@ -19,7 +19,7 @@ public class ChatBotService {
   private final ItemRepository itemRepository;
 
   @Value("${openapi.api.key}")
-  private String apiKey;
+  private String apiKey = "";
 
   @Value("${openapi.api.model}")
   private String model;

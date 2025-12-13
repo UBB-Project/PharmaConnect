@@ -1,14 +1,7 @@
 package com.pharmacy.Pharmacy_Manager.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +25,7 @@ public class OrderEntity {
     private UUID id;
 
     @Column
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private OrderType type;
 
     @Column
@@ -40,13 +33,20 @@ public class OrderEntity {
     private Instant placedAt;
 
     @Column
+    @NotNull
     private int quantity;
 
     @ManyToOne()
     @JoinColumn(name= "item_id", referencedColumnName = "id")
+    @NotNull
     private ItemEntity item;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @NotNull
     private UserEntity user;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 }
