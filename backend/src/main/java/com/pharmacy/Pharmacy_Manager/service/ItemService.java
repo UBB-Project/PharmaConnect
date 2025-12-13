@@ -187,6 +187,7 @@ public class ItemService {
 
     private ItemResponseDto mapToResponseDto(ItemEntity entity) {
         return ItemResponseDto.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
                 .category(entity.getCategory())

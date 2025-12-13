@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "primereact/button";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import  ReservationConfirmationDialog  from "./ReservationConfirmationDialog";
 
@@ -17,7 +16,6 @@ export default function ReserveButton(props) {
     const [reservation, setReservation] = useState(null);
     const [isError, setIsError] = useState(false);
     const { t } = useTranslation();
-    const navigate = useNavigate();
     const { id } = useParams();
     
 

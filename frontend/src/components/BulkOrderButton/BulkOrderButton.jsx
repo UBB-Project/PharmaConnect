@@ -4,6 +4,10 @@ import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router-dom';
 import './BulkOrderButton.css';
 
+// Constants must match your CartPage
+const API_BASE = "http://localhost:8080/api";
+const USER_ID = "00000000-0000-0000-0000-000000000001";
+
 const BulkOrderButton = () => {
     const fileInputRef = useRef(null);
     const toast = useRef(null);
@@ -17,7 +21,7 @@ const BulkOrderButton = () => {
         const file = event.target.files[0];
         if (!file) return;
 
-        // Security Check
+        // 1. Validation
         if (file.type !== 'text/plain' && !file.name.toLowerCase().endsWith('.txt')) {
             toast.current.show({
                 severity: 'error',
@@ -29,11 +33,11 @@ const BulkOrderButton = () => {
             return;
         }
 
-        // Processing Toast (Will now be Teal!)
+        // Show "Analyzing" toast
         toast.current.show({
             severity: 'info',
             summary: 'Processing',
-            detail: 'Reading file...',
+            detail: 'Analyzing file for matches...',
             life: 2000
         });
 
@@ -41,20 +45,47 @@ const BulkOrderButton = () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('http://localhost:8080/api/items/bulk-order', {
+            // 2. Upload file to Backend to get matches
+            const response = await fetch(`${API_BASE}/items/bulk-order`, {
                 method: 'POST',
                 body: formData,
             });
 
-            if (!response.ok) throw new Error('Backend upload failed');
+            if (!response.ok) throw new Error('Backend analysis failed');
 
             const data = await response.json();
 
-            if (data.availableItems.length > 0) {
-                const existing = JSON.parse(localStorage.getItem('temp_cart_import') || '[]');
-                localStorage.setItem('temp_cart_import', JSON.stringify([...existing, ...data.availableItems]));
+            // data structure expected:
+            // { availableItems: [{id, name, ...}], outOfStockNames: [], notFoundNames: [] }
+
+            // 3. If items found, ADD them to the DB Cart
+            if (data.availableItems && data.availableItems.length > 0) {
+
+                toast.current.show({
+                    severity: 'info',
+                    summary: 'Syncing',
+                    detail: `Adding ${data.availableItems.length} items to cart...`,
+                    life: 2000
+                });
+
+                // Create a promise for each item to be added to the cart
+                const addToCartPromises = data.availableItems.map(item => {
+                    return fetch(`${API_BASE}/cart/${USER_ID}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            id: item.id, // This requires the Java fix mentioned above
+                            quantity: 1  // Default quantity
+                        })
+                    });
+                });
+
+                // Wait for all items to be added to the database
+                await Promise.all(addToCartPromises);
             }
 
+            // 4. Navigate to Cart Page
+            // We pass the results in state so CartPage can show a summary Toast
             if (data.availableItems.length > 0 || data.outOfStockNames.length > 0 || data.notFoundNames.length > 0) {
                 navigate('/cart', {
                     state: {
@@ -65,18 +96,19 @@ const BulkOrderButton = () => {
                     }
                 });
             } else {
-                toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found in file.', life: 3000 });
+                toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found.', life: 3000 });
             }
 
         } catch (error) {
-            console.error("Upload Error:", error);
+            console.error("Bulk Order Error:", error);
             toast.current.show({
                 severity: 'error',
-                summary: 'Upload Error',
-                detail: 'Could not process the file.',
+                summary: 'Error',
+                detail: 'Could not process the bulk order.',
                 life: 3000
             });
         } finally {
+            // Reset input so the same file can be selected again if needed
             event.target.value = null;
         }
     };

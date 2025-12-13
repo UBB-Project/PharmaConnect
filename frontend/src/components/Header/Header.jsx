@@ -12,7 +12,7 @@ import CartPreview from "../../pages/CartPage/CartPreview.jsx";
 
 export default function Header() {
     const API_BASE = "http://localhost:8080/api";
-    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
 
     const [showPopup, setShowPopup] = useState(false);
     const [showCartPreview, setShowCartPreview] = useState(false);
@@ -52,7 +52,6 @@ export default function Header() {
 
     const currentVal = languages.find(l => l.value === i18n.language) ? i18n.language : languages[0].value;
 
-
     useEffect(() => {
         const fetchCart = async () => {
             try {
@@ -61,11 +60,12 @@ export default function Header() {
                 const data = await res.json();
                 setCartItems(data);
             } catch (err) {
-                console.error(err);
+                console.error("Header fetch cart error:", err);
             }
         };
         fetchCart();
-    }, []);
+        // Added location.pathname so the cart refreshes when you change pages
+    }, [location.pathname]);
 
     const handleRemoveItem = async (id) => {
         try {
@@ -115,7 +115,25 @@ export default function Header() {
                         className="p-button-outlined p-button-rounded cart-button"
                         onClick={() => navigate("/cart")}
                         aria-label="Cart"
-                    />
+                    >
+                        {/* Optional: Add badge count if items exist */}
+                        {cartItems.length > 0 && (
+                            <span className="cart-badge"
+                                  style={{
+                                      position: 'absolute',
+                                      top: '0',
+                                      right: '0',
+                                      background: 'red',
+                                      color: 'white',
+                                      borderRadius: '50%',
+                                      padding: '0.2rem 0.4rem',
+                                      fontSize: '0.7rem'
+                                  }}>
+                                {cartItems.length}
+                            </span>
+                        )}
+                    </Button>
+
                     {showCartPreview && (
                         <CartPreview
                             cartItems={cartItems}
