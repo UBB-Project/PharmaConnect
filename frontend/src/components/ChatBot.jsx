@@ -59,7 +59,7 @@ const ChatBot = () => {
               <div
                 className={`p-2 rounded-3 ${
                   msg.sender === "user"
-                    ? "bg-primary text-white"
+                    ? "bg-primary text-dark"
                     : "bg-light text-dark"
                 }`}
                 style={{ maxWidth: "70%" }}
