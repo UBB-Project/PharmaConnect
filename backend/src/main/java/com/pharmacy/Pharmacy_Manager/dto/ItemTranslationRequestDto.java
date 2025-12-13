@@ -1,12 +1,13 @@
 package com.pharmacy.Pharmacy_Manager.dto;
 
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntityTranslation;
 import lombok.Builder;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Builder
-public record ItemRequestDto(
+public record ItemTranslationRequestDto(
         UUID id,
         String name,
         String description,
@@ -20,20 +21,20 @@ public record ItemRequestDto(
         String sideEffects,
         Integer soldCount,
         Integer stockQuantity
-        ) {
-    public static ItemRequestDto from(ItemEntity i) {
-        return ItemRequestDto.builder()
+) {
+    public static ItemTranslationRequestDto from(ItemEntity i, ItemEntityTranslation j) {
+        return ItemTranslationRequestDto.builder()
                 .id(i.getId())
                 .name(i.getName())
-                .description(i.getDescription())
-                .category(i.getCategory())
+                .description(j.getDescription())
+                .category(j.getCategory())
                 .price(i.getPrice())
                 .brand(i.getBrand())
                 .imageUrl(i.getImageUrl())
                 .manufacturingDate(i.getManufacturingDate())
                 .expirationDate(i.getExpirationDate())
                 .prescriptionRequired(i.getPrescriptionRequired())
-                .sideEffects(i.getSideEffects())
+                .sideEffects(j.getSideEffects())
                 .soldCount(i.getSoldCount())
                 .stockQuantity(i.getStockQuantity())
                 .build();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Popup from "../Popup/Popup.jsx";
 import "./Header.css";
@@ -7,13 +7,21 @@ import ThemeSwitcher from "../Theme/ThemeSwitcher.jsx";
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import BulkOrderButton from '../BulkOrderButton/BulkOrderButton.jsx';
+import CartPreview from "../../pages/CartPage/CartPreview.jsx";
+
 
 export default function Header() {
+    const API_BASE = "http://localhost:8080/api";
+    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+
     const [showPopup, setShowPopup] = useState(false);
+    const [showCartPreview, setShowCartPreview] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
     const { t, i18n } = useTranslation(["header", "common"]);
     const navigate = useNavigate();
     const location = useLocation();
     const hideLogoutButton = location.pathname === "/login";
+
     const handleLogoutClick = () => setShowPopup(true);
 
     const confirmLogout = (confirm) => {
@@ -33,10 +41,7 @@ export default function Header() {
     };
 
     const countryOptionTemplate = (option) => {
-        if (!option) {
-            return <span>Select</span>;
-        }
-
+        if (!option) return <span>Select</span>;
         return (
             <div className="language-item">
                 <span className={`fi fi-${option.code}`}></span>
@@ -46,6 +51,35 @@ export default function Header() {
     };
 
     const currentVal = languages.find(l => l.value === i18n.language) ? i18n.language : languages[0].value;
+
+
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/cart/${USER_ID}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                setCartItems(data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchCart();
+    }, []);
+
+    const handleRemoveItem = async (id) => {
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error("Failed to remove item");
+
+            setCartItems(prev => prev.filter(item => item.id !== id));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
     return (
         <header className="header">
@@ -71,6 +105,26 @@ export default function Header() {
 
             <div className="header-right">
                 <ThemeSwitcher />
+                <div
+                    className="cart-wrapper"
+                    onMouseEnter={() => setShowCartPreview(true)}
+                    onMouseLeave={() => setShowCartPreview(false)}
+                >
+                    <Button
+                        icon="pi pi-shopping-cart"
+                        className="p-button-outlined p-button-rounded cart-button"
+                        onClick={() => navigate("/cart")}
+                        aria-label="Cart"
+                    />
+                    {showCartPreview && (
+                        <CartPreview
+                            cartItems={cartItems}
+                            onRemove={handleRemoveItem}
+                        />
+                    )}
+                </div>
+
+
                 {!hideLogoutButton && (
                     <Button
                         label="Log out"
@@ -81,10 +135,11 @@ export default function Header() {
                     />
                 )}
             </div>
+
             {showPopup && (
                 <Popup
                     message={t("header.logoutConfirm")}
-                    onConfirm={confirmLogout}
+                    onConfirm={(confirm) => confirmLogout(confirm)}
                 />
             )}
         </header>

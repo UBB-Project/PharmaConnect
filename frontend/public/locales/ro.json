@@ -6,6 +6,24 @@
     "submit": "Trimite",
     "loading": "Se încarcă..."
   },
+  
+  "auth": {
+    "title": "Autentificare",
+    "loginTab": "Intră în cont",
+    "registerTab": "Creează cont",
+    "email": "Email",
+    "password": "Parolă",
+    "loginButton": "Intră în cont",
+    "noAccount": "Nu ai cont?",
+    "createAccount": "Creează cont",
+    "client": "Client",
+    "pharmacy": "Farmacie",
+    "firstName": "Prenume",
+    "middleName": "Al doilea prenume",
+    "lastName": "Nume",
+    "pharmacyName": "Nume Farmacie",
+    "registerButton": "Înregistrează-te"
+  },
   "footer": {
     "copyright": "© 2025 PharmaConnect. Toate drepturile rezervate.",
     "github": "Depozitul GitHub PharmaConnect"
@@ -97,7 +115,23 @@
   "notFound": {
     "message": "Pagina nu a fost găsită",
     "goHome": "Înapoi la pagina principală"
+  },
+  "cart": {
+    "title": "Coș de cumpărături",
+    "empty": "Coșul tău este gol.",
+    "total": "Total",
+    "deliveryMethod": "Metodă de livrare",
+    "paymentMethod": "Metodă de plată",
+    "homeDelivery": "Livrare la domiciliu",
+    "pickup": "Ridicare din farmacie",
+    "card": "Card",
+    "cash": "Cash la livrare",
+    "proceedCheckout": "Finalizează comanda",
+    "quantity": "Cantitate",
+    "remove": "Șterge",
+    "orderSuccess": "Comanda a fost plasată cu succes!"
   }
+
 }
 
 

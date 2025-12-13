@@ -1,102 +1,176 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+import { useTranslation } from 'react-i18next';
 import './CartPage.css';
 
-const CartPage = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [cartItems, setCartItems] = useState([]);
+const API_BASE = "http://localhost:8080/api";
+const USER_ID = "00000000-0000-0000-0000-000000000001";
 
-    const { importSuccess, addedCount, outOfStock, notFound } = location.state || {};
+export default function CartPage() {
+    const { t, i18n } = useTranslation("cart");
+    const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [deliveryMethod, setDeliveryMethod] = useState("home");
+    const [paymentMethod, setPaymentMethod] = useState("card");
+    const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+    const toast = useRef(null);
 
     useEffect(() => {
-        const storedItems = JSON.parse(localStorage.getItem('temp_cart_import') || '[]');
-        setCartItems(storedItems);
-    }, []);
+        const fetchCart = async () => {
+            try {
+                const response = await fetch(`${API_BASE}/cart/${USER_ID}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                setCartItems(data);
+            } catch (err) {
+                console.error(err);
+                setError(t("cart.error") || "Failed to load cart items.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCart();
+    }, [i18n.language]);
 
-    const calculateTotal = () => {
-        return cartItems.reduce((total, item) => total + (item.price || 0), 0).toFixed(2);
+    const handleQuantityChange = async (id, newQuantity) => {
+        if (newQuantity < 1) return;
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, quantity: newQuantity })
+            });
+            if (!response.ok) throw new Error("Failed to update quantity");
+
+            setCartItems(prev =>
+                prev.map(item => item.id === id ? { ...item, quantity: newQuantity } : item)
+            );
+        } catch (err) {
+            console.error(err);
+            setError(t("cart.updateError") || "Failed to update quantity.");
+        }
     };
+
+    const handleRemoveItem = async (id) => {
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error("Failed to remove item");
+
+            setCartItems(prev => prev.filter(item => item.id !== id));
+        } catch (err) {
+            console.error(err);
+            setError(t("cart.removeError") || "Failed to remove item.");
+        }
+    };
+
+    const handleCheckout = async () => {
+        if (cartItems.length === 0) return;
+        setCheckoutLoading(true);
+        setError(null);
+
+        try {
+            for (const item of cartItems) {
+                const response = await fetch(`${API_BASE}/cart/${USER_ID}/${item.id}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) throw new Error("Failed to remove item");
+            }
+
+            toast.current.show({
+                severity: 'success',
+                summary: t("cart.orderSuccess"),
+                detail: "",
+                life: 3000,
+                className: 'center-toast'
+            });
+
+            setCartItems([]);
+        } catch (err) {
+            console.error(err);
+            setError(t("cart.checkoutError") || "Checkout failed.");
+        } finally {
+            setCheckoutLoading(false);
+        }
+    };
+
+    if (loading) return <p>{t("common.loading")}</p>;
+    if (error) return <p className="error">{error}</p>;
+
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
         <div className="cart-page">
-            <div className="cart-container">
-                <h1 className="cart-title">Your Shopping Cart</h1>
+            <Toast ref={toast} />
+            <h2>{t("cart.title")}</h2>
 
-                {importSuccess && (
-                    <div className="import-report-container">
-                        <h3>Import Report</h3>
-
-                        {addedCount > 0 && (
-                            <div className="report-item success">
-                                <i className="pi pi-check-circle"></i>
-                                <span>Successfully added <strong>{addedCount}</strong> items to your cart.</span>
-                            </div>
-                        )}
-
-                        {outOfStock && outOfStock.length > 0 && (
-                            <div className="report-item warning">
-                                <div className="report-header">
-                                    <i className="pi pi-exclamation-triangle"></i>
-                                    <span><strong>Out of Stock</strong> (These were not added):</span>
+            {cartItems.length === 0 ? (
+                <p>{t("cart.empty")}</p>
+            ) : (
+                <div className="cart-items">
+                    {cartItems.map(item => (
+                        <div className="cart-item" key={item.id}>
+                            <img src={item.imageUrl} alt={item.name} className="cart-item-image" />
+                            <div className="cart-item-info">
+                                <h3>{item.name}</h3>
+                                <p className="brand">{item.brand}</p>
+                                <p className="price">{item.price.toFixed(2)} LEI</p>
+                                <div className="qty-actions">
+                                    <label>{t("cart.quantity")}</label>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={e => handleQuantityChange(item.id, parseInt(e.target.value))}
+                                    />
+                                    <Button
+                                        icon="pi pi-trash"
+                                        className="p-button-danger"
+                                        onClick={() => handleRemoveItem(item.id)}
+                                        tooltip={t("cart.remove")}
+                                    />
                                 </div>
-                                <ul className="report-list">
-                                    {outOfStock.map((name, i) => <li key={i}>{name}</li>)}
-                                </ul>
                             </div>
-                        )}
-
-                        {notFound && notFound.length > 0 && (
-                            <div className="report-item error">
-                                <div className="report-header">
-                                    <i className="pi pi-times-circle"></i>
-                                    <span><strong>Unknown Items</strong> (Check spelling):</span>
-                                </div>
-                                <ul className="report-list">
-                                    {notFound.map((name, i) => <li key={i}>{name}</li>)}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <div className="cart-content">
-                    {cartItems.length === 0 ? (
-                        <div className="empty-cart">
-                            <i className="pi pi-shopping-cart" style={{ fontSize: '3rem', color: '#ccc' }}></i>
-                            <p>Your cart is empty.</p>
-                            <Button label="Go to Shop" outlined onClick={() => navigate('/')} />
                         </div>
-                    ) : (
-                        <>
-                            <div className="cart-items-list">
-                                {cartItems.map((item, index) => (
-                                    <div key={index} className="cart-item-card">
-                                        <div className="item-info">
-                                            <h4>{item.name}</h4>
-                                            <span className="item-brand">{item.brand}</span>
-                                        </div>
-                                        <div className="item-price">
-                                            ${item.price}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="cart-summary">
-                                <h3>Total: ${calculateTotal()}</h3>
-                                <div className="cart-actions">
-                                    <Button label="Continue Shopping" outlined onClick={() => navigate('/')} />
-                                    <Button label="Checkout" severity="success" />
-                                </div>
-                            </div>
-                        </>
-                    )}
+                    ))}
                 </div>
-            </div>
+            )}
+
+            {cartItems.length > 0 && (
+                <div className="cart-summary">
+                    <h3>{t("cart.total")}: {totalPrice.toFixed(2)} LEI</h3>
+
+                    <div className="checkout-options">
+                        <label>
+                            {t("cart.deliveryMethod")}:
+                            <select value={deliveryMethod} onChange={e => setDeliveryMethod(e.target.value)}>
+                                <option value="home">{t("cart.homeDelivery")}</option>
+                                <option value="pickup">{t("cart.pickup")}</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            {t("cart.paymentMethod")}:
+                            <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)}>
+                                <option value="card">{t("cart.card")}</option>
+                                <option value="cash">{t("cart.cash")}</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <Button
+                        label={t("cart.proceedCheckout")}
+                        icon="pi pi-credit-card"
+                        className="p-button-success"
+                        onClick={handleCheckout}
+                        loading={checkoutLoading}
+                    />
+                </div>
+            )}
         </div>
     );
-};
-
-export default CartPage;
+}

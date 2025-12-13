@@ -6,6 +6,24 @@
     "submit": "Submit",
     "loading": "Loading..."
   },
+
+  "auth": {
+    "title": "Authentication",
+    "loginTab": "Log In",
+    "registerTab": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Log In",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create account",
+    "client": "Client",
+    "pharmacy": "Pharmacy",
+    "firstName": "First Name",
+    "middleName": "Middle Name",
+    "lastName": "Last Name",
+    "pharmacyName": "Pharmacy Name",
+    "registerButton": "Sign Up"
+  },
   "footer": {
     "copyright": "© 2025 PharmaConnect. All rights reserved.",
     "github": "PharmaConnect GitHub Repository"
@@ -98,6 +116,21 @@
   "notFound": {
     "message": "Page not found",
     "goHome": "Go back home"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty.",
+    "total": "Total",
+    "deliveryMethod": "Delivery Method",
+    "paymentMethod": "Payment Method",
+    "homeDelivery": "Home Delivery",
+    "pickup": "Pickup from Store",
+    "card": "Card",
+    "cash": "Cash on Delivery",
+    "proceedCheckout": "Proceed to Checkout",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "orderSuccess": "Order placed successfully!"
   }
 
 }

@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,5 +20,9 @@ public class UserService {
         UserEntity newUserEntity = UserEntity.builder().firstName(firstName).secondName(secondName).lastName(lastName).build();
         userRepository.save(newUserEntity);
         return newUserEntity.getId();
+    }
+
+    public Optional<UserEntity> getById(UUID id) {
+        return userRepository.findById(id);
     }
 }

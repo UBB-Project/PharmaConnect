@@ -21,6 +21,8 @@ public class ItemMapper {
         itemEntity.setExpirationDate(itemRequestDto.expirationDate());
         itemEntity.setPrescriptionRequired(itemRequestDto.prescriptionRequired());
         itemEntity.setSideEffects(itemRequestDto.sideEffects());
+        itemEntity.setSoldCount(itemRequestDto.soldCount());
+        itemEntity.setStockQuantity(itemRequestDto.stockQuantity());
 
         return itemEntity;
     }
@@ -37,6 +39,8 @@ public class ItemMapper {
         itemResponseDto.setExpirationDate(itemRequestDto.expirationDate());
         itemResponseDto.setPrescriptionRequired(itemRequestDto.prescriptionRequired());
         itemResponseDto.setSideEffects(itemRequestDto.sideEffects());
+        itemResponseDto.setSoldCount(itemRequestDto.soldCount());
+        itemResponseDto.setStockQuantity(itemRequestDto.stockQuantity());
 
         return itemResponseDto;
 

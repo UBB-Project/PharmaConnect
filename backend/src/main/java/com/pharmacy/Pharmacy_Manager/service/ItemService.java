@@ -1,5 +1,8 @@
 package com.pharmacy.Pharmacy_Manager.service;
 
+import com.pharmacy.Pharmacy_Manager.model.ItemEntityTranslation;
+import com.pharmacy.Pharmacy_Manager.model.Language;
+import com.pharmacy.Pharmacy_Manager.repository.ItemEntityTranslationRepository;
 import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
 import jakarta.transaction.Transactional;
@@ -24,6 +27,8 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
+    private final ItemEntityTranslationRepository translationRepository;
+
     @Transactional
     public UUID addItem(
                         String name,
@@ -35,7 +40,9 @@ public class ItemService {
                         LocalDate manufacturingDate,
                         LocalDate expirationDate,
                         Boolean prescriptionRequired,
-                        String sideEffects
+                        String sideEffects,
+                        Integer soldCount,
+                        Integer stockQuantity
                         )
         {
             ItemEntity newItemEntity = ItemEntity.builder()
@@ -49,6 +56,8 @@ public class ItemService {
                     .expirationDate(expirationDate)
                     .prescriptionRequired(prescriptionRequired)
                     .sideEffects(sideEffects)
+                    .soldCount(soldCount)
+                    .stockQuantity(stockQuantity)
                     .build();
             itemRepository.save(newItemEntity);
             return newItemEntity.getId();
@@ -56,6 +65,12 @@ public class ItemService {
     public Optional<ItemEntity> getById(UUID id) {
         return itemRepository.findById(id);
     }
+
+    public Optional<ItemEntityTranslation> getByIdAndLanguage(UUID id, Language language){return translationRepository.findByItemIdAndLanguage(id, language);}
+
+    public List<ItemEntity> getAll(){return itemRepository.findAll();}
+
+    public List<ItemEntityTranslation> getAllLanguage(Language language){return translationRepository.findAllByLanguage(language);}
 
     public List<ItemEntity> searchFilterSort(
             String search,
