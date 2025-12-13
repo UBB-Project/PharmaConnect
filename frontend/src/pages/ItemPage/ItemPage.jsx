@@ -40,7 +40,7 @@ export default function ItemPage() {
     useEffect(() => {
         const load = async () => {
             try {
-                const r = await fetch(`${API_BASE}/items/${id}`);
+                const r = await fetch(`${API_BASE}/items/${id}/${i18n.language}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
                 setItem({ ...data, stock: data.stock_quantity });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
@@ -56,6 +56,27 @@ export default function ItemPage() {
     if (loading) return <div className="container">{t("item.loading")}</div>;
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
+
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
+    const reserve = async () => {
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: item.id, quantity: qty })
+            });
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            setReserved(true);
+
+
+            navigate("/cart");
+
+        } catch (err) {
+            console.error("Failed to reserve item:", err);
+        }
+    };
 
 
     const priceFormatted =
