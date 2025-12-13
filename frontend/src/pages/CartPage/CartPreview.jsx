@@ -10,7 +10,6 @@ export default function CartPreview({ cartItems, onRemove }) {
         <div className="cart-preview">
             {cartItems.length === 0 ? (
                 <div className="cart-preview-empty">
-                    {/* Icon mare pentru cos gol */}
                     <i className="pi pi-shopping-cart cart-empty-icon"></i>
                     <p>Your cart is empty</p>
                 </div>

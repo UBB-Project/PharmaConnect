@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import './CartPage.css';
 
 const API_BASE = "http://localhost:8080/api";
-const USER_ID = "ba204b4e-fa60-4a55-9b96-9911900e385c";
+const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
 
 export default function CartPage() {
     const { t, i18n } = useTranslation("cart");

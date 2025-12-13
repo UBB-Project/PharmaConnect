@@ -2,11 +2,15 @@ package com.pharmacy.Pharmacy_Manager.controller;
 
 import com.pharmacy.Pharmacy_Manager.dto.ItemQueryDto;
 import com.pharmacy.Pharmacy_Manager.dto.ItemRequestDto;
+import com.pharmacy.Pharmacy_Manager.dto.ItemTranslationRequestDto;
 import com.pharmacy.Pharmacy_Manager.model.ItemEntity;
+import com.pharmacy.Pharmacy_Manager.model.ItemEntityTranslation;
+import com.pharmacy.Pharmacy_Manager.model.Language;
 import com.pharmacy.Pharmacy_Manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:5173")
@@ -50,11 +54,33 @@ public class ItemController {
                 .toList();
     }
 
-
-    @GetMapping("/{id}")
-    public ItemRequestDto getItem(@PathVariable UUID id) {
+    @GetMapping("/{id}/{language}")
+    public Object getItem(@PathVariable UUID id, @PathVariable Language language) {
         ItemEntity item = itemService.getById(id)
-                .orElseThrow();
-        return ItemRequestDto.from(item);
+                .orElseThrow(() -> new RuntimeException("Item not found with id " + id));
+        if(language==Language.en){
+            return ItemRequestDto.from(item);
+        }
+        else{
+            ItemEntityTranslation item_trans = itemService.getByIdAndLanguage(id, language).orElseThrow(() -> new RuntimeException("Item not found with id " + id));
+            return ItemTranslationRequestDto.from(item, item_trans);
+        }
+    }
+
+    @GetMapping("/{language}")
+    public List<Object> getAllItems(@PathVariable Language language){
+        try {
+            if (language == Language.en) {
+                return Collections.singletonList(itemService.getAll().stream()
+                        .map(ItemRequestDto::from)
+                        .toList());
+            } else {
+                return Collections.singletonList(itemService.getAllLanguage(language)
+                        .stream().map(t -> ItemTranslationRequestDto.from(t.getItem(), t)).toList());
+            }
+        }catch(Exception e){
+            throw e;
+        }
+
     }
 }

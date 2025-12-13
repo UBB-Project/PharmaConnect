@@ -22,7 +22,7 @@ import React, { useState, useEffect } from "react";
 function App() {
     const { t } = useTranslation("home");
     const [setCartItems] = useState([]);
-    const USER_ID = "ba204b4e-fa60-4a55-9b96-9911900e385c";
+    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
     const API_BASE = "http://localhost:8080/api";
 
     useEffect(() => {

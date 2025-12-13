@@ -6,6 +6,24 @@
     "submit": "Trimite",
     "loading": "Se încarcă..."
   },
+  
+  "auth": {
+    "title": "Autentificare",
+    "loginTab": "Intră în cont",
+    "registerTab": "Creează cont",
+    "email": "Email",
+    "password": "Parolă",
+    "loginButton": "Intră în cont",
+    "noAccount": "Nu ai cont?",
+    "createAccount": "Creează cont",
+    "client": "Client",
+    "pharmacy": "Farmacie",
+    "firstName": "Prenume",
+    "middleName": "Al doilea prenume",
+    "lastName": "Nume",
+    "pharmacyName": "Nume Farmacie",
+    "registerButton": "Înregistrează-te"
+  },
   "footer": {
     "copyright": "© 2025 PharmaConnect. Toate drepturile rezervate.",
     "github": "Depozitul GitHub PharmaConnect"

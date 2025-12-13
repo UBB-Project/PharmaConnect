@@ -10,8 +10,6 @@ import com.pharmacy.Pharmacy_Manager.model.UserEntity;
 import com.pharmacy.Pharmacy_Manager.repository.ItemRepository;
 import com.pharmacy.Pharmacy_Manager.repository.OrderRepository;
 import com.pharmacy.Pharmacy_Manager.repository.UserRepository;
-import com.pharmacy.Pharmacy_Manager.service.mapper.CartMapper;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @Builder

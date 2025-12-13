@@ -11,7 +11,7 @@ import CartPreview from "../../pages/CartPage/CartPreview.jsx";
 
 export default function Header() {
     const API_BASE = "http://localhost:8080/api";
-    const USER_ID = "ba204b4e-fa60-4a55-9b96-9911900e385c";
+    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
 
     const [showPopup, setShowPopup] = useState(false);
     const [showCartPreview, setShowCartPreview] = useState(false);
