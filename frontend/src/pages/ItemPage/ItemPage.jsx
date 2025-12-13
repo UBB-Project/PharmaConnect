@@ -58,7 +58,7 @@ export default function ItemPage() {
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
 
-    const USER_ID = "444c0bf8-4bfd-412b-960f-11d6dddbcf13";
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
     const reserve = async () => {
         try {
             const response = await fetch(`${API_BASE}/cart/${USER_ID}`, {
