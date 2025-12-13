@@ -47,7 +47,7 @@ export default function ItemPage() {
                 const r = await fetch(`${API_BASE}/items/${id}/${i18n.language}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
-                setItem({ ...data, stock: data.stock_quantity });
+                setItem({ ...data, stock: data.stockQuantity });
             } catch {
                 setError(t("item.error"));
             } finally {

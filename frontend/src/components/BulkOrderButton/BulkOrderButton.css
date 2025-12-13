@@ -1,0 +1,44 @@
+.hidden-file-input {
+    display: none;
+}
+
+.p-button.bulk-order-btn {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 10px;
+    background-color: var(--surface-0);
+    border: 1px solid var(--surface-border);
+    color: var(--primary-color);
+    transition: box-shadow 0.2s;
+}
+
+.p-button.bulk-order-btn:hover {
+    background-color: var(--surface-0);
+    border-color: var(--surface-border);
+    color: var(--primary-color);
+}
+
+.p-button.bulk-order-btn:focus {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+body .p-toast .p-toast-message {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-width: 1px;
+}
+
+body .p-toast .p-toast-message.p-toast-message-info {
+    background-color: #f0fdfa;
+    border-color: #0f766e;
+    color: #115e59;
+}
+
+body .p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon {
+    color: #0f766e;
+}
+
+body .p-toast .p-toast-message .p-toast-icon-close {
+    display: none;
+}

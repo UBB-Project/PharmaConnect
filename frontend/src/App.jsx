@@ -16,29 +16,9 @@ import "slick-carousel/slick/slick-theme.css";
 import ItemsList from "./components/ItemsList/ItemsList.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import CartPage from "./pages/CartPage/CartPage.jsx";
-import React, { useState, useEffect } from "react";
 
 function App() {
     const { t } = useTranslation("home");
-    const [setCartItems] = useState([]);
-    const USER_ID = "00000000-0000-0000-0000-000000000001";
-    const API_BASE = "http://localhost:8080/api";
-
-    useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                const r = await fetch(`${API_BASE}/cart/${USER_ID}`);
-                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                const data = await r.json();
-                setCartItems(data);
-            } catch (err) {
-                console.error("Failed to fetch cart:", err);
-            }
-        };
-        fetchCart();
-    }, []);
-
-
 
     return (
             <div className="app-container">
