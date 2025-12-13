@@ -16,7 +16,7 @@
 
 .header-title {
     position: absolute;
-    color: white;
+    color: white !important;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.5rem;
@@ -97,7 +97,6 @@
     display: flex;
     align-items: center;
     height: 100%;
-    color: var(--dropdown-text) !important;
 }
 
 .language-dropdown .p-dropdown-trigger {
