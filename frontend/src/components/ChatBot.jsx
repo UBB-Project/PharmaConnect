@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const ChatBot = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
   const chatEndRef = useRef(null);
 
   const sendMessage = async () => {
@@ -27,9 +28,23 @@ const ChatBot = () => {
       console.error("Error while fetching response", error);
       setMessages((prev) => [
         ...prev,
-        { text: "Error while retrieving response", sender: "bot" },
+        {
+          text: "⚠️ Unable to retrieve a response at the moment.",
+          sender: "bot",
+        },
       ]);
     }
+  };
+
+  const closeDisclaimer = () => {
+    setShowDisclaimer(false);
+    setMessages([
+      {
+        text:
+          "⚠️ Medical Disclaimer: This chatbot provides general medical information and recommendations only. It does not provide diagnoses or replace professional medical advice. Always consult a qualified healthcare provider.",
+        sender: "bot",
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -38,13 +53,109 @@ const ChatBot = () => {
 
   return (
     <div className="container mt-5">
+
+      {showDisclaimer && (
+        <div
+          className="modal fade show"
+          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.6)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 shadow-lg rounded-4">
+
+              <div className="modal-header border-0 pb-0">
+                <h5 className="modal-title d-flex align-items-center gap-2">
+                  <i className="bi bi-heart-pulse-fill text-danger fs-4"></i>
+                  Medical Disclaimer
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={closeDisclaimer}
+                />
+              </div>
+
+              <div className="modal-body pt-2">
+                <p className="text-muted">
+                  This chatbot is intended to provide
+                  <strong> general medical information </strong>
+                  and health-related recommendations only.
+                </p>
+
+                <ul className="list-unstyled">
+                  <li className="d-flex mb-3">
+                    <i className="bi bi-x-circle-fill text-danger me-3 fs-5"></i>
+                    <span>
+                      The information provided is <strong>not a medical diagnosis</strong> and should not be treated as professional medical advice.
+                    </span>
+                  </li>
+
+                  <li className="d-flex mb-3">
+                    <i className="bi bi-exclamation-triangle-fill text-warning me-3 fs-5"></i>
+                    <span>
+                      This chatbot <strong>cannot replace a licensed healthcare professional</strong>,
+                      physical examination, or diagnostic testing.
+                    </span>
+                  </li>
+
+                  <li className="d-flex mb-3">
+                    <i className="bi bi-shield-check text-primary me-3 fs-5"></i>
+                    <span>
+                      Always consult a <strong>qualified physician or healthcare provider</strong> before making medical decisions.
+                    </span>
+                  </li>
+
+                  <li className="d-flex">
+                    <i className="bi bi-info-circle-fill text-secondary me-3 fs-5"></i>
+                    <span>
+                      Use this chatbot as a <strong>supportive informational tool only</strong>,
+                      not as a source of definitive medical guidance.
+                    </span>
+                  </li>
+                </ul>
+
+                <div className="alert alert-danger small mt-4 mb-0 rounded-3">
+                  <i className="bi bi-exclamation-octagon-fill me-2"></i>
+                  If you are experiencing a medical emergency, seek immediate medical attention.
+                </div>
+              </div>
+
+              <div className="modal-footer border-0 pt-0">
+                <button
+                  className="btn btn-outline-secondary rounded-pill px-4"
+                  onClick={closeDisclaimer}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-primary rounded-pill px-4"
+                  onClick={closeDisclaimer}
+                >
+                  <i className="bi bi-check-circle-fill me-2"></i>
+                  I Understand
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="card shadow-lg">
         <div className="card-header bg-primary text-white text-center">
-          <h4>ChatGPT ChatBot</h4>
+          <h4>Medical Recommendation Chatbot</h4>
         </div>
 
+        {!showDisclaimer && (
+          <div className="alert alert-danger d-flex align-items-center gap-2 m-2 py-2 small rounded-3">
+            <i className="bi bi-heart-pulse-fill fs-5"></i>
+            <span>
+              Medical information only. Not a diagnosis or professional medical advice.
+            </span>
+          </div>
+        )}
+
         <div
-          className="card-body chat-box"
+          className="card-body"
           style={{ height: "400px", overflowY: "auto", background: "#f8f9fa" }}
         >
           {messages.map((msg, index) => (
@@ -76,7 +187,7 @@ const ChatBot = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Type a message..."
+              placeholder="Describe your symptoms..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
