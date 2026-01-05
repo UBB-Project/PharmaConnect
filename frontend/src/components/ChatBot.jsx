@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "primeicons/primeicons.css";
 
 const ChatBot = () => {
   const [input, setInput] = useState("");
@@ -53,7 +54,6 @@ const ChatBot = () => {
 
   return (
     <div className="container mt-5">
-
       {showDisclaimer && (
         <div
           className="modal fade show"
@@ -61,7 +61,6 @@ const ChatBot = () => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content border-0 shadow-lg rounded-4">
-
               <div className="modal-header border-0 pb-0">
                 <h5 className="modal-title d-flex align-items-center gap-2">
                   <i className="bi bi-heart-pulse-fill text-danger fs-4"></i>
@@ -134,7 +133,6 @@ const ChatBot = () => {
                   I Understand
                 </button>
               </div>
-
             </div>
           </div>
         </div>
@@ -161,24 +159,39 @@ const ChatBot = () => {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`d-flex mb-3 ${
+              className={`d-flex align-items-end mb-3 ${
                 msg.sender === "user"
                   ? "justify-content-end"
                   : "justify-content-start"
               }`}
             >
+              {msg.sender === "bot" && (
+                <i
+                  className="bi bi-robot fs-3 me-2 text-teal animate-bounce"
+                  title="Bot"
+                ></i>
+              )}
+
               <div
                 className={`p-2 rounded-3 ${
                   msg.sender === "user"
-                    ? "bg-primary text-dark"
-                    : "bg-light text-dark"
+                    ? "bg-gradient-user text-gradient-user"
+                    : "bg-gradient-bot text-white"
                 }`}
                 style={{ maxWidth: "70%" }}
               >
                 {msg.text}
               </div>
+
+              {msg.sender === "user" && (
+                <i
+                  className="pi pi-user fs-3 ms-2 text-teal animate-bounce"
+                  title="You"
+                ></i>
+              )}
             </div>
           ))}
+
           <div ref={chatEndRef} />
         </div>
 
@@ -192,12 +205,49 @@ const ChatBot = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
-            <button className="btn btn-primary" onClick={sendMessage}>
+            <button className="btn btn-gradient-send" onClick={sendMessage}>
               Send
             </button>
           </div>
         </div>
       </div>
+
+      <style>
+        {`
+          .animate-bounce {
+            animation: bounce 1s infinite;
+          }
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+          }
+          .bg-gradient-user {
+            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
+          }
+          .text-gradient-user {
+            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          .bg-gradient-bot {
+            background: linear-gradient(135deg, #00c6a7 0%, #007b8a 100%);
+          }
+          .text-teal {
+            color: #00c6a7 !important;
+          }
+          .text-yellow {
+            color: #ffd166 !important;
+          }
+          .btn-gradient-send {
+            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
+            color: white;
+            border: none;
+          }
+          .btn-gradient-send:hover {
+            opacity: 0.9;
+          }
+        `}
+      </style>
     </div>
   );
 };
