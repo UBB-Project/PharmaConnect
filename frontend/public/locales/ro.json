@@ -72,7 +72,8 @@
     "updatedToday": "Actualizat azi",
     "quantity": "Cantitate",
     "reserve": "Rezervă",
-    "reserved": "Rezervat ",
+    "reserved": "Rezervat",
+    "reserveError": "Eroare la rezervare. Incercati din nou",
     "tabs": {
       "desc": "Descriere",
       "spec": "Specificații",
@@ -91,8 +92,8 @@
     "category": "Categorie",
     "productCode": "Cod produs",
     "generalInfo": "Informații generale: nu depășiți doza recomandată. A nu se lăsa la îndemâna copiilor.",
-    "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul."
-
+    "prospectInfo": "Citește prospectul oficial sau consultă medicul/farmacistul.",
+    "addToCart": "Adauga in Cos"
   },
   "itemsList": {
     "title": "Produse Disponibile",
@@ -115,7 +116,23 @@
   "notFound": {
     "message": "Pagina nu a fost găsită",
     "goHome": "Înapoi la pagina principală"
+  },
+  "cart": {
+    "title": "Coș de cumpărături",
+    "empty": "Coșul tău este gol.",
+    "total": "Total",
+    "deliveryMethod": "Metodă de livrare",
+    "paymentMethod": "Metodă de plată",
+    "homeDelivery": "Livrare la domiciliu",
+    "pickup": "Ridicare din farmacie",
+    "card": "Card",
+    "cash": "Cash la livrare",
+    "proceedCheckout": "Finalizează comanda",
+    "quantity": "Cantitate",
+    "remove": "Șterge",
+    "orderSuccess": "Comanda a fost plasată cu succes!"
   }
+
 }
 
 

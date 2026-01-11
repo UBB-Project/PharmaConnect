@@ -14,6 +14,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import com.pharmacy.Pharmacy_Manager.dto.ItemResponseDto;
+import com.pharmacy.Pharmacy_Manager.dto.StockCheckResponseDto;
+import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
@@ -125,5 +133,71 @@ public class ItemService {
         }
 
         return items;
+    }
+
+    public StockCheckResponseDto processBulkOrder(MultipartFile file) throws IOException {
+        StockCheckResponseDto response = new StockCheckResponseDto();
+
+        List<ItemEntity> allItems = itemRepository.findAll();
+
+        LevenshteinDistance levenshtein = new LevenshteinDistance();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String searchName = line.trim();
+                if (searchName.isEmpty()) continue;
+
+                ItemEntity bestMatch = null;
+                int bestDistance = Integer.MAX_VALUE;
+
+                for (ItemEntity item : allItems) {
+                    if (item.getName() == null) continue;
+
+                    int distance = levenshtein.apply(searchName.toLowerCase(), item.getName().toLowerCase());
+
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestMatch = item;
+                    }
+                }
+
+                if (bestMatch != null && bestDistance <= 3) {
+
+                    // TODO: Later replace with: int stock = bestMatch.getStock();
+                    int stock = 50;
+
+                    if (bestMatch.getName().toUpperCase().contains("X")) {
+                        stock = 0;
+                    }
+
+                    if (stock > 0) {
+                        ItemResponseDto dto = mapToResponseDto(bestMatch);
+                        response.addAvailable(dto);
+                    } else {
+                        response.addOutOfStock(bestMatch.getName());
+                    }
+                } else {
+                    response.addNotFound(searchName);
+                }
+            }
+        }
+        return response;
+    }
+
+    private ItemResponseDto mapToResponseDto(ItemEntity entity) {
+        return ItemResponseDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .description(entity.getDescription())
+                .category(entity.getCategory())
+                .price(entity.getPrice())
+                .brand(entity.getBrand())
+                .imageUrl(entity.getImageUrl())
+                .manufacturingDate(entity.getManufacturingDate())
+                .expirationDate(entity.getExpirationDate())
+                .prescriptionRequired(entity.getPrescriptionRequired())
+                .sideEffects(entity.getSideEffects())
+                .build();
     }
 }

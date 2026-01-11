@@ -73,7 +73,8 @@
       "updatedToday": "Updated today",
       "quantity": "Quantity",
       "reserve": "Reserve",
-      "reserved": "Reserved ",
+      "reserved": "Reserved",
+      "reserveError": "Error reserving the item. Try again",
       "tabs": {
         "desc": "Description",
         "spec": "Specifications",
@@ -92,8 +93,8 @@
       "category": "Category",
       "productCode": "Product code",
       "generalInfo": "General information: do not exceed the recommended dose. Keep out of the reach of children.",
-      "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist."
-
+      "prospectInfo": "Read the official leaflet or consult your doctor/pharmacist.",
+      "addToCart": "Add to Cart"
       },
   "itemsList": {
     "title": "Available Products",
@@ -116,6 +117,21 @@
   "notFound": {
     "message": "Page not found",
     "goHome": "Go back home"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty.",
+    "total": "Total",
+    "deliveryMethod": "Delivery Method",
+    "paymentMethod": "Payment Method",
+    "homeDelivery": "Home Delivery",
+    "pickup": "Pickup from Store",
+    "card": "Card",
+    "cash": "Cash on Delivery",
+    "proceedCheckout": "Proceed to Checkout",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "orderSuccess": "Order placed successfully!"
   }
 
 }

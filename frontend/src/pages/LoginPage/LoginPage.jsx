@@ -31,13 +31,24 @@ export default function LoginPage() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     console.log("Logging in...", loginData);
-    navigate("/home");
+    navigate("/");
   };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     console.log("Registering...", registerData);
-    navigate("/home");
+  
+    setActiveIndex(0);
+    
+    setRegisterData({
+        userType: "Client", 
+        firstName: "",
+        secondName: "",
+        lastName: "",
+        email: "",
+        password: "",
+    });
+    
   };
 
   return (
@@ -167,5 +178,5 @@ export default function LoginPage() {
         </TabView>
       </div>
     </div>
-  );
+  );  
 }

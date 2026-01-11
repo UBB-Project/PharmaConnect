@@ -1,28 +1,33 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Added useNavigate
 import { useTranslation } from "react-i18next";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 
-
 import "./ItemPage.css";
+import ReserveButton from "./ReserveButton";
 
 const API_BASE = "http://localhost:8080/api";
 
 export default function ItemPage() {
     const { id } = useParams();
+    const navigate = useNavigate(); // Initialize navigate
     const { t, i18n } = useTranslation();
-    const navigate = useNavigate();
+
     const [item, setItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [reserved, setReserved] = useState(false);
     const [qty, setQty] = useState(1);
+
+    // Notify logic
     const [notifyEmail, setNotifyEmail] = useState("");
     const [notifyError, setNotifyError] = useState("");
     const [subscribed, setSubscribed] = useState(false);
+
+    // Added state for the Add to Cart action
+    const [reserved, setReserved] = useState(false);
 
     const inc = () => setQty((q) => q + 1);
     const dec = () => setQty((q) => (q > 1 ? q - 1 : 1));
@@ -32,10 +37,8 @@ export default function ItemPage() {
             setNotifyError(t("item.setNotifyError"));
             return;
         }
-
         setSubscribed(true);
         setNotifyError("");
-
     };
 
     useEffect(() => {
@@ -44,7 +47,7 @@ export default function ItemPage() {
                 const r = await fetch(`${API_BASE}/items/${id}/${i18n.language}`);
                 if (!r.ok) throw new Error(`HTTP ${r.status}`);
                 const data = await r.json();
-                setItem({ ...data, stock: 0 });//setItem(data)-in stock ;setItem({ ...data, stock: 0 })-out of stock
+                setItem({ ...data, stock: data.stockQuantity });
             } catch {
                 setError(t("item.error"));
             } finally {
@@ -54,31 +57,31 @@ export default function ItemPage() {
         load();
     }, [id, i18n.language]);
 
+    // Hardcoded User ID for testing
+    const USER_ID = "00000000-0000-0000-0000-000000000001";
+
+    // This function handles the "Add to Cart" logic
+    const addToCart = async () => {
+        try {
+            const response = await fetch(`${API_BASE}/cart/${USER_ID}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: item.id, quantity: qty })
+            });
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            setReserved(true);
+            navigate("/cart");
+
+        } catch (err) {
+            console.error("Failed to add item to cart:", err);
+        }
+    };
+
     if (loading) return <div className="container">{t("item.loading")}</div>;
     if (error) return <div className="container error">{error}</div>;
     if (!item) return null;
-
-
-
-    const reserve = () => {
-        setReserved(true);
-
-        // 1. Define the hardcoded reservation details
-        const reservationDetails = {
-            "type": "reservation",
-            "quantity": 1, // Hardcoded quantity
-            "itemId": "e3182925-cac0-40f5-994a-0b8505adede9", // Hardcoded item ID
-            "userId": "45c3cdd3-9dc9-4936-a02b-d337dafe39c2"  // Hardcoded user ID
-        };
-
-
-        navigate(`/orders`, {
-            state: {
-                reservation: reservationDetails
-            }
-        });
-
-    };
 
     const priceFormatted =
         typeof item.price === "number"
@@ -92,7 +95,6 @@ export default function ItemPage() {
         t(`item.products.${id}.${field}`, { defaultValue: fallback });
 
     const outOfStock = item.stock === 0;
-
 
     return (
         <div className="container">
@@ -129,13 +131,12 @@ export default function ItemPage() {
 
                     <div className="tei-badges">
                         <Tag className="rx-tag"
-                            value={item.prescriptionRequired ? t("item.rx") : t("item.otc")}
-                            icon={item.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
-                            severity={item.prescriptionRequired ? "info" : "success"}
-                            rounded
+                             value={item.prescriptionRequired ? t("item.rx") : t("item.otc")}
+                             icon={item.prescriptionRequired ? "pi pi-lock" : "pi pi-unlock"}
+                             severity={item.prescriptionRequired ? "info" : "success"}
+                             rounded
                         />
                     </div>
-
                 </div>
 
                 <aside className="tei-right">
@@ -157,30 +158,34 @@ export default function ItemPage() {
                                 className="qty-btn"
                                 onClick={dec}
                                 text
-                                />
+                            />
                             <InputText
                                 value={qty}
                                 readOnly
                                 className="qty-input"
-                                />
+                            />
                             <Button
                                 icon="pi pi-plus"
                                 className="qty-btn"
                                 onClick={inc}
                                 text
-                                />
-
+                            />
                         </div>
                     </div>
 
-                    <Button
-                        label={reserved ? t("item.reserved") : t("item.reserve")}
-                        icon={reserved ? "pi pi-check" : ""}
-                        iconPos="left"
-                        className="reserve-btn"
-                        onClick={reserve}
-                        disabled={reserved}
-                    />
+                    {!outOfStock && (
+                        <>
+                            <ReserveButton quantity={qty}/>
+
+                            {/* --- NEW ADD TO CART BUTTON --- */}
+                            <Button
+                                label={t("item.addToCart")}
+                                className="add-to-cart-btn"
+                                onClick={addToCart}
+                            />
+                        </>
+                    )}
+
                     {outOfStock && (
                         <div className="notify-box">
                             <h3 className="notify-title">
@@ -219,15 +224,12 @@ export default function ItemPage() {
                                         disabled
                                         icon="pi pi-check"
                                         label={t("item.subscribed")}
-
                                 />
                             )}
                         </div>
                     )}
                 </aside>
             </div>
-
-
 
             <div className="tei-tabs">
                 <TabView>
@@ -279,9 +281,6 @@ export default function ItemPage() {
                     </TabPanel>
                 </TabView>
             </div>
-
-
         </div>
-
     );
 }
