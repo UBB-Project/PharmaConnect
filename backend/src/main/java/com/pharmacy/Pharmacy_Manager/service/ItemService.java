@@ -28,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemEntityTranslationRepository translationRepository;
+    private final StockNotificationService notificationService;
 
     @Transactional
     public UUID addItem(

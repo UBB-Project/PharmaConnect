@@ -32,13 +32,34 @@ export default function ItemPage() {
     const inc = () => setQty((q) => q + 1);
     const dec = () => setQty((q) => (q > 1 ? q - 1 : 1));
 
-    const handleNotifySubscribe = () => {
+    const handleNotifySubscribe = async () => {
         if (!notifyEmail.includes("@")) {
             setNotifyError(t("item.setNotifyError"));
             return;
         }
-        setSubscribed(true);
-        setNotifyError("");
+
+        try {
+            const response = await fetch(`${API_BASE}/stock-alerts/subscribe`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: notifyEmail,
+                    itemId: id
+                }),
+            });
+
+            if (response.ok) {
+                setSubscribed(true);
+                setNotifyError("");
+            } else {
+                setNotifyError("Eroare la salvarea abonării.");
+            }
+        } catch (err) {
+            console.error("Eroare trimitere notificare:", err);
+            setNotifyError("Serverul PharmaConnect nu răspunde.");
+        }
     };
 
     useEffect(() => {
