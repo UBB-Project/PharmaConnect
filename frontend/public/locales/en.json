@@ -132,6 +132,29 @@
     "quantity": "Quantity",
     "remove": "Remove",
     "orderSuccess": "Order placed successfully!"
+  },
+  "modal": {
+    "title": "Medical Disclaimer",
+    "intro": "This chatbot is intended to provide <1>general medical information</1> and health-related recommendations only.",
+    "list": {
+      "diagnosis": "The information provided is <1>not a medical diagnosis</1> and should not be treated as professional medical advice.",
+      "replace_pro": "This chatbot <1>cannot replace a licensed healthcare professional</1>, physical examination, or diagnostic testing.",
+      "consult": "Always consult a <1>qualified physician or healthcare provider</1> before making medical decisions.",
+      "support_tool": "Use this chatbot as a <1>supportive informational tool only</1>, not as a source of definitive medical guidance."
+    },
+    "emergency": "If you are experiencing a medical emergency, seek immediate medical attention.",
+    "btn_cancel": "Cancel",
+    "btn_understand": "I Understand"
+  },
+  "chat": {
+    "header_title": "Medical Recommendation Chatbot",
+    "alert_banner": "Medical information only. Not a diagnosis or professional medical advice.",
+    "input_placeholder": "Describe your symptoms...",
+    "btn_send": "Send",
+    "messages": {
+      "initial_disclaimer": "⚠️ Medical Disclaimer: This chatbot provides general medical information and recommendations only. It does not provide diagnoses or replace professional medical advice. Always consult a qualified healthcare provider.",
+      "error_fetch": "⚠️ Unable to retrieve a response at the moment."
+    }
   }
 
 }
