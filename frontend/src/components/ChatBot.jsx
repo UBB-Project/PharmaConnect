@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation, Trans } from 'react-i18next';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "primeicons/primeicons.css";
@@ -8,6 +9,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([]);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   const chatEndRef = useRef(null);
+  const { t } = useTranslation();
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -30,8 +32,8 @@ const ChatBot = () => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "⚠️ Unable to retrieve a response at the moment.",
-          sender: "bot",
+            text: t("chat.messages.error_fetch"),
+            sender: "bot",
         },
       ]);
     }
@@ -41,9 +43,8 @@ const ChatBot = () => {
     setShowDisclaimer(false);
     setMessages([
       {
-        text:
-          "⚠️ Medical Disclaimer: This chatbot provides general medical information and recommendations only. It does not provide diagnoses or replace professional medical advice. Always consult a qualified healthcare provider.",
-        sender: "bot",
+          text: t("chat.messages.initial_disclaimer"),
+          sender: "bot",
       },
     ]);
   };
@@ -64,7 +65,7 @@ const ChatBot = () => {
               <div className="modal-header border-0 pb-0">
                 <h5 className="modal-title d-flex align-items-center gap-2">
                   <i className="bi bi-heart-pulse-fill text-danger fs-4"></i>
-                  Medical Disclaimer
+                    {t("modal.title")}
                 </h5>
                 <button
                   type="button"
@@ -75,46 +76,56 @@ const ChatBot = () => {
 
               <div className="modal-body pt-2">
                 <p className="text-muted">
-                  This chatbot is intended to provide
-                  <strong> general medical information </strong>
-                  and health-related recommendations only.
+                    <Trans i18nKey="modal.intro">
+                        This chatbot is intended to provide
+                        <strong> general medical information </strong>
+                        and health-related recommendations only.
+                    </Trans>
                 </p>
 
                 <ul className="list-unstyled">
                   <li className="d-flex mb-3">
                     <i className="bi bi-x-circle-fill text-danger me-3 fs-5"></i>
                     <span>
-                      The information provided is <strong>not a medical diagnosis</strong> and should not be treated as professional medical advice.
+                      <Trans i18nKey="modal.list.diagnosis">
+                        The information provided is <strong>not a medical diagnosis</strong> and should not be treated as professional medical advice.
+                      </Trans>
                     </span>
                   </li>
 
                   <li className="d-flex mb-3">
                     <i className="bi bi-exclamation-triangle-fill text-warning me-3 fs-5"></i>
                     <span>
-                      This chatbot <strong>cannot replace a licensed healthcare professional</strong>,
-                      physical examination, or diagnostic testing.
+                      <Trans i18nKey="modal.list.replace_pro">
+                        This chatbot <strong>cannot replace a licensed healthcare professional</strong>,
+                        physical examination, or diagnostic testing.
+                      </Trans>
                     </span>
                   </li>
 
                   <li className="d-flex mb-3">
                     <i className="bi bi-shield-check text-primary me-3 fs-5"></i>
                     <span>
-                      Always consult a <strong>qualified physician or healthcare provider</strong> before making medical decisions.
+                      <Trans i18nKey="modal.list.consult">
+                        Always consult a <strong>qualified physician or healthcare provider</strong> before making medical decisions.
+                      </Trans>
                     </span>
                   </li>
 
                   <li className="d-flex">
                     <i className="bi bi-info-circle-fill text-secondary me-3 fs-5"></i>
                     <span>
-                      Use this chatbot as a <strong>supportive informational tool only</strong>,
-                      not as a source of definitive medical guidance.
+                      <Trans i18nKey="modal.list.support_tool">
+                        Use this chatbot as a <strong>supportive informational tool only</strong>,
+                        not as a source of definitive medical guidance.
+                      </Trans>
                     </span>
                   </li>
                 </ul>
 
                 <div className="alert alert-danger small mt-4 mb-0 rounded-3">
                   <i className="bi bi-exclamation-octagon-fill me-2"></i>
-                  If you are experiencing a medical emergency, seek immediate medical attention.
+                    {t("modal.emergency")}
                 </div>
               </div>
 
@@ -123,14 +134,14 @@ const ChatBot = () => {
                   className="btn btn-outline-secondary rounded-pill px-4"
                   onClick={closeDisclaimer}
                 >
-                  Cancel
+                    {t("modal.btn_cancel")}
                 </button>
                 <button
                   className="btn btn-primary rounded-pill px-4"
                   onClick={closeDisclaimer}
                 >
                   <i className="bi bi-check-circle-fill me-2"></i>
-                  I Understand
+                    {t("modal.btn_understand")}
                 </button>
               </div>
             </div>
@@ -140,14 +151,14 @@ const ChatBot = () => {
 
       <div className="card shadow-lg">
         <div className="card-header bg-primary text-white text-center">
-          <h4>Medical Recommendation Chatbot</h4>
+          <h4>{t("chat.header_title")}</h4>
         </div>
 
         {!showDisclaimer && (
           <div className="alert alert-danger d-flex align-items-center gap-2 m-2 py-2 small rounded-3">
             <i className="bi bi-heart-pulse-fill fs-5"></i>
             <span>
-              Medical information only. Not a diagnosis or professional medical advice.
+              {t("chat.alert_banner")}
             </span>
           </div>
         )}
@@ -200,13 +211,13 @@ const ChatBot = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Describe your symptoms..."
+              placeholder={t("chat.input_placeholder")}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
             <button className="btn btn-gradient-send" onClick={sendMessage}>
-              Send
+                {t("chat.btn_send")}
             </button>
           </div>
         </div>
