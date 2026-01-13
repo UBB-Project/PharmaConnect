@@ -3,6 +3,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "primeicons/primeicons.css";
+import "./ChatBot.css";
 
 const ChatBot = () => {
   const [input, setInput] = useState("");
@@ -222,43 +223,6 @@ const ChatBot = () => {
           </div>
         </div>
       </div>
-
-      <style>
-        {`
-          .animate-bounce {
-            animation: bounce 1s infinite;
-          }
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-          }
-          .bg-gradient-user {
-            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
-          }
-          .text-gradient-user {
-            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .bg-gradient-bot {
-            background: linear-gradient(135deg, #00c6a7 0%, #007b8a 100%);
-          }
-          .text-teal {
-            color: #00c6a7 !important;
-          }
-          .text-yellow {
-            color: #ffd166 !important;
-          }
-          .btn-gradient-send {
-            background: linear-gradient(135deg, #00c6a7 0%, #2575fc 100%);
-            color: white;
-            border: none;
-          }
-          .btn-gradient-send:hover {
-            opacity: 0.9;
-          }
-        `}
-      </style>
     </div>
   );
 };
