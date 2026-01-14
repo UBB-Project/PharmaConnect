@@ -1,0 +1,57 @@
+.popup-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 520px; /* Default width */
+    height: 720px; /* Default height */
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-header {
+    background: linear-gradient(135deg, #00c6a7, #2575fc);
+    color: white;
+    padding: 10px 14px;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    user-select: none; /* Prevents text selection while dragging */
+}
+
+.popup-header:active {
+    cursor: grabbing;
+}
+
+.popup-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.popup-close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.popup-close-btn:hover {
+    opacity: 0.8;
+}
+
+.popup-body {
+    flex: 1;
+    overflow: hidden; /* Ensures content doesn't spill out */
+    display: flex;
+    flex-direction: column;
+}
