@@ -21,23 +21,27 @@ const BulkOrderButton = () => {
         const file = event.target.files[0];
         if (!file) return;
 
-        // 1. Validation
-        if (file.type !== 'text/plain' && !file.name.toLowerCase().endsWith('.txt')) {
+        if (
+            file.type !== 'text/plain' &&
+            !file.name.toLowerCase().endsWith('.txt') &&
+            !file.type.startsWith('image/')
+        ) {
             toast.current.show({
                 severity: 'error',
                 summary: 'Invalid File',
-                detail: 'Please upload a .txt file only.',
+                detail: 'Please upload a .txt file or an image.',
                 life: 3000
             });
             event.target.value = null;
             return;
         }
 
-        // Show "Analyzing" toast
         toast.current.show({
             severity: 'info',
             summary: 'Processing',
-            detail: 'Analyzing file for matches...',
+            detail: file.type.startsWith('image/')
+                ? 'Reading handwritten text...'
+                : 'Analyzing file for matches...',
             life: 2000
         });
 
@@ -45,58 +49,130 @@ const BulkOrderButton = () => {
         formData.append('file', file);
 
         try {
-            // 2. Upload file to Backend to get matches
-            const response = await fetch(`${API_BASE}/items/bulk-order`, {
-                method: 'POST',
-                body: formData,
-            });
+            const response = await fetch(
+                file.type.startsWith('image/')
+                    ? `${API_BASE}/image/ocr`
+                    : `${API_BASE}/items/bulk-order`,
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            );
 
             if (!response.ok) throw new Error('Backend analysis failed');
 
             const data = await response.json();
 
-            // data structure expected:
-            // { availableItems: [{id, name, ...}], outOfStockNames: [], notFoundNames: [] }
+            if (file.type.startsWith('image/')) {
 
-            // 3. If items found, ADD them to the DB Cart
-            if (data.availableItems && data.availableItems.length > 0) {
+                const textBlob = new Blob([data.text || ''], { type: 'text/plain' });
+                const textFile = new File([textBlob], 'ocr.txt', { type: 'text/plain' });
 
-                toast.current.show({
-                    severity: 'info',
-                    summary: 'Syncing',
-                    detail: `Adding ${data.availableItems.length} items to cart...`,
-                    life: 2000
+                const textFormData = new FormData();
+                textFormData.append('file', textFile);
+
+                const bulkResponse = await fetch(`${API_BASE}/items/bulk-order`, {
+                    method: 'POST',
+                    body: textFormData
                 });
 
-                // Create a promise for each item to be added to the cart
-                const addToCartPromises = data.availableItems.map(item => {
-                    return fetch(`${API_BASE}/cart/${USER_ID}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            id: item.id, // This requires the Java fix mentioned above
-                            quantity: 1  // Default quantity
-                        })
+                if (!bulkResponse.ok) throw new Error('Backend analysis failed');
+
+                const bulkData = await bulkResponse.json();
+
+                // data structure expected:
+                // { availableItems: [{id, name, ...}], outOfStockNames: [], notFoundNames: [] }
+
+                // 3. If items found, ADD them to the DB Cart
+                if (bulkData.availableItems && bulkData.availableItems.length > 0) {
+
+                    toast.current.show({
+                        severity: 'info',
+                        summary: 'Syncing',
+                        detail: `Adding ${bulkData.availableItems.length} items to cart...`,
+                        life: 2000
                     });
-                });
 
-                // Wait for all items to be added to the database
-                await Promise.all(addToCartPromises);
-            }
+                    // Create a promise for each item to be added to the cart
+                    const addToCartPromises = bulkData.availableItems.map(item => {
+                        return fetch(`${API_BASE}/cart/${USER_ID}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                id: item.id, // This requires the Java fix mentioned above
+                                quantity: 1  // Default quantity
+                            })
+                        });
+                    });
 
-            // 4. Navigate to Cart Page
-            // We pass the results in state so CartPage can show a summary Toast
-            if (data.availableItems.length > 0 || data.outOfStockNames.length > 0 || data.notFoundNames.length > 0) {
-                navigate('/cart', {
-                    state: {
-                        importSuccess: true,
-                        addedCount: data.availableItems.length,
-                        outOfStock: data.outOfStockNames,
-                        notFound: data.notFoundNames
-                    }
-                });
+                    // Wait for all items to be added to the database
+                    await Promise.all(addToCartPromises);
+                }
+
+                // 4. Navigate to Cart Page
+                // We pass the results in state so CartPage can show a summary Toast
+                if (
+                    bulkData.availableItems.length > 0 ||
+                    bulkData.outOfStockNames.length > 0 ||
+                    bulkData.notFoundNames.length > 0
+                ) {
+                    navigate('/cart', {
+                        state: {
+                            importSuccess: true,
+                            addedCount: bulkData.availableItems.length,
+                            outOfStock: bulkData.outOfStockNames,
+                            notFound: bulkData.notFoundNames
+                        }
+                    });
+                } else {
+                    toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found.', life: 3000 });
+                }
+
             } else {
-                toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found.', life: 3000 });
+
+                // data structure expected:
+                // { availableItems: [{id, name, ...}], outOfStockNames: [], notFoundNames: [] }
+
+                // 3. If items found, ADD them to the DB Cart
+                if (data.availableItems && data.availableItems.length > 0) {
+
+                    toast.current.show({
+                        severity: 'info',
+                        summary: 'Syncing',
+                        detail: `Adding ${data.availableItems.length} items to cart...`,
+                        life: 2000
+                    });
+
+                    // Create a promise for each item to be added to the cart
+                    const addToCartPromises = data.availableItems.map(item => {
+                        return fetch(`${API_BASE}/cart/${USER_ID}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                id: item.id, // This requires the Java fix mentioned above
+                                quantity: 1  // Default quantity
+                            })
+                        });
+                    });
+
+                    // Wait for all items to be added to the database
+                    await Promise.all(addToCartPromises);
+                }
+
+                // 4. Navigate to Cart Page
+                // We pass the results in state so CartPage can show a summary Toast
+                if (data.availableItems.length > 0 || data.outOfStockNames.length > 0 || data.notFoundNames.length > 0) {
+                    navigate('/cart', {
+                        state: {
+                            importSuccess: true,
+                            addedCount: data.availableItems.length,
+                            outOfStock: data.outOfStockNames,
+                            notFound: data.notFoundNames
+                        }
+                    });
+                } else {
+                    toast.current.show({ severity: 'warn', summary: 'Empty', detail: 'No valid items found.', life: 3000 });
+                }
             }
 
         } catch (error) {
@@ -120,7 +196,7 @@ const BulkOrderButton = () => {
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
-                accept=".txt"
+                accept=".txt,image/*"
                 className="hidden-file-input"
                 aria-label="Upload Bulk Order Text File"
             />
