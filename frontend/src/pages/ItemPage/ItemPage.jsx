@@ -179,8 +179,10 @@ export default function ItemPage() {
                                 className="qty-btn"
                                 onClick={dec}
                                 text
+                                aria-label="Decrease quantity"
                             />
                             <InputText
+                                id="qty"
                                 value={qty}
                                 readOnly
                                 className="qty-input"
@@ -190,6 +192,7 @@ export default function ItemPage() {
                                 className="qty-btn"
                                 onClick={inc}
                                 text
+                                aria-label="Increase quantity"
                             />
                         </div>
                     </div>

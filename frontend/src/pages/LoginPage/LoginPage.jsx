@@ -3,7 +3,6 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
-import { Divider } from "primereact/divider";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -12,13 +11,13 @@ import "./LoginPage.css";
 export default function LoginPage() {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   // State for Login
   const [loginData, setLoginData] = useState({ email: "", password: "" });
 
   // State for Register - user only
   const [registerData, setRegisterData] = useState({
-    userType: "Client", 
+    userType: "Client",
     firstName: "",
     secondName: "",
     lastName: "",
@@ -37,18 +36,18 @@ export default function LoginPage() {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     console.log("Registering...", registerData);
-  
+
     setActiveIndex(0);
-    
+
     setRegisterData({
-        userType: "Client", 
+        userType: "Client",
         firstName: "",
         secondName: "",
         lastName: "",
         email: "",
         password: "",
     });
-    
+
   };
 
   return (
@@ -57,7 +56,7 @@ export default function LoginPage() {
         <h2 className="auth-title">{t("auth.title")}</h2>
 
         <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="auth-tabs">
-          
+
           {/* === LOG IN TAB === */}
           <TabPanel header={t("auth.loginTab")}>
             <form onSubmit={handleLoginSubmit} className="auth-form">
@@ -76,7 +75,7 @@ export default function LoginPage() {
               <div className="form-group">
                 <label htmlFor="loginPassword" className="input-label">{t("auth.password")}</label>
                 <Password
-                  id="loginPassword"
+                  inputId="loginPassword"
                   value={loginData.password}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                   feedback={false}
@@ -99,7 +98,7 @@ export default function LoginPage() {
               <span className="secondary-text">{t("auth.noAccount")}</span>
               <Button
                 label={t("auth.createAccount")}
-                className="p-button-link custom-link-btn" 
+                className="p-button-link custom-link-btn"
                 onClick={() => setActiveIndex(1)}
               />
             </div>
@@ -107,13 +106,13 @@ export default function LoginPage() {
 
           {/* === REGISTER TAB === */}
           <TabPanel header={t("auth.registerTab")}>
-            
+
             <form onSubmit={handleRegisterSubmit} className="auth-form">
                 {/* First Name & Middle Name Row */}
                 <div className="flex-row">
                   <div className="form-group flex-1">
-                    <label className="input-label">{t("auth.firstName")}</label>
-                    <InputText
+                    <label htmlFor="regFirstName" className="input-label">{t("auth.firstName")}</label>
+                    <InputText id="regFirstName"
                       value={registerData.firstName}
                       onChange={(e) => setRegisterData({ ...registerData, firstName: e.target.value })}
                       className="w-full p-inputtext-lg"
@@ -121,8 +120,9 @@ export default function LoginPage() {
                     />
                   </div>
                   <div className="form-group flex-1">
-                    <label className="input-label">{t("auth.middleName")}</label>
+                    <label htmlFor="regSecondName" className="input-label">{t("auth.middleName")}</label>
                     <InputText
+                        id="regSecondName"
                       value={registerData.secondName}
                       onChange={(e) => setRegisterData({ ...registerData, secondName: e.target.value })}
                       className="w-full p-inputtext-lg"
@@ -132,8 +132,9 @@ export default function LoginPage() {
 
                 {/* Last Name */}
                 <div className="form-group">
-                  <label className="input-label">{t("auth.lastName")}</label>
+                  <label htmlFor="regLastName" className="input-label">{t("auth.lastName")}</label>
                   <InputText
+                      id="regLastName"
                     value={registerData.lastName}
                     onChange={(e) => setRegisterData({ ...registerData, lastName: e.target.value })}
                     className="w-full p-inputtext-lg"
@@ -141,12 +142,11 @@ export default function LoginPage() {
                   />
                 </div>
 
-                {/* <Divider /> */}
-
                 {/* Email */}
                 <div className="form-group">
-                  <label className="input-label">{t("auth.email")}</label>
+                  <label htmlFor="regEmail" className="input-label">{t("auth.email")}</label>
                   <InputText
+                      id="regEmail"
                     value={registerData.email}
                     onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                     className="w-full p-inputtext-lg"
@@ -156,8 +156,9 @@ export default function LoginPage() {
 
                 {/* Password */}
                 <div className="form-group">
-                  <label className="input-label">{t("auth.password")}</label>
+                  <label htmlFor="regPassword" className="input-label">{t("auth.password")}</label>
                   <Password
+                      inputId="regPassword"
                     value={registerData.password}
                     onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                     toggleMask
@@ -178,5 +179,5 @@ export default function LoginPage() {
         </TabView>
       </div>
     </div>
-  );  
+  );
 }

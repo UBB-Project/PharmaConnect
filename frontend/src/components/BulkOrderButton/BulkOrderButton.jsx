@@ -122,6 +122,7 @@ const BulkOrderButton = () => {
                 onChange={handleFileChange}
                 accept=".txt"
                 className="hidden-file-input"
+                aria-label="Upload Bulk Order Text File"
             />
 
             <Button
@@ -130,6 +131,7 @@ const BulkOrderButton = () => {
                 onClick={handleButtonClick}
                 tooltip="Upload Order List (.txt)"
                 tooltipOptions={{ position: 'bottom' }}
+                aria-label="Upload bulk order file"
             />
         </>
     );
