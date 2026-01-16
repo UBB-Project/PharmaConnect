@@ -56,7 +56,12 @@
 .cart-page .price {
     font-size: 1rem;
     font-weight: 800;
-    color: #FF1D26;
+    color: #d32f2f;
+}
+
+.app-dark .cart-page .price,
+.dark-mode .cart-page .price {
+    color: #ff8a80;
 }
 
 .cart-page .qty-actions {

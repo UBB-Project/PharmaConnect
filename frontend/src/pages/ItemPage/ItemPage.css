@@ -8,7 +8,7 @@
 }
 
 .error {
-    color: #b00020;
+    color: #d32f2f;
 }
 
 .breadcrumb {
@@ -138,15 +138,16 @@
 .price-lg {
     font-size: 32px;
     font-weight: 800;
-    color: #FF1D26;
+    color: #d32f2f;
     margin-left: 2px;
 }
 
 .currency {
     font-size: 14px;
     margin-left: 4px;
-    color: #FF1D26;
+    color: #d32f2f;
 }
+
 
 .stock-row {
     display: flex;
@@ -156,17 +157,32 @@
     margin-top: 4px;
 }
 .in-stock {
-    color: var(--primary-600);
+    color: #15803d !important;
     font-weight: 500;
     margin-left: 5px;
 }
 .out-of-stock {
-    color: #dc2626; /* roșu elegant */
+    color: #d32f2f;
     font-weight: 600;
 }
 
+.app-dark .price-lg,
+.app-dark .currency,
+.app-dark .out-of-stock {
+    color: #ff6b6b !important;
+}
+
 .updated {
+    color: #374151 !important;
     opacity: .8;
+}
+
+.app-dark .in-stock {
+    color: #4ade80 !important;
+}
+
+.app-dark .updated {
+    color: #cbd5e1 !important;
 }
 
 .qty-row {
@@ -307,8 +323,13 @@
 }
 
 .tei-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    color: #29C0AE;
+    color: #167772 !important;
     border-bottom: 3px solid #29C0AE;
+}
+
+.app-dark .tei-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: #29C0AE !important;
+    border-bottom: 3px solid #29C0AE !important;
 }
 
 .tei-tabs .p-tabview-panels {
