@@ -52,6 +52,7 @@
     - **Cart Integration**: `addToCart` via POST to `/api/cart/{userId}` with redirect.
     - **Stock Alerts**: `handleNotifySubscribe` via `/api/stock-alerts/subscribe`.
     - **Reservation**: `ReserveButton` triggers POST to `/api/orders` and opens success `Dialog`.
+    - **Bulk Order & Fuzzy Matching**: `BulkOrderButton` sends `.txt` lists to `/api/items/bulk-order`, which uses **Levenshtein Fuzzy Matching** (dist ≤ 3) to identify items. Valid matches are then automatically added to the user's cart via sequential POST requests.
     - **UI elements**: Uses PrimeReact `TabView`, `Tag`, `Dialog`, `Button`, and `InputText`.
 - i18n: `react-i18next` with HTTP backend loading `public/locales/{en,ro}.json`.
  - Styling: PrimeReact Lara teal themes + custom CSS.

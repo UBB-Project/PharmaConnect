@@ -29,8 +29,13 @@
 - **Cart**: `pages/CartPage` and `CartPreview` for cart management; integrates with `/api/cart` endpoints.
  - **Map**: `pages/MapPage` plus `components/Map/PharmacyMap` and `MiniMapWidget` using Leaflet to show pharmacy markers from `/api/map/pharmacies`.
  - **Chatbot**: `components/ChatBot` routes to `/api/chat`.
- - **Bulk order**: `components/BulkOrderButton` uploads a CSV/XLS to `/api/items/bulk-order` and renders stock check results.
- - **Auth shell**: `pages/LoginPage` (UI-only placeholder; backend auth not enabled).
+- **Bulk order**: `components/BulkOrderButton` uploads a `.txt` list of item names.
+    - **Logic**:
+        - **Validation**: Only `.txt` files allowed.
+        - **Upload**: Sends `MultipartFile` to `/api/items/bulk-order`.
+        - **Syncing**: Based on the returned matches (available/out-of-stock/not-found), it sequentially adds available items to the cart using POST to `/api/cart/{userId}` (hardcoded `USER_ID` placeholder for dev).
+        - **Navigation**: Redirects to `/cart` with a summary state.
+- **Auth shell**: `pages/LoginPage` (UI-only placeholder; backend auth not enabled).
  - **NotFound**: fallback page for unknown routes.
  
  ## Internationalization

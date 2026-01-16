@@ -12,8 +12,9 @@
  - `resources`: Flyway migrations, `application.properties`.
  
  ## Design patterns and conventions
- - **Layered architecture**: Controller → Service → Repository.
- - **DTO + Mapper**: keeps transport models separate from persistence; mappers (`CartMapper`, `ItemMapper`, `PharmacyMapper`, `UserMapper`) translate entities to DTOs.
+- **Layered architecture**: Controller → Service → Repository.
+- **Fuzzy Matching**: `ItemService` uses `LevenshteinDistance` (Apache Commons Text) to match bulk-order item names with stored items (threshold distance ≤ 3).
+- **DTO + Mapper**: keeps transport models separate from persistence; mappers (`CartMapper`, `ItemMapper`, `PharmacyMapper`, `UserMapper`) translate entities to DTOs.
  - **Repository pattern**: Spring Data JPA repositories abstract queries and persistence.
  - **Configuration as code**: `CorsFilter` bean and `SecurityFilterChain` bean keep infra concerns isolated.
  - **Validation**: `@Valid` on request DTOs where applicable (pharmacy, location).
