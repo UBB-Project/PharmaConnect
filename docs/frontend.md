@@ -13,8 +13,20 @@
  ## Key UI modules
  - **Home**: hero copy, mini map widget (`MiniMapWidget`), chatbot CTA, items list CTA, carousel (`SimpleSlider`).
  - **Items**: `components/ItemsList` for catalog grid, `ProductCard` for item cards, navigation to detail page.
- - **Item detail**: `pages/ItemPage` with description, availability, reserve button, confirmation dialog (`ReservationConfirmationDialog`), `ReserveButton`.
- - **Cart**: `pages/CartPage` and `CartPreview` for cart management; integrates with `/api/cart` endpoints.
+- **Item detail**: `pages/ItemPage` with description, availability, reserve button, confirmation dialog (`ReservationConfirmationDialog`), `ReserveButton`.
+    - **Logic**: 
+        - `useEffect` (load): Fetches product data from `/api/items/{id}/{lang}`, manages loading/error states, and updates stock.
+        - `inc/dec`: Modifies selected quantity (minimum 1).
+        - `addToCart`: Sends POST to `/api/cart/{userId}` and redirects to cart.
+        - `handleNotifySubscribe`: Subscribes user to stock alerts via `/api/stock-alerts/subscribe` after email validation.
+    - **ReserveButton Logic**: 
+        - `reserve`: Sends POST to `/api/orders` to create a reservation, updates button state, and opens confirmation dialog.
+    - **UI Components**:
+        - `TabView / TabPanel`: Organizes info (Description, Specs, Info, Prospect).
+        - `Tag (RX / OTC)`: Indicates prescription requirement.
+        - `Dialog`: Modal for reservation confirmation.
+        - `Button / InputText`: Controls for quantity, reservation, and notifications.
+- **Cart**: `pages/CartPage` and `CartPreview` for cart management; integrates with `/api/cart` endpoints.
  - **Map**: `pages/MapPage` plus `components/Map/PharmacyMap` and `MiniMapWidget` using Leaflet to show pharmacy markers from `/api/map/pharmacies`.
  - **Chatbot**: `components/ChatBot` routes to `/api/chat`.
  - **Bulk order**: `components/BulkOrderButton` uploads a CSV/XLS to `/api/items/bulk-order` and renders stock check results.

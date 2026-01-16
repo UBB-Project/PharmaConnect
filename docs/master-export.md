@@ -45,8 +45,15 @@
  
  ## 6) Frontend overview
  - Routing: home, login (UI-only), chatbot, items list, item detail, map, cart, 404.
- - Components: Header/Footer, carousel, map widgets (Leaflet), items list/product cards, popup, theme switcher, bulk order button, reservation dialog.
- - i18n: `react-i18next` with HTTP backend loading `public/locales/{en,ro}.json`.
+- Components: Header/Footer, carousel, map widgets (Leaflet), items list/product cards, popup, theme switcher, bulk order button, reservation dialog.
+- **ItemPage & ReserveButton Detailed Logic**:
+    - **Data Loading**: `useEffect` fetches from `/api/items/{id}/{lang}` with loading/error handling.
+    - **Quantity Control**: `inc/dec` logic with minimum bound of 1.
+    - **Cart Integration**: `addToCart` via POST to `/api/cart/{userId}` with redirect.
+    - **Stock Alerts**: `handleNotifySubscribe` via `/api/stock-alerts/subscribe`.
+    - **Reservation**: `ReserveButton` triggers POST to `/api/orders` and opens success `Dialog`.
+    - **UI elements**: Uses PrimeReact `TabView`, `Tag`, `Dialog`, `Button`, and `InputText`.
+- i18n: `react-i18next` with HTTP backend loading `public/locales/{en,ro}.json`.
  - Styling: PrimeReact Lara teal themes + custom CSS.
  - API usage: axios calls to backend endpoints; Leaflet tiles for maps.
  
