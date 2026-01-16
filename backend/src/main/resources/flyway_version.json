@@ -1,4 +1,70 @@
 {
-  "flywayVersion": 15,
-  "items": []
+  "flywayVersion": 17,
+  "items": [
+    {
+      "product_id": "nurofen",
+      "provider_name": "Dr-Max",
+      "uuid": "fe032b75-9064-4677-8e55-37c6394b204c"
+    },
+    {
+      "product_id": "nurofen",
+      "provider_name": "Tei",
+      "uuid": "c88b5095-fb1f-4a97-a4d1-1fbb4597b3fa"
+    },
+    {
+      "product_id": "nurofen",
+      "provider_name": "Ducfarm",
+      "uuid": "8334a8a8-749f-4e2d-bbf9-75f3a07db952"
+    },
+    {
+      "product_id": "paracetamol",
+      "provider_name": "Dr-Max",
+      "uuid": "fda76138-60f4-4544-b2e7-71788a312b77"
+    },
+    {
+      "product_id": "paracetamol",
+      "provider_name": "Tei",
+      "uuid": "bd154714-9758-4e08-bc15-0b44da2ad617"
+    },
+    {
+      "product_id": "strepsils",
+      "provider_name": "Dr-Max",
+      "uuid": "93f9d1d2-3c67-4083-8c01-b332617582a5"
+    },
+    {
+      "product_id": "strepsils",
+      "provider_name": "Tei",
+      "uuid": "bceea1c7-3c83-4a37-8370-66f886540255"
+    },
+    {
+      "product_id": "strepsils",
+      "provider_name": "Ducfarm",
+      "uuid": "5df9a655-5313-46f1-a869-b70595813b0f"
+    },
+    {
+      "product_id": "coldrex",
+      "provider_name": "Dr-Max",
+      "uuid": "4326d34e-ff9d-4e8f-b715-652a1e32e79a"
+    },
+    {
+      "product_id": "coldrex",
+      "provider_name": "Tei",
+      "uuid": "6a125ae4-564f-49c6-8317-21c6520ffc02"
+    },
+    {
+      "product_id": "aspacardin",
+      "provider_name": "Dr-Max",
+      "uuid": "a3559fdb-41c9-4684-80d2-85bc3834078b"
+    },
+    {
+      "product_id": "aspacardin",
+      "provider_name": "Tei",
+      "uuid": "aec7e00a-3c49-4763-a452-f1443b14da18"
+    },
+    {
+      "product_id": "aspacardin",
+      "provider_name": "Ducfarm",
+      "uuid": "c7a1103c-300a-43b3-9d60-be155cdde12c"
+    }
+  ]
 }

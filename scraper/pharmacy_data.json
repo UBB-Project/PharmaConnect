@@ -6,7 +6,7 @@
         "name": "Nurofen Express 200 mg, 20 capsule, Reckitt Benckiser",
         "description": "Nurofen Express capsule moi calmeaza rapid durerea de cap, migrenele, durerile musculare sau reumatismale. Calmarea durerii depinde insa si de cat de usor se descompune si absoarbe medicamentul in corp. Nurofen Express 200 mg capsule moi se absoarbe rapid de catre organism, tintind chiar locul dureros. Datorita compozitiei sale Nurofen Express calmeaza rapid si isi face prompt si eficient efectul chiar la sursa durerii. Astfel recastigi starea de bine si te poti bucura de fiecare moment.\n\nNurofen Express 200 mg capsule moi este absorbit rapid de organism, stratul exterior de gel incepe sa se dezintegreze foarte repede in stomac, permitand ibuprofenlui lichid sa se disperseze in intestinul subtire, actionand rapid impotriva febrei si durerii. Nurofen Express contine 200 mg ibuprofen si se utilizeaza pentru a trata durerile de cap, durerile de spate, simptomele de gripa si raceala, starile febrile, durerile menstruale si dentare, nevralgiile, migrenele, durerile musculare si reumatice.",
         "category": "Medicamente fara reteta",
-        "price": 27.99,
+        "price": 30.49,
         "brand": "NUROFEN",
         "image_url": "https://www.drmax.ro/_i/-1315687461.webp?m2=%2Fmedia%2Fcatalog%2Fproduct%2F7%2F6%2F763c8c9c45c26_rb_nurofen_carton_200mg_rbl2004920_3157624_oop.jpg&fit=contain&w=350&h=350&format=webp",
         "prescription_required": false,
@@ -21,7 +21,7 @@
         "name": "Nurofen Express, 200 mg, 20 capsule moi, Reckitt Benckiser",
         "description": "Indicatii:Nurofen Express este utilizat pentru:- ameliorarea durerilor uşoare până la moderate, cum sunt dureri de cap, durerile de dinți şi- reducerea febrei şi durerii asociate cu răceala comună.\n\nContraindicatii:Nu luaţi Nurofen Express- dacă sunteţi alergic (hipersensibil) la ibuprofen, Ponceau 4R (E124) sau la oricare dintre celelalte componente ale Nurofen Express.",
         "category": "Analgezice",
-        "price": 28.0,
+        "price": 30.5,
         "brand": "Nurofen",
         "image_url": "https://media.farmaciatei.ro/gallery/15802/medium/nurofen-express-200mg-20-capsule-reckitt-benckiser-healthcare-9410.jpg",
         "prescription_required": true,
@@ -66,12 +66,12 @@
         "name": "Paracetamol, 500 mg, 20 comprimate, Zentiva",
         "description": "Indicatii:- Paracetamol Zentiva face parte din grupa medicamentelor analgezice-antipiretice (ameliorează durerea şi reduce temperatura corpului în caz de febră);- Paracetamol Zentiva este indicat în tratamentul simptomatic al durerilor de intensitate uşoară până la moderată, cu diferite localizări (dureri de cap, dureri în gât, dureri de dinţi, dureri asociate răcelii şi gripei, dureri ale muşchilor sau articulaţiilor sau în caz de menstruaţie dureroasă) şi tratamentul simptomatic al febrei.\n\nContraindicații:Nu luaţi Paracetamol Zentiva:- dacă sunteţi alergic la paracetamol sau la oricare dintre celelalte componente ale acestui medicament;",
         "category": "Ameliorare simptome raceala si gripa",
-        "price": 2.0,
+        "price": 1.5,
         "brand": "Zentiva",
         "image_url": "https://media.farmaciatei.ro/gallery/15454/paracetamol-500-mg-20-comprimate-zentiva-3642.jpg",
         "prescription_required": false,
         "side_effects": null,
-        "expiration_date": "31-03-2027",
+        "expiration_date": "30-09-2026",
         "manufacturing_date": null
     },
     {
@@ -146,7 +146,7 @@
         "image_url": "https://media.farmaciatei.ro/images/products-photos/medium/coldrex-maxgrip-lemon-10-plicuri-perrigo-4619.jpg",
         "prescription_required": false,
         "side_effects": null,
-        "expiration_date": "30-04-2027",
+        "expiration_date": "01-05-2027",
         "manufacturing_date": null
     },
     {

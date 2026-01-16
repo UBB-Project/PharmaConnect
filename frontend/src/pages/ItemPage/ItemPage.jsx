@@ -8,6 +8,7 @@ import { InputText } from 'primereact/inputtext';
 
 import "./ItemPage.css";
 import ReserveButton from "./ReserveButton";
+import AlternativesDropdown from "./AlternativesDropdown";
 
 const API_BASE = "http://localhost:8080/api";
 
@@ -147,6 +148,11 @@ export default function ItemPage() {
                         </div>
                         <div>
                             <b>{t("item.soldBy")}:</b> {t("item.soldByName")}
+                        </div>
+
+                        <div>
+                            <b>Alternative: </b>
+                            <AlternativesDropdown selectedItemId={id} selectedName={item.name}/>
                         </div>
                     </div>
 

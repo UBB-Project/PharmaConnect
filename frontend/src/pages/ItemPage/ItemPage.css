@@ -553,3 +553,37 @@
         align-items: center;
     }
 }
+.alternatives-dropdown {
+    width: 350px;
+}
+
+.alternatives-dropdown-panel {
+    max-width: 350px;
+}
+
+.alternative-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.alternative-name {
+    white-space: normal;       
+    word-break: break-word;  
+    flex: 1;
+}
+
+.alternative-price {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.alternatives-dropdown-panel .p-dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.alternatives-dropdown-panel .p-dropdown-item.p-highlight {
+    background-color: rgba(0, 0, 0, 0.08);
+}
