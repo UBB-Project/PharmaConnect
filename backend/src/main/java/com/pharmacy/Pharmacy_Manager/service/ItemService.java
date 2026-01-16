@@ -201,4 +201,12 @@ public class ItemService {
                 .sideEffects(entity.getSideEffects())
                 .build();
     }
+
+    public List<ItemEntity> getSimilarById(UUID id) {
+        ItemEntity item = itemRepository.getReferenceById(id);
+        String cleaned = item.getName().replaceAll("[^a-zA-Z]", " ");
+        String[] parts = cleaned.trim().split("\\s+");
+        String prefix =  parts.length > 0 ? parts[0] : "";
+        return itemRepository.findByNameStartingWithOrderByPriceAsc(prefix);
+    }
 }

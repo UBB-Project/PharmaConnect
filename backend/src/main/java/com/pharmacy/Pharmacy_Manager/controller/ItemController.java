@@ -101,4 +101,17 @@ public class ItemController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @GetMapping("/similar/{id}")
+    public ResponseEntity<List<ItemRequestDto>> getSimilarItems(@PathVariable UUID id) {
+        try {
+            List<ItemRequestDto> items = itemService.getSimilarById(id).stream()
+                    .map(ItemRequestDto::from)
+                    .toList();
+            return ResponseEntity.ok(items);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 }
