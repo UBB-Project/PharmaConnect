@@ -57,7 +57,7 @@ export default function ReservationConfirmationDialog(props) {
     
     const footer = (
         <div style = {{display: "flex", flexDirection: "row", gap: "1.5rem", alignItems: "right", padding: "1.5rem"}}>
-            <Button label="Download QR Code" icon="pi pi-download" onClick={downloadQR} style={{backgroundColor: '#115e59', display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1.25rem" }}/>
+            <Button label="Download QR Code" icon="pi pi-download" onClick={downloadQR} style={{backgroundColor: '#115e59', color: '#ffffff', display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1.25rem" }}/>
         </div>
     )
     const header = (<div style= {{padding: "1.5rem"}}>Reservation placed</div>)
@@ -74,7 +74,7 @@ export default function ReservationConfirmationDialog(props) {
                         <p style={{ marginBottom: "0.25rem" }}>Reserved At Pharmacy: PharmaConnect</p>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem",  borderRadius: "12px" }}>
-                        <img id="qrCodeCanvas" src={qrCodeUrl} style={{ borderRadius: "12px"}}/>
+                        <img id="qrCodeCanvas" alt="Reservation QR Code" src={qrCodeUrl} style={{ borderRadius: "12px"}}/>
                     </div>
                 </div>
             </Card>

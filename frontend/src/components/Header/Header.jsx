@@ -123,11 +123,11 @@ export default function Header() {
                                       position: 'absolute',
                                       top: '0',
                                       right: '0',
-                                      background: 'red',
+                                      background: '#d32f2f',
                                       color: 'white',
                                       borderRadius: '50%',
                                       padding: '0.2rem 0.4rem',
-                                      fontSize: '0.7rem'
+                                      fontSize: '0.7rem',
                                   }}>
                                 {cartItems.length}
                             </span>
@@ -147,7 +147,7 @@ export default function Header() {
                     <Button
                         label="Log out"
                         icon="pi pi-sign-out"
-                        className="p-button-outlined"
+                        className="p-button-outlined logout-btn"
                         onClick={handleLogoutClick}
                         aria-label="Log out"
                     />

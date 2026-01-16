@@ -87,6 +87,7 @@ export default function ItemsList() {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-input"
+                    aria-label={t("itemsList.searchPlaceholder")}
                 />
 
                 <select

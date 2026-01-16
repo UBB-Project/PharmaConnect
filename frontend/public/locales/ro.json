@@ -131,8 +131,30 @@
     "quantity": "Cantitate",
     "remove": "Șterge",
     "orderSuccess": "Comanda a fost plasată cu succes!"
+  },
+  "modal": {
+    "title": "Declinare a responsabilității medicale",
+    "intro": "Acest chatbot este destinat să ofere doar <1>informații medicale generale</1> și recomandări legate de sănătate.",
+    "list": {
+      "diagnosis": "Informațiile furnizate <1>nu reprezintă un diagnostic medical</1> și nu trebuie tratate ca sfaturi medicale profesionale.",
+      "replace_pro": "Acest chatbot <1>nu poate înlocui un cadru medical licențiat</1>, examinarea fizică sau testele de diagnosticare.",
+      "consult": "Consultați întotdeauna un <1>medic calificat sau un furnizor de servicii medicale</1> înainte de a lua decizii medicale.",
+      "support_tool": "Utilizați acest chatbot doar ca un <1>instrument informativ de sprijin</1>, nu ca o sursă de îndrumare medicală definitivă."
+    },
+    "emergency": "Dacă aveți o urgență medicală, solicitați imediat asistență medicală.",
+    "btn_cancel": "Anulează",
+    "btn_understand": "Am înțeles"
+  },
+  "chat": {
+    "header_title": "Chatbot de Recomandări Medicale",
+    "alert_banner": "Doar informații medicale. Nu este un diagnostic sau sfat medical profesional.",
+    "input_placeholder": "Descrieți simptomele...",
+    "btn_send": "Trimite",
+    "messages": {
+      "initial_disclaimer": "⚠️ Declinare a responsabilității medicale: Acest chatbot oferă doar informații medicale generale și recomandări. Nu oferă diagnostice și nu înlocuiește sfatul medical profesional. Consultați întotdeauna un furnizor de asistență medicală calificat.",
+      "error_fetch": "⚠️ Nu se poate obține un răspuns în acest moment."
+    }
   }
-
 }
 
 
