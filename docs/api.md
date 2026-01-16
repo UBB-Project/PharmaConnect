@@ -38,10 +38,16 @@
  ## Users (`/users`)
  - `POST /users` — create user with `UserRequestDto { firstName, secondName, lastName }`; returns user UUID.
  
- ## Chatbot (`/chat`)
- - `POST /chat` — body `PromptRequest { prompt: string }`; returns chatbot response string.
- 
- ## Common behaviors
+## Chatbot (`/chat`)
+- `POST /chat` — body `PromptRequest { prompt: string }`; returns chatbot response string.
+
+## Image OCR (`/image`)
+- `POST /api/image/ocr` — multipart file upload; returns JSON `{ "text": "extracted text" }` using OpenAI GPT-4 Vision.
+
+## Stock Alerts (`/stock-alerts`)
+- `POST /api/stock-alerts/subscribe` — body `{ "email": string, "itemId": uuid }`; registers user interest in an item.
+
+## Common behaviors
  - **CORS**: allowed origins `http://localhost:5173`/`5174`.
  - **Auth**: none enabled; all `/api/**` are permitted (dev).
  - **Validation**: DTOs with `@Valid` where present; errors currently surfaced as generic exceptions.

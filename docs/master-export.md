@@ -28,8 +28,10 @@
  - Patterns: layered architecture, Repository, DTO/Mapper, configuration-as-code for CORS/security.
  
  ## 4) API surface (dev base: `/api`)
- - Items: create; list/search; get by id + language; get all by language; bulk-order upload → stock check.
- - Cart: get/add/update/delete items per user.
+- Items: create; list/search; get by id + language; get all by language; bulk-order upload → stock check.
+- **Image OCR**: `POST /api/image/ocr` (multipart file) extracts text using GPT-4 Vision.
+- **Stock Alerts**: `POST /api/stock-alerts/subscribe` registers user email for out-of-stock items.
+- Cart: get/add/update/delete items per user.
  - Orders: create order; get order; get QR PNG.
  - Pharmacies: list/create/get by id or name/update/delete.
  - Locations: create/delete locations linked to pharmacies.
@@ -38,8 +40,8 @@
  - Chatbot: send prompt, receive reply.
  
  ## 5) Data model
- - Tables: users, items (+ sold_count, stock_quantity), items_translation (per language), pharmacies, locations, orders.
- - Relationships: orders ↔ users/items; locations ↔ pharmacies; translations ↔ items.
+- Tables: users, items (+ sold_count, stock_quantity), items_translation (per language), pharmacies, locations, orders, **stock_alerts**.
+- Relationships: orders ↔ users/items; locations ↔ pharmacies; translations ↔ items; alerts ↔ items.
  - Migrations: Flyway SQL files under `backend/src/main/resources/db/migration`; seeds for users/items/pharmacies/locations/translations/order enums.
  - Docker Compose: PostgreSQL 17 (`user/password/pharmaconnect`, port 5432).
  
@@ -52,8 +54,9 @@
     - **Cart Integration**: `addToCart` via POST to `/api/cart/{userId}` with redirect.
     - **Stock Alerts**: `handleNotifySubscribe` via `/api/stock-alerts/subscribe`.
     - **Reservation**: `ReserveButton` triggers POST to `/api/orders` and opens success `Dialog`.
-    - **Bulk Order & Fuzzy Matching**: `BulkOrderButton` sends `.txt` lists to `/api/items/bulk-order`, which uses **Levenshtein Fuzzy Matching** (dist ≤ 3) to identify items. Valid matches are then automatically added to the user's cart via sequential POST requests.
-    - **UI elements**: Uses PrimeReact `TabView`, `Tag`, `Dialog`, `Button`, and `InputText`.
+- **Bulk Order & Fuzzy Matching**: `BulkOrderButton` sends `.txt` lists to `/api/items/bulk-order`, which uses **Levenshtein Fuzzy Matching** (dist ≤ 3) to identify items. Valid matches are then automatically added to the user's cart via sequential POST requests.
+- **Modular ChatBot**: Modularized component with separate `CBPopup`.
+- **UI elements**: Uses PrimeReact `TabView`, `Tag`, `Dialog`, `Button`, and `InputText`.
 - i18n: `react-i18next` with HTTP backend loading `public/locales/{en,ro}.json`.
  - Styling: PrimeReact Lara teal themes + custom CSS.
  - API usage: axios calls to backend endpoints; Leaflet tiles for maps.

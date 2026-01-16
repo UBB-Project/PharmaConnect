@@ -9,9 +9,10 @@
  - `items_translation` — `id_translation (uuid PK)`, `id (FK items)`, `description`, `category`, `side_effects`, `language` (`V11__create_itemEntityTranslation_table.sql`).
  - `pharmacies` — `id (uuid PK)`, `name` unique (`V5__create_pharmacies.sql`).
  - `locations` — `id (uuid PK)`, `address`, `pharmacy_id (FK pharmacies)`, `open_hours`, `latitude`, `longitude` (`V8__create_locations_table.sql`).
- - `orders` — `id (uuid PK)`, `type`, `placed_at`, `quantity`, `item_id (FK items)`, `user_id (FK users)` (`V7__Create_Orders.sql`).
- 
- ## Seed data migrations
+- `orders` — `id (uuid PK)`, `type`, `placed_at`, `quantity`, `item_id (FK items)`, `user_id (FK users)` (`V7__Create_Orders.sql`).
+- `stock_alerts` — `id (uuid PK)`, `email`, `item_id (FK items)` (`V15__Stock_alerts.sql`).
+
+## Seed data migrations
  - Users, items, pharmacies, locations, translations, enums/status/type are pre-seeded via `V3__mockdata_users.sql`, `V4__mockdata_items.sql`, `V6__mockdata_pharmacies.sql`, `V9__mockdata_locations.sql`, `V12__mockdata_itemEntityTranslation.sql`, `V13__Status_Type_Order.sql`, `V14__TestUser.sql`.
  
  ## Relationships

@@ -26,15 +26,19 @@
  - **ItemService**: CRUD/search/filter/sort items; handles translations (`ItemEntityTranslation`) by language; processes bulk-order uploads into stock checks (`StockCheckResponseDto`).
  - **CartService**: manages per-user cart entries (add/update/remove/list) using `UserService` lookups.
  - **OrderService**: creates orders from `OrderDTO`, retrieves orders, and generates QR codes (ZXing) for pickup/verification.
- - **MapService**: aggregates pharmacy locations into `MapLocationDTO` with coordinates.
- - **PharmacyService**: CRUD and search by name for pharmacies; links to locations.
+- **MapService**: aggregates pharmacy locations into `MapLocationDTO` with coordinates.
+- **ImageOCRService**: extracts text from images using GPT-4 Vision APIs (OpenAI); handles multipart file uploads and base64 conversion.
+- **StockNotificationService**: manages user interest in out-of-stock items; persists subscriptions in `stock_alerts` table.
+- **PharmacyService**: CRUD and search by name for pharmacies; links to locations.
  - **LocationService**: CRUD for locations bound to pharmacies.
  - **UserService**: simple user creation and lookup.
  - **ChatBotService**: wraps outbound call to LLM/chat provider via `PromptRequest`/`ChatGptResponse` (implementation stub to extend with actual API keys and error handling).
  
  ## Notable controllers (REST endpoints)
- - `ItemController` (`/api/items`): create item, list/search, fetch by id + language, fetch all by language, bulk-order file upload → stock check response.
- - `CartController` (`/api/cart/{userId}`): get cart, add item, update quantity, delete item.
+- `ItemController` (`/api/items`): create item, list/search, fetch by id + language, fetch all by language, bulk-order file upload → stock check response.
+- `ImageOCRController` (`/api/image/ocr`): extracts text from uploaded images (e.g. prescriptions or product lists).
+- `StockAlertController` (`/api/stock-alerts/subscribe`): user subscription for stock notifications.
+- `CartController` (`/api/cart/{userId}`): get cart, add item, update quantity, delete item.
  - `OrderController` (`/api/orders`): get order by id, place order, get QR PNG by order id.
  - `PharmacyController` (`/api/pharmacies`): list, create, get by name/id, update, delete.
  - `LocationController` (`/api/locations`): create location, delete location.

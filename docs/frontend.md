@@ -45,9 +45,10 @@
  ## Data fetching & API usage
  - Uses `axios` for REST calls (see components/pages for specific requests).
  - Base API expected at `http://localhost:8080/api`; CORS configured on backend.
- - Map uses Leaflet tile server (OSM) via `react-leaflet`.
- 
- ## UI libraries
+- Map uses Leaflet tile server (OSM) via `react-leaflet`.
+- **ChatBot Modularization**: The `ChatBot` component is now under `components/ChatBot/` with a separate `Popup` sub-component (`CBPopup`).
+
+## UI libraries
  - **PrimeReact** components and utilities; `primeflex` grid/util classes; `primeicons` for icons.
  - **react-slick** + `slick-carousel` styles for carousel.
  - **Leaflet/react-leaflet** for interactive maps.
