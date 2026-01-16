@@ -48,7 +48,7 @@ const Popup = ({ isOpen, onClose, title, icon, children }) => {
                     {icon && <i className={icon}></i>}
                     {title}
                 </span>
-                <button className="popup-close-btn" onClick={onClose}>
+                <button className="popup-close-btn" onClick={onClose} aria-label="Close popup">
                     &times;
                 </button>
             </div>

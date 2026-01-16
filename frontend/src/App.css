@@ -52,7 +52,6 @@ html, body, #root {
 
 .home-tagline {
     font-size: 1.2rem;
-    color: var(--text-secondary-color, #666);
     margin-bottom: 3rem;
     text-align: center;
     max-width: 800px;
@@ -80,10 +79,15 @@ html, body, #root {
 
 .mini-map-title {
     margin-bottom: 1rem;
-    color: var(--primary-color, #0f766e);
+    color: #115e59 !important; /* Forces Dark Teal in Light Mode */
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* 2. Dark Mode Override -> Revert to Original */
+.app-dark .mini-map-title {
+    color: var(--primary-color, #0f766e) !important; /* Back to bright teal in dark mode */
 }
 
 .chatbot-section {

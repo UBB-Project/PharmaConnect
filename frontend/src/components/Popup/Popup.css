@@ -44,7 +44,7 @@
 
 .yes-btn {
     background-color: var(--primary-color);
-    color: var(--primary-color-text);
+    color: white;
 }
 
 .yes-btn:hover {

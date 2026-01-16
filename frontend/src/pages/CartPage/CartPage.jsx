@@ -161,6 +161,7 @@ export default function CartPage() {
                                         className="p-button-danger"
                                         onClick={() => handleRemoveItem(item.id)}
                                         tooltip={t("cart.remove")}
+                                        aria-label={t("cart.remove")}
                                     />
                                 </div>
                             </div>

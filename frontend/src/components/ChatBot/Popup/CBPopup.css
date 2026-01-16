@@ -51,7 +51,8 @@
 
 .popup-body {
     flex: 1;
-    overflow: hidden; /* Ensures content doesn't spill out */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
+

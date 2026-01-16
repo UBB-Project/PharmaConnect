@@ -72,6 +72,7 @@ const ChatBot = () => {
                   type="button"
                   className="btn-close"
                   onClick={closeDisclaimer}
+                  aria-label="Close"
                 />
               </div>
 
@@ -151,13 +152,15 @@ const ChatBot = () => {
       )}
 
       <div className="card shadow-lg">
-        <div className="card-header bg-primary text-white text-center">
-          <h4>{t("chat.header_title")}</h4>
+        <div className="card-header bg-white text-center border-bottom-0">
+          <h4 style={{color: '#115e59', fontWeight: '700'}}>
+            {t("chat.header_title")}
+          </h4>
         </div>
 
         {!showDisclaimer && (
-          <div className="alert alert-danger d-flex align-items-center gap-2 m-2 py-2 small rounded-3">
-            <i className="bi bi-heart-pulse-fill fs-5"></i>
+            <div className="alert alert-danger d-flex align-items-center gap-2 m-2 py-2 small rounded-3">
+              <i className="bi bi-heart-pulse-fill fs-5"></i>
             <span>
               {t("chat.alert_banner")}
             </span>
@@ -216,6 +219,7 @@ const ChatBot = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              aria-label={t("chat.input_placeholder")}
             />
             <button className="btn btn-gradient-send" onClick={sendMessage}>
                 {t("chat.btn_send")}
