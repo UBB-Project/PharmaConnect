@@ -39,12 +39,13 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: var(--primary-color, #0f766e);
+    color: #115e59 !important;
     pointer-events: none;
 }
 
 .mini-map-badge i {
     font-size: 1rem;
+    color: inherit;
 }
 
 .mini-map-wrapper .leaflet-container {

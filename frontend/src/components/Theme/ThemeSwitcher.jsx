@@ -38,7 +38,11 @@ const ThemeSwitcher = () => {
                 className={`pi ${isDarkMode ? "pi-moon" : "pi-sun"}`}
                 style={{ fontSize: "1.2rem", color: "white" }}
             ></i>
-            <InputSwitch checked={isDarkMode} onChange={handleToggle} />
+            <InputSwitch
+                checked={isDarkMode}
+                onChange={handleToggle}
+                aria-label="Toggle Dark Mode"
+            />
         </div>
     );
 };

@@ -124,13 +124,13 @@
   font-weight: bold;
   border-radius: 8px !important;
   border: none !important;
-  background-color: #0ea5e9 !important; 
+  background-color: #22786c !important;
   color: #ffffff !important;
   transition: transform 0.1s, background-color 0.2s;
 }
 
 .auth-btn:hover {
-    background-color: #0284c7 !important; 
+    background-color: #22786c !important;
     transform: translateY(-1px);
 }
 
@@ -151,7 +151,7 @@
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    color: #0ea5e9 !important;
+    color: #22786c !important;
     padding: 0 !important;    
     width: auto !important;   
     margin: 0 !important;
