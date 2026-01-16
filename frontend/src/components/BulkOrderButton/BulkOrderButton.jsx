@@ -40,7 +40,7 @@ const BulkOrderButton = () => {
             severity: 'info',
             summary: 'Processing',
             detail: file.type.startsWith('image/')
-                ? 'Reading handwritten text...'
+                ? 'Analyzing image...'
                 : 'Analyzing file for matches...',
             life: 2000
         });
@@ -198,16 +198,13 @@ const BulkOrderButton = () => {
                 onChange={handleFileChange}
                 accept=".txt,image/*"
                 className="hidden-file-input"
-                aria-label="Upload Bulk Order Text File"
             />
-
             <Button
                 icon="pi pi-upload"
                 className="p-button-outlined bulk-order-btn"
                 onClick={handleButtonClick}
-                tooltip="Upload Order List (.txt)"
+                tooltip="Upload order list • TXT or image"
                 tooltipOptions={{ position: 'bottom' }}
-                aria-label="Upload bulk order file"
             />
         </>
     );
